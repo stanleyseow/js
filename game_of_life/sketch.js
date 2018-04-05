@@ -19,6 +19,8 @@ let rows;
 let resolution = 10;
 
 function setup() {
+
+  frameRate(10);
   createCanvas(400, 400);
   cols = width / resolution;
   rows = height / resolution;
@@ -29,6 +31,7 @@ function setup() {
       grid[i][j] = floor(random(2));
     }
   }
+
 }
 
 function draw() {
@@ -70,6 +73,16 @@ function draw() {
   grid = next;
 
 
+
+}
+
+
+function mouseClicked() {
+  for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        grid[i][j] = floor(random(2));
+      }
+  }
 
 }
 
