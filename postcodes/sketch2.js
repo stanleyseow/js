@@ -45,7 +45,7 @@ function addMarker(location, map) {
 function initMap() {
   map2 = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 3.139003, lng: 101.68685499999992},
-    zoom: 8
+    zoom: 6
   });
 }
 
