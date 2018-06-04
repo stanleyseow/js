@@ -5,7 +5,7 @@
 
 
 var cities;
-var map;
+var map2;
 
 
 function preload() {
@@ -15,9 +15,8 @@ function preload() {
 function setup() {
 //  createCanvas(1000, 500);
 //  background(0);
-
-
-  // Init Google Maps
+  
+// Init Google Maps
   initMap();
 
   for (var i = 0; i < cities.getRowCount(); i++) {
@@ -26,32 +25,25 @@ function setup() {
 
     var pos = { lat: latitude, lng: longitude };
     // Call google addMarket functions
-    addMarker(pos, map);
-
+    addMarker(pos, map2);
   }
-
-
 }
 
-
-function draw() {
- 
+function draw() { 
 }
-
 
 function addMarker(location, map) {
   // Add the marker at the clicked location, and add the next-available label
   // from the array of alphabetical characters.
   var marker = new google.maps.Marker({
     position: location,
-    //label: labels[labelIndex++ % labels.length],
-    map: map
+    map: map2
   });
 }
 
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
+  map2 = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 3.139003, lng: 101.68685499999992},
     zoom: 8
   });
