@@ -1,23 +1,29 @@
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Plotting live data for temp / humidity</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Plotting live data for temp / humidity</title>
 
 
-<script type="text/javascript" src="../libraries/jquery.min.js"></script>
-<script src="../libraries/mqttws31.js" type="text/javascript"></script>
-<script src="script.js" type="text/javascript"></script>
-<script src="../libraries/highstock.js"></script>
-<script src="../libraries/exporting.js"></script>
+    <script type="text/javascript" src="../libraries/jquery.min.js"></script>
+    <script src="../libraries/mqttws31.js" type="text/javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
+    <script src="../libraries/highstock.js"></script>
+    <script src="../libraries/exporting.js"></script>
 
 
 </head>
+
 <body>
-<body onload="init();"><!--Start the javascript ball rolling and connect to the mqtt broker-->
+
+    <body onload="init();">
+        <!--Start the javascript ball rolling and connect to the mqtt broker-->
 
 
 
-<div id="container" style="height: 500px; min-width: 500px"></div><!-- this the placeholder for the chart-->
+        <div id="container" style="height: 500px; min-width: 500px"></div>
+        <!-- this the placeholder for the chart-->
 
-	</body>
+    </body>
+
 </html>
