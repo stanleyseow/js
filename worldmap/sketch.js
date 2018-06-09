@@ -16,7 +16,7 @@ function preload() {
         ww + 'x' + hh +
         '?access_token=pk.eyJ1Ijoic3RhbmxleXNlb3ciLCJhIjoiY2ppN2o1cDNpMGMxbjNrcnh4NDZscWdjcSJ9.wRwNMaVDa7HCnLRLVpWVdw');
     // earthquakes = loadStrings('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.csv');
-    earthquakes = loadStrings('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv');
+    earthquakes = loadStrings('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv');
 }
 
 function mercX(lon) {
