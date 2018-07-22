@@ -11,18 +11,19 @@ var bee3 = new Bee2(200, 200,3);
 
 function setup() {
     createCanvas(800, 800);
+    frameRate(5);
 }
 
 function draw() {
-//    background(255);
+    background(255);
     bee1.move();
     bee1.display();
     
     bee2.move();
     bee2.display();
 
-    bee3.move();
-    bee3.display();
+    //bee3.move();
+    //bee3.display();
 }
 
 // Object constructor , blueprint of a house

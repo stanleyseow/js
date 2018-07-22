@@ -1,28 +1,27 @@
-var bee1 = new Bee(0, 0, 30, 'red');
-var bee2 = new Bee(-50, -50, 30, 'green');
-var bee3 = new Bee(100, 100, 30, 'blue');
+var ball1 = new Ball(0, 0, 10, 'red');
+var ball2 = new Ball(-50, -50, 20, 'green');
+var ball3 = new Ball(100, 100, 50, 'blue');
 
 
 function setup() {
-    createCanvas(600, 600)
-
+    createCanvas(600, 600);
 
 }
 
 function draw() {
     //background(200);
-    bee1.move();
-    bee1.display();
+    ball1.move();
+    ball1.display();
 
-    bee2.move();
-    bee2.display();
+    ball2.move();
+    ball2.display();
 
-    bee3.move();
-    bee3.display();
+    ball3.move();
+    ball3.display();
 }
 
 // Object constructor , blueprint of a house
-function Bee(x, y, size, colour) {
+function Ball(x, y, size, colour) {
     this.x = x; // property of x
     this.y = y; // property of y
     this.size = size; // property of size
