@@ -3,17 +3,43 @@ var invSize = 5; // must be an odd number!
 var halfAxis = (invSize - 1) / 2; // fixes a middle vertical simmetry
 
 function setup() {
-    createCanvas(300, 300);
+    canvas = createCanvas(windowWidth, windowHeight);
+    canvas.position(0,0);
+    canvas.style('z-index','-1');
     frameRate(2);
 }
 
 function draw() {
-    background(200);
+    clear();
+    background(255,50);
+    
+    push();
     scale(8);
-    translate(10,10);
-    //push();
+    translate(50,10);
+    stroke(0);
     genInvaders();
-    //pop();
+    pop();
+    
+    push();
+    scale(8);
+    translate(50,30);
+    stroke(0);
+    genInvaders();
+    pop();
+
+    push();
+    scale(8);
+    translate(50,50);
+    stroke(0);
+    genInvaders();
+    pop();  
+    
+    push();
+    scale(8);
+    translate(50,70);
+    stroke(0);
+    genInvaders();
+    pop();  
 }
 
 function genInvaders() {
