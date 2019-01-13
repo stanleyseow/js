@@ -60,7 +60,4 @@ function genInvaders() {
             }
         }
     }
-
-
-
 }

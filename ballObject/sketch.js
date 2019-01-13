@@ -22,6 +22,7 @@ function draw() {
 
 // Object constructor , blueprint of a house
 function Ball(x, y, size, colour) {
+
     this.x = x; // property of x
     this.y = y; // property of y
     this.size = size; // property of size
@@ -31,8 +32,7 @@ function Ball(x, y, size, colour) {
     this.move = function () {
         this.x = x + random(100, 400);
         this.y = y + random(100, 400);
-    }
-
+    };
     // display methods
 
     this.display = function () {
@@ -52,6 +52,6 @@ function Ball(x, y, size, colour) {
         }
         fill(r, g, b);
         ellipse(this.x, this.y, this.size, this.size);
-    }
+    };
 
 }

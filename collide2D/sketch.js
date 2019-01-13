@@ -7,7 +7,7 @@ function setup() {
 	createCanvas(1000,300);
 
 	for(i=0;i<numRects;i++){
-		r = new rectObj(random(width),random(height), 30, 30 ) // generate a rectObj
+		r = new rectObj(random(width),random(height), 30, 30 ); // generate a rectObj
 		rects.push(r); //add it to the array.
 	}
 
@@ -32,11 +32,11 @@ function draw(){
 }
 
 function rectObj(x,y,w,h){
-	this.x = x
-	this.y = y
-	this.w = w
-	this.h = h
-	this.color = color(random(255),random(255),random(255))
+	this.x = x;
+	this.y = y;
+	this.w = w;
+	this.h = h;
+	this.color = color(random(255),random(255),random(255));
 	this.hit = false;
 
 	this.collide = function(obj){
@@ -53,26 +53,24 @@ function rectObj(x,y,w,h){
       return 1;
 		}
 
-	}
+	};
 
 	this.disp = function(){
 		noStroke();
 		fill(this.color);
-		this.x += 3 //move to the right!
+		this.x += 3; //move to the right!
 		if(this.x > width){ //loop to the left!
 			this.x = -this.w;
 		}
 		rect(this.x,this.y,this.w,this.h);
 
-	}
+	};
 
 }
 
 function circleObj(dia){
 	this.dia = dia;
-	this.color = color(random(255),random(255),random(255))
-	this.x;
-	this.y;
+	this.color = color( random(255), random(255), random(255) );
 
 	this.disp = function(x,y){
 		this.x = x;
@@ -80,6 +78,6 @@ function circleObj(dia){
 		noStroke();
 		fill(this.color);
 		ellipse(this.x,this.y,this.dia,this.dia);
-	}
+	};
 
 }
