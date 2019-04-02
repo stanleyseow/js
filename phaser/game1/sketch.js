@@ -15,6 +15,9 @@ var config = {
         preload: preload,
         create: create,
         update: update
+    },
+    audio: {
+        disableWebAudio: true
     }
 };
 
