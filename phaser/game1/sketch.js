@@ -26,6 +26,8 @@ var bombs;
 var score = 0;
 var scoreText;
 var gameOver = false;
+var collectSound;
+
 
 var game = new Phaser.Game(config);
 
@@ -40,10 +42,18 @@ function preload() {
             frameHeight: 48
         }
     );
+    
+    game.load.audio('collect', 'assets/sound/p-ping.mp3');
+
 }
 
 function create() {
     this.add.image(400, 300, 'sky');
+    
+    collectSound = game.add.audio('collect');
+
+    game.sound.setDecodedCallback([ collectSound ], start, this);
+
 
     platforms = this.physics.add.staticGroup();
 
@@ -147,6 +157,7 @@ function collectStar(player, star) {
     star.disableBody(true, true);
     score += 10;
     scoreText.setText('Score: ' + score);
+    collectSound.play();
 
     if (stars.countActive(true) === 0) {
         stars.children.iterate(function (child) {
