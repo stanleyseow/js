@@ -53,10 +53,7 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
     
-    collectSound = this.add.audio('collect');
-
-    this.sound.setDecodedCallback([ collectSound ], start, this);
-
+    collectSound = this.sound.add('collect');
 
     platforms = this.physics.add.staticGroup();
 
