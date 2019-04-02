@@ -53,7 +53,7 @@ function preload() {
 function create() {
     this.add.image(400, 300, 'sky');
     
-    collectSound = game.add.audio('collect');
+    collectSound = this.add.audio('collect');
 
     this.sound.setDecodedCallback([ collectSound ], start, this);
 
