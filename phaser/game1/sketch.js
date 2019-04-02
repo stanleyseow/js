@@ -46,7 +46,7 @@ function preload() {
         }
     );
     
-    game.load.audio('collect', 'assets/sound/p-ping.mp3');
+    this.load.audio('collect', 'assets/sound/p-ping.mp3');
 
 }
 
@@ -55,7 +55,7 @@ function create() {
     
     collectSound = game.add.audio('collect');
 
-    game.sound.setDecodedCallback([ collectSound ], start, this);
+    this.sound.setDecodedCallback([ collectSound ], start, this);
 
 
     platforms = this.physics.add.staticGroup();
