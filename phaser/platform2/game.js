@@ -66,7 +66,7 @@ function create() {
     player.body.setSize(player.width, player.height-8);
     
     // player will collide with the level tiles 
-    //this.physics.add.collider(groundLayer, player);
+    this.physics.add.collider(groundLayer, player);
 
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
