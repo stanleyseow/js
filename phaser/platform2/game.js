@@ -59,14 +59,14 @@ function create() {
 
     // create the player sprite    
     player = this.physics.add.sprite(200, 200, 'player');
-    //player.setBounce(0.2); // our player will bounce from items
-    //player.setCollideWorldBounds(true); // don't go out of the map    
+    player.setBounce(0.2); // our player will bounce from items
+    player.setCollideWorldBounds(true); // don't go out of the map    
     
     // small fix to our player images, we resize the physics body object slightly
     player.body.setSize(player.width, player.height-8);
     
     // player will collide with the level tiles 
-    //this.physics.add.collider(groundLayer, player);
+    this.physics.add.collider(groundLayer, player);
 
     coinLayer.setTileIndexCallback(17, collectCoin, this);
     // when the player overlaps with a tile with index 17, collectCoin 
