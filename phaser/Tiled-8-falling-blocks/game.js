@@ -118,7 +118,7 @@ function create() {
 
 
     timedEvent = this.time.addEvent({ delay: 2000, callback: dropStars, callbackScope: this, loop: true });
-    timedEvent2 = this.time.addEvent({ delay: 30000, callback: clearStars, callbackScope: this, loop: true });
+    timedEvent2 = this.time.addEvent({ delay: 10000, callback: clearStars, callbackScope: this, loop: true });
 
     // Create the physics groups for stars
     this.stars = this.physics.add.group({defaultKey: 'star'})
@@ -131,7 +131,7 @@ function create() {
 
         
     // this text will show the score
-    starText = this.add.text(20, 20, '1', {
+    starText = this.add.text(20, 20, '0', {
         fontSize: '20px',
         fill: '#ffffff'
     });

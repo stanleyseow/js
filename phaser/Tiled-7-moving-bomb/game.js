@@ -139,15 +139,9 @@ function create() {
     this.physics.add.collider(groundLayer, bombs);
 
     //this.physics.add.overlap(bombs, stars, removeBombs, null, this );
-    
-    this.tweens.add({
-        targets: bombs.getChildren().map(function (c) { return c.body.velocity }),
-        x:  -100,
-        ease: 'Sine.easeInOut',
-        yoyo: true,
-        repeat: -1
-    });
-      
+    timedEvent = this.time.addEvent({ delay: 2000, callback: moveLeft, callbackScope: this, loop: true });
+    timedEvent2 = this.time.addEvent({ delay: 4000, callback: moveRight, callbackScope: this, loop: true });
+          
     // this text will show the score
     starText = this.add.text(20, 20, '1', {
         fontSize: '20px',
@@ -198,6 +192,26 @@ function create() {
 //     // text.setText(score); // set the text to show the current score
 //     return false;
 // }
+
+function moveLeft() {
+    this.tweens.add({
+        targets: bombs.getChildren().map(function (c) { return c.body.velocity }),
+        x:  -100,
+        ease: 'Sine.easeInOut',
+        yoyo: true,
+        repeat: false
+    });
+}
+function moveRight() {
+    this.tweens.add({
+        targets: bombs.getChildren().map(function (c) { return c.body.velocity }),
+        x:  100,
+        ease: 'Sine.easeInOut',
+        yoyo: true,
+        repeat: false
+    });
+}
+
 
 function collectStars(player, stars) {
     stars.disableBody(true, true);
