@@ -151,8 +151,8 @@ removeBombs(bombs,stars) {
 update() {
 
     // Check for more then 5 stars
-    if ( this.starCount > 2 ) {
-        console.log('Collected 1 star, jump to level 2');
+    if ( this.starCount > 5 ) {
+        console.log('Collected 5 star, jump to level 2');
         this.scene.stop("level1");
         this.scene.start("level2");
     }

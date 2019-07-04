@@ -15,7 +15,7 @@ preload() {
     
     this.load.spritesheet('tiles', 'assets/tiles64x64.png', {frameWidth: 64, frameHeight: 64});
 
-    //this.load.image('goldCoin', 'assets/goldCoin.png');
+    this.load.image('coin', 'assets/goldCoin.png');
 
     //this.load.atlas('player', 'assets/this.player.png', 'assets/this.player.json');
     this.load.spritesheet('player','assets/dude.png', { frameWidth: 32, frameHeight: 48} );
@@ -32,7 +32,7 @@ create() {
     this.map = this.make.tilemap({key: 'map2'});
     
     // Must match tileSets name
-   // var coinTiles = map.addTilesetImage('goldCoin');
+    //var coinTiles = map.addTilesetImage('coin');
 
     // Must match tileSets name
     this.Tiles = this.map.addTilesetImage('tiles64x64','tiles');
@@ -45,8 +45,11 @@ create() {
     this.startPoint = this.map.findObject("ObjectLayer", obj => obj.name === "startPoint");
     this.endPoint = this.map.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
-    console.log('startPoint ', this.startPoint.x, this.startPoint.y);
-    console.log('endPoint ', this.endPoint.x, this.endPoint.y);
+    // Add coin at endpoints
+    this.add.image(this.endPoint.x, this.endPoint.y, 'coin').setOrigin(0, 0);
+
+    // console.log('startPoint ', this.startPoint.x, this.startPoint.y);
+    // console.log('endPoint ', this.endPoint.x, this.endPoint.y);
     
     // add coins as tiles
     //coinLayer = map.createDynamicLayer('coinLayer', coinTiles, 0, 0);
@@ -62,7 +65,7 @@ create() {
     // Set this.player to starting position
     this.player.setPosition(this.startPoint.x, this.startPoint.y);  
 
-    console.log('player ', this.player.x, this.player.y);
+    //console.log('player ', this.player.x, this.player.y);
 
     // set the boundaries of our game world
     this.physics.world.bounds.width = this.groundLayer.width;
@@ -91,8 +94,8 @@ create() {
      // Add random bomb
      this.bombs = this.physics.add.group({
         key: 'bomb',
-        repeat: 10,
-        setXY: { x: 200, y: 0, stepX: Phaser.Math.Between(200, 200) }
+        repeat: 6,
+        setXY: { x: 200, y: 0, stepX: Phaser.Math.Between(400, 1000) }
     });
 
     // Collide platform with stars
@@ -102,7 +105,7 @@ create() {
     //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 2', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+    this.add.text(0,560, 'Level 2 - static bomb', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, '0', {
@@ -202,15 +205,15 @@ update() {
         this.player.body.setVelocityY(-500);        
     }
 
-    //console.log('Current this.player pos ', this.player.x, this.player.y);
+    console.log('Dist between endPoint & player ', this.endPoint.x-this.player.x, this.endPoint.y - this.player.y );
 
     // Check for reaching endPoint object
-    if ( this.player.x >= this.endPoint.x && this.player.y >= this.endPoint.y ) {
-        console.log('Reached End, game over');
+    if ( (this.endPoint.x - this.player.x ) < 10 && ( this.endPoint.y - this.player.y ) < 10 ) {
+        console.log('Reached endPoint, goto next level');
         //this.cameras.main.shake(500);
         this.time.delayedCall(1000,function() {
             this.scene.stop("level2");
-            this.scene.start("gameoverScene");
+            this.scene.start("level3");
         },[], this);
     }
     
