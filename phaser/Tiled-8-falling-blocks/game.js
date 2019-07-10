@@ -112,11 +112,6 @@ function create() {
     this.physics.add.collider(groundLayer, player);
     this.physics.add.collider(platformLayer, player);
 
-    //  "firstgid":17 , this is the index number
-    //coinLayer.setTileIndexCallback(17, collectCoin, this);
-    //this.physics.add.overlap(player, coinLayer,collectCoin, null, this );
-
-
     timedEvent = this.time.addEvent({ delay: 2000, callback: dropStars, callbackScope: this, loop: true });
     timedEvent2 = this.time.addEvent({ delay: 10000, callback: clearStars, callbackScope: this, loop: true });
 
