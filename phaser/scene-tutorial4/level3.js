@@ -42,11 +42,11 @@ create() {
     this.platformLayer = this.map.createDynamicLayer('platformLayer', this.Tiles, 0, 0);
 
     // Set starting and ending position using name
-    this.startPoint = this.map.findObject("ObjectLayer", obj => obj.name === "startPoint");
-    this.endPoint = this.map.findObject("ObjectLayer", obj => obj.name === "endPoint");
+    this.startPoint3 = this.map.findObject("ObjectLayer", obj => obj.name === "startPoint");
+    this.endPoint3 = this.map.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
-    console.log('startPoint ', this.startPoint.x, this.startPoint.y);
-    console.log('endPoint ', this.endPoint.x, this.endPoint.y);
+    // console.log('startPoint ', this.startPoint.x, this.startPoint.y);
+    // console.log('endPoint ', this.endPoint.x, this.endPoint.y);
     
     // add coins as tiles
     //coinLayer = map.createDynamicLayer('coinLayer', coinTiles, 0, 0);
@@ -60,7 +60,7 @@ create() {
     this.player.setCollideWorldBounds(true); // don't go out of the map  
 
     // Set this.player to starting position
-    this.player.setPosition(this.startPoint.x, this.startPoint.y);  
+    this.player.setPosition(0, 0);  
 
     console.log('player ', this.player.x, this.player.y);
 
@@ -92,7 +92,7 @@ create() {
      this.bombs = this.physics.add.group({
         key: 'bomb',
         repeat: 5,
-        setXY: { x: 500, y: 0, stepX: Phaser.Math.Between(500, 1000) }
+        setXY: { x: 400, y: 0, stepX: Phaser.Math.Between(300, 300) }
     });
 
     this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.moveLeft, callbackScope: this, loop: true });
@@ -106,7 +106,7 @@ create() {
     //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 3 - Moving bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+    this.add.text(0,560, 'Level 3', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, '0', {
@@ -230,12 +230,12 @@ update() {
     //console.log('Current this.player pos ', this.player.x, this.player.y);
 
     // Check for reaching endPoint object
-    if ( this.player.x >= this.endPoint.x && this.player.y >= this.endPoint.y ) {
+    if ( this.player.x >= this.endPoint3.x && this.player.y >= this.endPoint3.y ) {
         console.log('Reached End, game over');
         //this.cameras.main.shake(500);
         this.time.delayedCall(1000,function() {
             this.scene.stop("level3");
-            this.scene.start("gameoverScene");
+            this.scene.start("level4");
         },[], this);
     }
     

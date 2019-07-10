@@ -150,12 +150,7 @@ removeBombs(bombs,stars) {
 
 update() {
 
-    // Check for more then 5 stars
-    if ( this.starCount > 5 ) {
-        console.log('Collected 5 star, jump to level 2');
-        this.scene.stop("level1");
-        this.scene.start("level2");
-    }
+
 
     if (this.cursors.left.isDown)
     {
@@ -179,6 +174,13 @@ update() {
     }
 
     //console.log('Current this.player pos ', this.player.x, this.player.y);
+    
+    // Check for more then 5 stars
+    if ( this.starCount > 3 ) {
+        console.log('Collected 1 star, jump to level 2');
+        this.scene.stop("level1");
+        this.scene.start("level2");
+    }
 
     // Check for reaching endPoint object
     if ( this.player.x >= this.endPoint.x && this.player.y >= this.endPoint.y ) {
