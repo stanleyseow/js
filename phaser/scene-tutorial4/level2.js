@@ -18,7 +18,7 @@ preload() {
     //this.load.image('goldCoin', 'assets/goldCoin.png');
 
     //this.load.atlas('player', 'assets/this.player.png', 'assets/this.player.json');
-    this.load.spritesheet('player','assets/dude.png', { frameWidth: 32, frameHeight: 48} );
+    this.load.spritesheet('player','assets/dude2.png', { frameWidth: 64, frameHeight: 96} );
 
 
     this.load.image('star', 'assets/star.png');
@@ -29,21 +29,21 @@ preload() {
 create() {
 
 
-    this.map = this.make.tilemap({key: 'map2'});
+    this.map2 = this.make.tilemap({key: 'map2'});
     
     // Must match tileSets name
    // var coinTiles = map.addTilesetImage('goldCoin');
 
     // Must match tileSets name
-    this.Tiles = this.map.addTilesetImage('tiles64x64','tiles');
+    this.Tiles = this.map2.addTilesetImage('tiles64x64','tiles');
 
     // create the ground layer
-    this.groundLayer = this.map.createDynamicLayer('groundLayer', this.Tiles, 0, 0);
-    this.platformLayer = this.map.createDynamicLayer('platformLayer', this.Tiles, 0, 0);
+    this.groundLayer = this.map2.createDynamicLayer('groundLayer', this.Tiles, 0, 0);
+    this.platformLayer = this.map2.createDynamicLayer('platformLayer', this.Tiles, 0, 0);
 
     // Set starting and ending position using name
-    this.startPoint2 = this.map.findObject("ObjectLayer", obj => obj.name === "startPoint");
-    this.endPoint2 = this.map.findObject("ObjectLayer", obj => obj.name === "endPoint");
+    this.startPoint2 = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
+    this.endPoint2 = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
     //console.log('startPoint ', this.startPoint.x, this.startPoint.y);
     //console.log('endPoint ', this.endPoint.x, this.endPoint.y);
@@ -146,7 +146,7 @@ create() {
     this.cursors = this.input.keyboard.createCursorKeys();
 
   // set bounds so the camera won't go outside the game world
-  this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+  this.cameras.main.setBounds(0, 0, this.map2.widthInPixels, this.map2.heightInPixels);
   // make the camera follow the this.player
   this.cameras.main.startFollow(this.player);
 
