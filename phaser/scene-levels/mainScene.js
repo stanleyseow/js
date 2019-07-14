@@ -14,7 +14,7 @@ class mainScene extends Phaser.Scene {
 
         this.add.image(0, 0, 'main').setOrigin(0, 0);
         
-        this.add.text(0,570, 'Press Spacebar to continue or 1,2,3,4,5,6 for level', { font: '24px Courier', fill: '#000000' });
+        this.add.text(0,570, 'Press spacebar or 1,2,3,4,5,6,7 for level', { font: '24px Courier', fill: '#000000' });
 
         console.log("This is mainScene");
 
@@ -26,6 +26,7 @@ class mainScene extends Phaser.Scene {
         var key4 = this.input.keyboard.addKey(52);
         var key5 = this.input.keyboard.addKey(53);
         var key6 = this.input.keyboard.addKey(54);
+        var key7 = this.input.keyboard.addKey(55);
 
 
         key1.on('down', function(){
@@ -59,6 +60,11 @@ class mainScene extends Phaser.Scene {
             this.scene.start("level6");
             }, this ); 
         
+        key7.on('down', function(){
+            this.scene.stop("mainScene");
+            this.scene.start("level7");
+            }, this ); 
+
         spaceDown.on('down', function(){
         console.log("Spacebar pressed, goto main2Scene");
         this.scene.stop("mainScene");
