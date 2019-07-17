@@ -1,9 +1,9 @@
 // collect stars, no enemies
-class level1 extends Phaser.Scene {
+class level5 extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'level1' });
+        super({ key: 'level5' });
         // Put global variable here
         this.starCount = 0;
     }
@@ -11,7 +11,7 @@ class level1 extends Phaser.Scene {
 preload() {
 
     // map made with Tiled in JSON format
-    this.load.tilemapTiledJSON('map', 'assets/level1.json');
+    this.load.tilemapTiledJSON('map2', 'assets/level2.json');
     
     this.load.spritesheet('tiles', 'assets/tiles64x64.png', {frameWidth: 64, frameHeight: 64});
 
@@ -21,29 +21,41 @@ preload() {
 
     this.load.image('coin', 'assets/goldCoin.png');
 
+    this.load.image('bomb', 'assets/bomb.png');
+
+    // Sound preload
+    this.load.audio('ping', 'assets/ping.mp3');
+    this.load.audio('explode', 'assets/explosion.mp3');
+    this.load.audio('blaster', 'assets/blaster.mp3');
+
 
 }
 
 create() {
 
-    this.map = this.make.tilemap({key: 'map'});
+    // Sound variable
+    this.pingSnd = this.sound.add('ping');
+    this.explodeSnd = this.sound.add('explode');
+    this.blasterSnd = this.sound.add('blaster')
+
+    // Load the tilemap to map variable
+    this.map2 = this.make.tilemap({key: 'map2'});
     
-    // Must match tileSets name
-    let Tiles = this.map.addTilesetImage('tiles64x64','tiles');
+    // Must match tileSets name inside Tiled
+    let Tiles = this.map2.addTilesetImage('tiles64x64','tiles');
 
-    // create the ground layer
-    this.groundLayer = this.map.createDynamicLayer('groundLayer', Tiles, 0, 0);
-    this.platformLayer = this.map.createDynamicLayer('platformLayer', Tiles, 0, 0);
+    // create the ground & platform layer
+    this.groundLayer = this.map2.createDynamicLayer('groundLayer', Tiles, 0, 0);
+    this.platformLayer = this.map2.createDynamicLayer('platformLayer', Tiles, 0, 0);
 
-    // Set starting and ending position using object names in tiles
-    this.startPoint = this.map.findObject("ObjectLayer", obj => obj.name === "startPoint");
-    this.endPoint = this.map.findObject("ObjectLayer", obj => obj.name === "endPoint");
+    // Set starting and ending position using object names in Tiled
+    this.startPoint = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
+    this.endPoint = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
     // Place an image manually on the endPoint
     this.add.image(this.endPoint.x, this.endPoint.y, 'coin').setOrigin(0, 0);
-
-    // console.log('startPoint ', this.startPoint.x, this.startPoint.y);
-    // console.log('endPoint ', this.endPoint.x, this.endPoint.y);
+    console.log('startPoint ', this.startPoint.x, this.startPoint.y);
+    console.log('endPoint ', this.endPoint.x, this.endPoint.y);
 
     // create the player sprite    
     this.player = this.physics.add.sprite(200, 200, 'player');
@@ -63,30 +75,38 @@ create() {
     this.physics.world.bounds.width = this.groundLayer.width;
     this.physics.world.bounds.height = this.groundLayer.height;
 
-    // the this.player will collide with this layer
+    // Setup collider for ground and platform layer
     this.groundLayer.setCollisionByProperty({ collides: true });
     this.platformLayer.setCollisionByProperty({ collides: true });
     
+    // Collides ground and platform with player
     this.physics.add.collider(this.groundLayer, this.player);
     this.physics.add.collider(this.platformLayer, this.player);
 
-    // Add random stars
-    this.stars = this.physics.add.group({
-        key: 'star',
-        repeat: 10,
-        setXY: { x: 0, y: 0, stepX: Phaser.Math.Between(200, 200) }
-    });
+    // Collide ground and platform with stars
+    this.stars = this.physics.add.group({defaultKey: 'star'})
 
-    // Collide platform with stars
     this.physics.add.collider(this.platformLayer, this.stars);
     this.physics.add.collider(this.groundLayer, this.stars);
 
+    // When player overlap with stars, run collectStars function
     this.physics.add.overlap(this.player, this.stars,this.collectStars, null, this );
 
-    this.add.text(0,560, 'Level 1', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+    // Timed events, drop starts every 2 secs, clear stars every 10 secs
+    this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.dropStars, callbackScope: this, loop: true });
+    this.timedEvent2 = this.time.addEvent({ delay: 10000, callback: this.clearStars, callbackScope: this, loop: true });
+    
+    // Add Level number text at bottom
+    this.add.text(0,560, 'Level 5', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
-    // this text will show the score
-    this.starText = this.add.text(20, 40, 'Stars 0', {
+    // Added 3 coins as 3mlives
+    this.coin1 = this.add.image(50,530, 'coin').setScrollFactor(0);
+    this.coin2 = this.add.image(100,530,'coin').setScrollFactor(0);
+    this.coin3 = this.add.image(150,530,'coin').setScrollFactor(0);
+
+
+    // Display the stars collected
+    this.starText = this.add.text(20, 40, 'Stars ' + this.starCount, {
         fontSize: '20px',
         fill: '#ffffff'
     });
@@ -94,6 +114,7 @@ create() {
     this.starText.setScrollFactor(0);
     this.starText.visible = true;
 
+    // Create animation for player
     this.anims.create({
         key: 'left',
         frames: this.anims.generateFrameNumbers('player', {
@@ -124,10 +145,12 @@ create() {
         repeat: -1
     });
 
+    // Setup cursors, up, down, left , right
     this.cursors = this.input.keyboard.createCursorKeys();
 
   // set bounds so the camera won't go outside the game world
-  this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+  this.cameras.main.setBounds(0, 0, this.map2.widthInPixels, this.map2.heightInPixels);
+
   // make the camera follow the this.player
   this.cameras.main.startFollow(this.player);
 
@@ -137,20 +160,49 @@ create() {
 }
 
 collectStars(player, stars) {
+    // remove stars once collected
     stars.disableBody(true, true);
+
+    // Add counter
     this.starCount += 1; 
+
+    // Play sound
+    this.pingSnd.play();
+
     console.log(this.starCount);
-    this.starText.setText(this.starCount); // set the text to show the current score
+
+    // Update star counter
+    this.starText.setText('Stars ' + this.starCount); // set the text to show the current score
+
     return false;
 }
 
-removeBombs(bombs,stars) {
-    bombs.disableBody(true, true);
+dropStars () {
+    // Add random stars
+    console.log('Dropping stars');
+    this.stars.createMultiple({
+        key: 'star',
+        repeat: 20,
+        setXY: { x: Phaser.Math.Between(300, 400), y: Phaser.Math.Between(0, 500), stepX: Phaser.Math.Between(0, 500) }
+    })
+
+}
+
+clearStars() {
+    console.log('Clearing stars');    
+    this.stars.clear(true,true);
+    //this.explodeSnd.play();
 }
 
 update() {
 
-
+    if ( this.starCount === 1) {
+        this.coin1.setVisible(false);
+    } else if ( this.starCount === 2) {
+        this.coin2.setVisible(false);
+    } else if ( this.starCount === 3) {
+        this.coin3.setVisible(false);
+    }
 
     if (this.cursors.left.isDown)
     {
@@ -170,23 +222,29 @@ update() {
     // jump 
     if (this.cursors.up.isDown && this.player.body.onFloor())
     {
-        this.player.body.setVelocityY(-500);        
+        this.player.body.setVelocityY(-500);   
+        this.blasterSnd.play();   
     }
 
     //console.log('Current this.player pos ', this.player.x, this.player.y);
     
     // Check for more then 5 stars
-    if ( this.starCount > 3 ) {
-        console.log('Collected 1 star, jump to level 2');
-        this.scene.stop("level1");
-        this.scene.start("level2");
+    if ( this.starCount > 10 ) {
+        console.log('Collected n star, jump to next level');
+        this.scene.stop("level5");
+        this.scene.start("level6");
     }
 
+    let x = Math.abs(this.endPoint.x - this.player.x);
+    let y = Math.abs(this.endPoint.y - this.player.y);
+
+    console.log(x,y);
+
     // Check for reaching endPoint object
-    if ( this.player.x >= this.endPoint.x && this.player.y >= this.endPoint.y ) {
+    if ( x < 50 && y < 50 ) {
         console.log('Reached endPoint, loading next level');
-        this.scene.stop("level1");
-        this.scene.start("level2");
+        this.scene.stop("level5");
+        this.scene.start("level6");
     }
     
 }

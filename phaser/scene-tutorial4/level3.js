@@ -11,14 +11,14 @@ class level3 extends Phaser.Scene {
 preload() {
 
     // map made with Tiled in JSON format
-    this.load.tilemapTiledJSON('map3', 'assets/level2.json');
+    this.load.tilemapTiledJSON('map2', 'assets/level2.json');
     
     this.load.spritesheet('tiles', 'assets/tiles64x64.png', {frameWidth: 64, frameHeight: 64});
 
     //this.load.image('goldCoin', 'assets/goldCoin.png');
 
     //this.load.atlas('player', 'assets/this.player.png', 'assets/this.player.json');
-    this.load.spritesheet('player','assets/dude.png', { frameWidth: 32, frameHeight: 48} );
+    this.load.spritesheet('player','assets/dude2.png', { frameWidth: 64, frameHeight: 96} );
 
 
     this.load.image('star', 'assets/star.png');
@@ -29,24 +29,24 @@ preload() {
 create() {
 
 
-    this.map = this.make.tilemap({key: 'map3'});
+    this.map2 = this.make.tilemap({key: 'map2'});
     
     // Must match tileSets name
    // var coinTiles = map.addTilesetImage('goldCoin');
 
     // Must match tileSets name
-    this.Tiles = this.map.addTilesetImage('tiles64x64','tiles');
+    this.Tiles = this.map2.addTilesetImage('tiles64x64','tiles');
 
     // create the ground layer
-    this.groundLayer = this.map.createDynamicLayer('groundLayer', this.Tiles, 0, 0);
-    this.platformLayer = this.map.createDynamicLayer('platformLayer', this.Tiles, 0, 0);
+    this.groundLayer = this.map2.createDynamicLayer('groundLayer', this.Tiles, 0, 0);
+    this.platformLayer = this.map2.createDynamicLayer('platformLayer', this.Tiles, 0, 0);
 
     // Set starting and ending position using name
-    this.startPoint = this.map.findObject("ObjectLayer", obj => obj.name === "startPoint");
-    this.endPoint = this.map.findObject("ObjectLayer", obj => obj.name === "endPoint");
+    this.startPoint3 = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
+    this.endPoint3 = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
-    console.log('startPoint ', this.startPoint.x, this.startPoint.y);
-    console.log('endPoint ', this.endPoint.x, this.endPoint.y);
+    // console.log('startPoint ', this.startPoint.x, this.startPoint.y);
+    // console.log('endPoint ', this.endPoint.x, this.endPoint.y);
     
     // add coins as tiles
     //coinLayer = map.createDynamicLayer('coinLayer', coinTiles, 0, 0);
@@ -60,7 +60,7 @@ create() {
     this.player.setCollideWorldBounds(true); // don't go out of the map  
 
     // Set this.player to starting position
-    this.player.setPosition(this.startPoint.x, this.startPoint.y);  
+    this.player.setPosition(0, 0);  
 
     console.log('player ', this.player.x, this.player.y);
 
@@ -75,24 +75,11 @@ create() {
     this.physics.add.collider(this.groundLayer, this.player);
     this.physics.add.collider(this.platformLayer, this.player);
 
-    // Add random stars
-    // this.stars = this.physics.add.group({
-    //     key: 'star',
-    //     repeat: 40,
-    //     setXY: { x: 0, y: 0, stepX: Phaser.Math.Between(100, 300) }
-    // });
-
-    // // Collide platform with stars
-    // this.physics.add.collider(this.platformLayer, this.stars);
-    // this.physics.add.collider(this.groundLayer, this.stars);
-
-    // this.physics.add.overlap(this.player, this.stars,this.collectStars, null, this );
-
      // Add random bomb
      this.bombs = this.physics.add.group({
         key: 'bomb',
         repeat: 5,
-        setXY: { x: 500, y: 0, stepX: Phaser.Math.Between(500, 1000) }
+        setXY: { x: 400, y: 0, stepX: Phaser.Math.Between(300, 300) }
     });
 
     this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.moveLeft, callbackScope: this, loop: true });
@@ -103,10 +90,9 @@ create() {
     this.physics.add.collider(this.platformLayer, this.bombs);
     this.physics.add.collider(this.groundLayer, this.bombs);
 
-    //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 3 - Moving bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+    this.add.text(0,560, 'Level 3', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, '0', {
@@ -150,7 +136,7 @@ create() {
     this.cursors = this.input.keyboard.createCursorKeys();
 
   // set bounds so the camera won't go outside the game world
-  this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+  this.cameras.main.setBounds(0, 0, this.map2.widthInPixels, this.map2.heightInPixels);
   // make the camera follow the this.player
   this.cameras.main.startFollow(this.player);
 
@@ -230,12 +216,12 @@ update() {
     //console.log('Current this.player pos ', this.player.x, this.player.y);
 
     // Check for reaching endPoint object
-    if ( this.player.x >= this.endPoint.x && this.player.y >= this.endPoint.y ) {
+    if ( this.player.x >= this.endPoint3.x && this.player.y >= this.endPoint3.y ) {
         console.log('Reached End, game over');
         //this.cameras.main.shake(500);
         this.time.delayedCall(1000,function() {
             this.scene.stop("level3");
-            this.scene.start("gameoverScene");
+            this.scene.start("level4");
         },[], this);
     }
     

@@ -20,7 +20,7 @@ preload() {
     //this.load.atlas('player', 'assets/this.player.png', 'assets/this.player.json');
     this.load.spritesheet('player','assets/dude2.png', { frameWidth: 64, frameHeight: 96} );
 
-
+    this.load.image('coin', 'assets/goldCoin.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
 
@@ -45,12 +45,12 @@ create() {
     this.startPoint2 = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
     this.endPoint2 = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
+    // Add coin image at the end 
+    this.add.image(this.endPoint2.x, this.endPoint2.y, 'coin').setOrigin(0, 0);
+
     //console.log('startPoint ', this.startPoint.x, this.startPoint.y);
     //console.log('endPoint ', this.endPoint.x, this.endPoint.y);
     
-    // add coins as tiles
-    //coinLayer = map.createDynamicLayer('coinLayer', coinTiles, 0, 0);
-
     // create the player sprite    
     this.player = this.physics.add.sprite(200, 200, 'player');
     this.player.setBounce(0.1); // our this.player will bounce from items
@@ -91,8 +91,8 @@ create() {
      // Add random bomb
      this.bombs = this.physics.add.group({
         key: 'bomb',
-        repeat: 10,
-        setXY: { x: 200, y: 0, stepX: Phaser.Math.Between(200, 200) }
+        repeat: 4,
+        setXY: { x: 200, y: 0, stepX: Phaser.Math.Between(300, 400) }
     });
 
     // Collide platform with stars
@@ -102,7 +102,7 @@ create() {
     //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 2', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+    this.add.text(0,560, 'Level 2 - static bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, '0', {
@@ -164,7 +164,7 @@ collectStars(player, stars) {
 }
 
 hitBombs(player,bombs) {
-    //bombs.disableBody(true, true);
+    bombs.disableBody(true, true);
     console.log('Hit bomb, restart game');
     this.cameras.main.shake(500);
     // delay 1 sec
@@ -202,16 +202,15 @@ update() {
         this.player.body.setVelocityY(-500);        
     }
 
-    //console.log('Current this.player pos ', this.player.x, this.player.y);
+    let x = Math.abs(this.endPoint2.x - this.player.x);
+    let y = Math.abs(this.endPoint2.y - this.player.y);
+    //console.log(x,y);
 
     // Check for reaching endPoint object
-    if ( this.player.x >= this.endPoint2.x && this.player.y >= this.endPoint2.y ) {
-        console.log('Reached End, goto level3');
-        //this.cameras.main.shake(500);
-        this.time.delayedCall(1000,function() {
-            this.scene.stop("level2");
-            this.scene.start("level3");
-        },[], this);
+    if ( x < 50 && y < 50 ) {
+        console.log('Reached endPoint, loading next level');
+        this.scene.stop("level2");
+        this.scene.start("level3");
     }
     
 }

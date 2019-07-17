@@ -1,9 +1,9 @@
-// static enemies
-class level2 extends Phaser.Scene {
+// moving enemies
+class level3 extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'level2' });
+        super({ key: 'level3' });
         this.starCount = 0;
 
     }
@@ -20,10 +20,9 @@ preload() {
     //this.load.atlas('player', 'assets/this.player.png', 'assets/this.player.json');
     this.load.spritesheet('player','assets/dude2.png', { frameWidth: 64, frameHeight: 96} );
 
-
+    this.load.image('coin', 'assets/goldCoin.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
-
 }
 
 create() {
@@ -42,11 +41,14 @@ create() {
     this.platformLayer = this.map2.createDynamicLayer('platformLayer', this.Tiles, 0, 0);
 
     // Set starting and ending position using name
-    this.startPoint2 = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
-    this.endPoint2 = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
+    this.startPoint3 = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
+    this.endPoint3 = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
-    //console.log('startPoint ', this.startPoint.x, this.startPoint.y);
-    //console.log('endPoint ', this.endPoint.x, this.endPoint.y);
+    // Add coin image at the end 
+    this.add.image(this.endPoint3.x, this.endPoint3.y, 'coin').setOrigin(0, 0);
+
+    // console.log('startPoint ', this.startPoint.x, this.startPoint.y);
+    // console.log('endPoint ', this.endPoint.x, this.endPoint.y);
     
     // add coins as tiles
     //coinLayer = map.createDynamicLayer('coinLayer', coinTiles, 0, 0);
@@ -60,7 +62,7 @@ create() {
     this.player.setCollideWorldBounds(true); // don't go out of the map  
 
     // Set this.player to starting position
-    this.player.setPosition(this.startPoint2.x, this.startPoint2.y);  
+    this.player.setPosition(0, 0);  
 
     console.log('player ', this.player.x, this.player.y);
 
@@ -75,34 +77,24 @@ create() {
     this.physics.add.collider(this.groundLayer, this.player);
     this.physics.add.collider(this.platformLayer, this.player);
 
-    // Add random stars
-    // this.stars = this.physics.add.group({
-    //     key: 'star',
-    //     repeat: 40,
-    //     setXY: { x: 0, y: 0, stepX: Phaser.Math.Between(100, 300) }
-    // });
-
-    // // Collide platform with stars
-    // this.physics.add.collider(this.platformLayer, this.stars);
-    // this.physics.add.collider(this.groundLayer, this.stars);
-
-    // this.physics.add.overlap(this.player, this.stars,this.collectStars, null, this );
-
      // Add random bomb
      this.bombs = this.physics.add.group({
         key: 'bomb',
-        repeat: 10,
-        setXY: { x: 200, y: 0, stepX: Phaser.Math.Between(200, 200) }
+        repeat: 5,
+        setXY: { x: 400, y: 0, stepX: Phaser.Math.Between(300, 300) }
     });
+
+    this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.moveLeft, callbackScope: this, loop: true });
+    this.timedEvent2 = this.time.addEvent({ delay: 4000, callback: this.moveRight, callbackScope: this, loop: true });
+       
 
     // Collide platform with stars
     this.physics.add.collider(this.platformLayer, this.bombs);
     this.physics.add.collider(this.groundLayer, this.bombs);
 
-    //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 2', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+    this.add.text(0,560, 'Level 3 - moving bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, '0', {
@@ -179,6 +171,27 @@ removeBombs(bombs,stars) {
     bombs.disableBody(true, true);
 }
 
+moveLeft(bombs) {
+    this.tweens.add({
+        targets: this.bombs.getChildren().map(function (c) { return c.body.velocity }),
+        x: Phaser.Math.Between(-150, -50) ,
+        ease: 'Sine.easeInOut',
+        yoyo: true,
+        repeat: false
+    });
+}
+moveRight(bombs) {
+    this.tweens.add({
+        targets: this.bombs.getChildren().map(function (c) { return c.body.velocity }),
+        x:  Phaser.Math.Between(50, 150),
+        ease: 'Sine.easeInOut',
+        yoyo: true,
+        repeat: false
+    });
+}
+
+
+
 update() {
 
     if (this.cursors.left.isDown)
@@ -202,17 +215,17 @@ update() {
         this.player.body.setVelocityY(-500);        
     }
 
-    //console.log('Current this.player pos ', this.player.x, this.player.y);
+    let x = Math.abs(this.endPoint3.x - this.player.x);
+    let y = Math.abs(this.endPoint3.y - this.player.y);
+    //console.log(x,y);
 
     // Check for reaching endPoint object
-    if ( this.player.x >= this.endPoint2.x && this.player.y >= this.endPoint2.y ) {
-        console.log('Reached End, goto level3');
-        //this.cameras.main.shake(500);
-        this.time.delayedCall(1000,function() {
-            this.scene.stop("level2");
-            this.scene.start("level3");
-        },[], this);
+    if ( x < 50 && y < 50 ) {
+        console.log('Reached endPoint, loading next level');
+        this.scene.stop("level3");
+        this.scene.start("level4");
     }
+
     
 }
 
