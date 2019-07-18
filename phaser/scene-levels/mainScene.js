@@ -7,7 +7,7 @@ class mainScene extends Phaser.Scene {
 
     preload() {
         this.load.image('main','assets/mainScene.png');
-
+        this.load.spritesheet('mummy', 'assets/mummy37x45.png', { frameWidth: 37, frameHeight: 45 });
     }
 
     create () {
@@ -17,6 +17,29 @@ class mainScene extends Phaser.Scene {
         this.add.text(0,570, 'Press spacebar or 1,2,3,4,5,6,7 for level', { font: '24px Courier', fill: '#000000' });
 
         console.log("This is mainScene");
+
+        // Add animation for mummy
+        this.anims.create({
+            key: 'walk',
+            frames: this.anims.generateFrameNumbers('mummy'),
+            frameRate: 20,
+            yoyo: true,
+            repeat: -1
+        });
+
+          // create mummies physics group
+    this.mummies = this.add.group();
+
+    // Add members to mummies group
+    this.mummies.create(200, 400, 'mummy').setScale(1);
+    this.mummies.create(400, 400, 'mummy').setScale(2);
+    this.mummies.create(600, 400, 'mummy').setScale(4);
+
+    // Iterate all the children and play animation
+    this.mummies.children.iterate(mummy => {
+        mummy.play('walk')
+    })
+
 
         //this.input.once('pointerdown', function(){
         var spaceDown = this.input.keyboard.addKey('SPACE');
