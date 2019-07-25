@@ -106,8 +106,14 @@ class mainScene extends Phaser.Scene {
         spaceDown.on('down', function(){
         console.log("Spacebar pressed, goto main2Scene");
         this.scene.stop("mainScene");
-        this.scene.start("level1");
+        this.scene.start("main2Scene");
         }, this );
+
+        this.input.once('pointerdown', function(){
+        console.log("pointer pressed, goto main2Scene");
+        this.scene.stop("mainScene");
+        this.scene.start("main2Scene");
+        }, this );    
 
     }
 
