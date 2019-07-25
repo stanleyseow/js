@@ -37,7 +37,8 @@ preload() {
 
 create() {
 
-        // Add the two background for parallax effect
+
+    // Add the two background for parallax effect
     // create an tiled sprite with the size of our game screen
     this.bg_b = this.add.tileSprite(0, 0, game.config.width, game.config.height, "bg_b");
     this.bg_b.setOrigin(0, 0);
@@ -47,6 +48,8 @@ create() {
     this.bg_f = this.add.tileSprite(0, 0, game.config.width, game.config.height, "bg_f");
     this.bg_f.setOrigin(0, 0);
     this.bg_f.setScrollFactor(0);
+
+    this.add.text(0,0, 'Level 7 - Parallax Background', { font: '24px Courier', fill: '#ffffff' }).setScrollFactor(0);
 
     // Load the tilemap to map variable
     this.map2 = this.make.tilemap({key: 'map2'});
@@ -106,23 +109,11 @@ create() {
     //this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.dropStars, callbackScope: this, loop: true });
     //this.timedEvent2 = this.time.addEvent({ delay: 10000, callback: this.clearStars, callbackScope: this, loop: true });
     
-    // Add Level number text at bottom
-    this.add.text(0,560, 'Level 7 - Parallax Background', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // Added 3 coins as 3mlives
     this.coin1 = this.add.image(50,530, 'coin').setScrollFactor(0);
     this.coin2 = this.add.image(100,530,'coin').setScrollFactor(0);
     this.coin3 = this.add.image(150,530,'coin').setScrollFactor(0);
-
-
-    // Display the stars collected
-    this.starText = this.add.text(20, 40, 'Stars ' + this.starCount, {
-        fontSize: '20px',
-        fill: '#ffffff'
-    });
-    // fix the text to the camera
-    this.starText.setScrollFactor(0);
-    this.starText.visible = true;
 
     // Create animation for player
     this.anims.create({

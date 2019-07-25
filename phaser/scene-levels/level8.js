@@ -1,9 +1,10 @@
+
 // collect stars, no enemies
-class level6 extends Phaser.Scene {
+class level8 extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'level6' });
+        super({ key: 'level8' });
         // Put global variable here
         this.starCount = 0;
     }
@@ -17,6 +18,8 @@ preload() {
 
     this.load.spritesheet('player','assets/dude2.png', { frameWidth: 64, frameHeight: 96} );
 
+    // Added in level 8
+    this.load.spritesheet('spinCoin', 'assets/spinCoin.png', { frameWidth: 32, frameHeight: 32 });
 
     this.load.image('star', 'assets/star.png');
 
@@ -31,11 +34,26 @@ preload() {
     // this.load.audio('explode', 'assets/explosion.mp3');
     // this.load.audio('blaster', 'assets/blaster.mp3');
 
+    // Scrolling Backgroud
+    this.load.image("bg_b", "assets/bg_b.png");
+    this.load.image("bg_f", "assets/bg_f.png");
 }
 
 create() {
 
-    this.add.text(0,0, 'Level 6 - Moving mummies', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+
+    // Add the two background for parallax effect
+    // create an tiled sprite with the size of our game screen
+    this.bg_b = this.add.tileSprite(0, 0, game.config.width, game.config.height, "bg_b");
+    this.bg_b.setOrigin(0, 0);
+    this.bg_b.setScrollFactor(0);
+
+    // Add a second background layer.
+    this.bg_f = this.add.tileSprite(0, 0, game.config.width, game.config.height, "bg_f");
+    this.bg_f.setOrigin(0, 0);
+    this.bg_f.setScrollFactor(0);
+
+    this.add.text(0,0, 'Level 8 - Animated Coin', { font: '24px Courier', fill: '#ffffff' }).setScrollFactor(0);
 
     // Load the tilemap to map variable
     this.map2 = this.make.tilemap({key: 'map2'});
@@ -48,11 +66,13 @@ create() {
     this.platformLayer = this.map2.createDynamicLayer('platformLayer', Tiles, 0, 0);
 
     // Set starting and ending position using object names in Tiled
-    this.startPoint6 = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
-    this.endPoint6 = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
+    this.startPoint = this.map2.findObject("ObjectLayer", obj => obj.name === "startPoint");
+    this.endPoint = this.map2.findObject("ObjectLayer", obj => obj.name === "endPoint");
 
     // Place an image manually on the endPoint
-    this.add.image(this.endPoint6.x, this.endPoint6.y, 'coin');
+    this.add.image(this.endPoint.x, this.endPoint.y, 'coin');
+    console.log('startPoint ', this.startPoint.x, this.startPoint.y);
+    console.log('endPoint ', this.endPoint.x, this.endPoint.y);
 
     // create the player sprite    
     this.player = this.physics.add.sprite(200, 200, 'player');
@@ -93,10 +113,6 @@ create() {
     //this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.dropStars, callbackScope: this, loop: true });
     //this.timedEvent2 = this.time.addEvent({ delay: 10000, callback: this.clearStars, callbackScope: this, loop: true });
     
-    // Added 3 coins as 3mlives
-    this.coin1 = this.add.image(50,530, 'coin').setScrollFactor(0);
-    this.coin2 = this.add.image(100,530,'coin').setScrollFactor(0);
-    this.coin3 = this.add.image(150,530,'coin').setScrollFactor(0);
 
     // Create animation for player
     this.anims.create({
@@ -139,26 +155,89 @@ create() {
             repeat: -1
     });
 
-    // create mummies physics group
-    this.mummies = this.physics.add.group();
+       // create mummies physics group
+       this.mummies = this.physics.add.group();
 
-    // Add members to mummies group
-    this.mummies.create(400, 600, 'mummy').setScale(2);
-    this.mummies.create(800, 600, 'mummy').setScale(2);
-    this.mummies.create(1200, 600, 'mummy').setScale(2);
-    this.mummies.create(1600, 600, 'mummy').setScale(2);
-    this.mummies.create(2000, 600, 'mummy').setScale(2);
+       // Add members to mummies group
+       this.mummies.create(400, 600, 'mummy').setScale(2);
+       this.mummies.create(800, 600, 'mummy').setScale(2);
+       this.mummies.create(1200, 600, 'mummy').setScale(2);
+       this.mummies.create(1600, 600, 'mummy').setScale(2);
+       this.mummies.create(2000, 600, 'mummy').setScale(2);
+   
+       // Iterate all the children and play animation
+       this.mummies.children.iterate(mummy => {
+           mummy.play('walk')
+         })
+   
+       // Add colider to ground and platform
+       this.physics.add.collider(this.platformLayer, this.mummies);
+       this.physics.add.collider(this.groundLayer, this.mummies);
 
-    // Iterate all the children and play animation
-    this.mummies.children.iterate(mummy => {
-        mummy.play('walk')
-      })
 
-    // Add colider to ground and platform
-    this.physics.add.collider(this.platformLayer, this.mummies);
-    this.physics.add.collider(this.groundLayer, this.mummies);
-    this.physics.add.collider(this.mummies, this.mummies);
-    this.physics.add.collider(this.player, this.mummies);
+    // Animate Coins
+    this.anims.create({
+        key: 'slowSpin',
+        frames: this.anims.generateFrameNumbers('spinCoin', { start: 0, end: 6 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'spin',
+        frames: this.anims.generateFrameNumbers('spinCoin', { start: 0, end: 6 }),
+        frameRate: 16,
+        repeat: -1
+    });
+
+    this.anims.create({
+        key: 'fastSpin',
+        frames: this.anims.generateFrameNumbers('spinCoin', { start: 0, end: 6 }),
+        frameRate: 30,
+        repeat: -1
+    });
+
+
+
+      // create coin physics group
+  this.coins = this.physics.add.group();
+
+  // Add members to this.coins group with different animation
+  this.coins.create(100, 0, 'spinCoin').setScale(0.5);
+  this.coins.create(200, 0, 'spinCoin').setScale(1);
+  this.coins.create(300, 0, 'spinCoin').setScale(2).play('fastSpin');
+  this.coins.create(500, 0, 'spinCoin').setScale(4).play('spin');
+  
+  // create second coin physics group
+  this.coins2 = this.physics.add.group();
+
+  // Add members to this.coins group
+  this.coins2.create(600, 0, 'spinCoin').setScale(0.5);
+  this.coins2.create(700, 0, 'spinCoin').setScale(1);
+  this.coins2.create(800, 0, 'spinCoin').setScale(2);
+  this.coins2.create(900, 0, 'spinCoin').setScale(4);
+
+    // iterate all the members in the group and play animation
+    this.coins2.children.iterate(coin => {
+        coin.play('slowSpin')
+    })
+
+    this.coins3 = this.physics.add.group({
+        key: 'spinCoin',
+        repeat: 5,
+        setXY: { x: 1200, y: 0, stepX: Phaser.Math.Between(100, 200) }
+    });
+
+     // iterate all the members in the group and play animation
+     this.coins3.children.iterate(coin => {
+        coin.play('fastSpin')
+    })   
+
+       // Add colider to ground and platform
+       this.physics.add.collider(this.groundLayer, this.coins);
+       this.physics.add.collider(this.groundLayer, this.coins2);
+       this.physics.add.collider(this.groundLayer, this.coins3);
+ 
     
     // Setup cursors, up, down, left , right
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -174,41 +253,6 @@ create() {
 
 }
 
-// collectStars(player, stars) {
-//     // remove stars once collected
-//     stars.disableBody(true, true);
-
-//     // Add counter
-//     this.starCount += 1; 
-
-//     // Play sound
-//     //this.pingSnd.play();
-
-//     console.log(this.starCount);
-
-//     // Update star counter
-//     this.starText.setText('Stars ' + this.starCount); // set the text to show the current score
-
-//     return false;
-// }
-
-// dropStars () {
-//     // Add random stars
-//     console.log('Dropping stars');
-//     this.stars.createMultiple({
-//         key: 'star',
-//         repeat: 20,
-//         setXY: { x: Phaser.Math.Between(300, 400), y: Phaser.Math.Between(0, 500), stepX: Phaser.Math.Between(0, 500) }
-//     })
-
-// }
-
-// clearStars() {
-//     console.log('Clearing stars');    
-//     this.stars.clear(true,true);
-//     //this.explodeSnd.play();
-// }
-
 update() {
 
     // Make mummies walk at speed 
@@ -222,13 +266,13 @@ update() {
     });
     
 
-    // if ( this.starCount === 1) {
-    //     this.coin1.setVisible(false);
-    // } else if ( this.starCount === 2) {
-    //     this.coin2.setVisible(false);
-    // } else if ( this.starCount === 3) {
-    //     this.coin3.setVisible(false);
-    // }
+    if ( this.starCount === 1) {
+        this.coin1.setVisible(false);
+    } else if ( this.starCount === 2) {
+        this.coin2.setVisible(false);
+    } else if ( this.starCount === 3) {
+        this.coin3.setVisible(false);
+    }
 
     if (this.cursors.left.isDown)
     {
@@ -248,7 +292,7 @@ update() {
     // jump 
     if (this.cursors.up.isDown && this.player.body.onFloor())
     {
-        this.player.body.setVelocityY(-300);   
+        this.player.body.setVelocityY(-500);   
         //this.blasterSnd.play();   
     }
 
@@ -261,16 +305,22 @@ update() {
         this.scene.start("gameoverScene");
     }
 
-    let x = Math.abs(this.endPoint6.x - this.player.x);
-    let y = Math.abs(this.endPoint6.y - this.player.y);
+    let x = Math.abs(this.endPoint.x - this.player.x);
+    let y = Math.abs(this.endPoint.y - this.player.y);
     //console.log(x,y);
 
     // Check for reaching endPoint object
     if ( x < 50 && y < 50 ) {
         console.log('Reached endPoint, loading next level');
-        this.scene.stop("level6");
+        this.scene.stop("level7");
         this.scene.start("gameoverScene");
     }
+
+
+        // Parallax scrolling codes
+    // scroll the texture of the tilesprites proportionally to the camera scroll
+    this.bg_b.tilePositionX = this.cameras.main.scrollX * .2;
+    this.bg_f.tilePositionX = this.cameras.main.scrollX * .7;
     
 }
 

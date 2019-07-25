@@ -14,13 +14,21 @@ class mainScene extends Phaser.Scene {
 
         this.add.image(0, 0, 'main').setOrigin(0, 0);
         
-        this.add.text(0,570, 'Press spacebar or 1,2,3,4,5,6,7 for level', { font: '24px Courier', fill: '#000000' });
+        this.add.text(0,570, 'Press spacebar or numbers for levels', { font: '24px Courier', fill: '#000000' });
 
         console.log("This is mainScene");
 
         // Add animation for mummy
         this.anims.create({
             key: 'walk',
+            frames: this.anims.generateFrameNumbers('mummy'),
+            frameRate: 10,
+            yoyo: true,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'walk2',
             frames: this.anims.generateFrameNumbers('mummy'),
             frameRate: 20,
             yoyo: true,
@@ -31,14 +39,14 @@ class mainScene extends Phaser.Scene {
     this.mummies = this.add.group();
 
     // Add members to mummies group
-    this.mummies.create(200, 400, 'mummy').setScale(1);
+    this.mummies.create(200, 400, 'mummy').setScale(1).play('walk');
     this.mummies.create(400, 400, 'mummy').setScale(2);
-    this.mummies.create(600, 400, 'mummy').setScale(4);
+    this.mummies.create(600, 400, 'mummy').setScale(4).play('walk2');
 
     // Iterate all the children and play animation
-    this.mummies.children.iterate(mummy => {
-        mummy.play('walk')
-    })
+    // this.mummies.children.iterate(mummy => {
+    //     mummy.play('walk')
+    // })
 
 
         //this.input.once('pointerdown', function(){
@@ -50,6 +58,8 @@ class mainScene extends Phaser.Scene {
         var key5 = this.input.keyboard.addKey(53);
         var key6 = this.input.keyboard.addKey(54);
         var key7 = this.input.keyboard.addKey(55);
+        var key8 = this.input.keyboard.addKey(56);
+
 
 
         key1.on('down', function(){
@@ -87,6 +97,11 @@ class mainScene extends Phaser.Scene {
             this.scene.stop("mainScene");
             this.scene.start("level7");
             }, this ); 
+
+        key8.on('down', function(){
+            this.scene.stop("mainScene");
+            this.scene.start("level8");
+            }, this );     
 
         spaceDown.on('down', function(){
         console.log("Spacebar pressed, goto main2Scene");

@@ -26,6 +26,8 @@ preload() {
 
 create() {
 
+    this.add.text(0,0, 'Level 1 - Collect stars', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+
     this.map = this.make.tilemap({key: 'map'});
     
     // Must match tileSets name
@@ -35,9 +37,17 @@ create() {
     this.groundLayer = this.map.createDynamicLayer('groundLayer', Tiles, 0, 0);
     this.platformLayer = this.map.createDynamicLayer('platformLayer', Tiles, 0, 0);
 
+    // Make it global variable for troubleshooting
+    window.groundLayer = this.groundLayer;
+
+
     // Set starting and ending position using object names in tiles
     this.startPoint = this.map.findObject("ObjectLayer", obj => obj.name === "startPoint");
     this.endPoint = this.map.findObject("ObjectLayer", obj => obj.name === "endPoint");
+
+    // Make it global variable for troubleshooting
+    window.startPoint = this.startPoint;
+    window.endPoint = this.endPoint;
 
     // Place an image manually on the endPoint
     this.add.image(this.endPoint.x, this.endPoint.y, 'coin').setOrigin(0, 0);
@@ -56,6 +66,9 @@ create() {
     // Set this.player to starting position
     //this.player.setPosition(this.startPoint.x, this.startPoint.y);  
     this.player.setPosition(0, 0);  
+
+    // Make it global variable for troubleshooting
+    window.player = this.player;
 
     //console.log('player ', this.player.x, this.player.y);
 
@@ -77,13 +90,13 @@ create() {
         setXY: { x: 0, y: 0, stepX: Phaser.Math.Between(200, 200) }
     });
 
+
     // Collide platform with stars
     this.physics.add.collider(this.platformLayer, this.stars);
     this.physics.add.collider(this.groundLayer, this.stars);
 
     this.physics.add.overlap(this.player, this.stars,this.collectStars, null, this );
 
-    this.add.text(0,560, 'Level 1 - Collect stars', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, 'Stars 0', {

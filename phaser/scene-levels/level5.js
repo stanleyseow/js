@@ -31,6 +31,8 @@ preload() {
 
 create() {
 
+    this.add.text(0,0, 'Level 5 - Dropping n clearing stars', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+
     // Sound variable
     this.explodeSnd = this.sound.add('explode');
     this.pingSnd = this.sound.add('ping');
@@ -92,8 +94,6 @@ create() {
     this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.dropStars, callbackScope: this, loop: true });
     this.timedEvent2 = this.time.addEvent({ delay: 10000, callback: this.clearStars, callbackScope: this, loop: true });
     
-    // Add Level number text at bottom
-    this.add.text(0,560, 'Level 5 - Dropping n clearing stars', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // Added 3 coins as 3mlives
     this.coin1 = this.add.image(50,530, 'coin').setScrollFactor(0);

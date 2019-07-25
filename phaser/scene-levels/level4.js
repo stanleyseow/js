@@ -33,6 +33,8 @@ preload() {
 
 create() {
 
+    this.add.text(0,0, 'Level 4 - moving bombs, display life & sound', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+
     // sound effect
     this.explodeSnd = this.sound.add('explode');
 
@@ -95,7 +97,6 @@ create() {
 
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 4 - moving bombs, display life & sound', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     this.coin1 = this.add.image(50,530, 'coin').setScrollFactor(0);
     this.coin2 = this.add.image(100,530,'coin').setScrollFactor(0);

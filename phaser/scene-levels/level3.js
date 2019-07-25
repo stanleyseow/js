@@ -27,6 +27,7 @@ preload() {
 
 create() {
 
+    this.add.text(0,0, 'Level 3 - moving bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     this.map2 = this.make.tilemap({key: 'map2'});
     
@@ -94,7 +95,6 @@ create() {
 
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 3 - moving bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, '0', {

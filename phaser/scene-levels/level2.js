@@ -28,12 +28,10 @@ preload() {
 
 create() {
 
+    this.add.text(0,0, 'Level 2 - static bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     this.map2 = this.make.tilemap({key: 'map2'});
     
-    // Must match tileSets name
-   // var coinTiles = map.addTilesetImage('goldCoin');
-
     // Must match tileSets name
     this.Tiles = this.map2.addTilesetImage('tiles64x64','tiles');
 
@@ -102,7 +100,6 @@ create() {
     //this.physics.add.overlap(this.stars, this.bombs, this.removeBombs, null, this );
     this.physics.add.overlap(this.player, this.bombs, this.hitBombs, null, this );
 
-    this.add.text(0,560, 'Level 2 - static bombs', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // this text will show the score
     this.starText = this.add.text(20, 40, '0', {
