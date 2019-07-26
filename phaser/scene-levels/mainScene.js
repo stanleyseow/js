@@ -59,6 +59,8 @@ class mainScene extends Phaser.Scene {
         var key6 = this.input.keyboard.addKey(54);
         var key7 = this.input.keyboard.addKey(55);
         var key8 = this.input.keyboard.addKey(56);
+        var key9 = this.input.keyboard.addKey(57);
+
 
 
 
@@ -102,6 +104,11 @@ class mainScene extends Phaser.Scene {
             this.scene.stop("mainScene");
             this.scene.start("level8");
             }, this );     
+
+        key9.on('down', function(){
+            this.scene.stop("mainScene");
+            this.scene.start("level9");
+            }, this );  
 
         spaceDown.on('down', function(){
         console.log("Spacebar pressed, goto main2Scene");
