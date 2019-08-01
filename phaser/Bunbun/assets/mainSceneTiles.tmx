@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="1" height="3" tilewidth="750" tileheight="141" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="tiledMainScene" tilewidth="750" tileheight="141" tilecount="1" columns="1">
+  <image source="tiledMainScene.png" width="750" height="142"/>
+  <tile id="0">
+   <properties>
+    <property name="collide" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer id="1" name="groundLayer" width="1" height="3">
+  <data encoding="base64">
+   AAAAAAAAAAABAAAA
+  </data>
+ </layer>
+</map>
