@@ -1,5 +1,6 @@
 var config = {
     type: Phaser.AUTO,
+    parent	: 'phaser-app',
     width: 800,
     height: 600,
     physics: {
@@ -18,79 +19,67 @@ var config = {
     }
 };
 
-var groundLayer;
-var platformLayer;
-var ladderLayer;
-var player;
-
-var startPoint;
-var endPoint;
-
 var ladder = false;
 
 var game = new Phaser.Game(config);
 
 function preload() {
-
-    // map made with Tiled in JSON format
     this.load.tilemapTiledJSON('map', 'assets/Tiled-9.json');
     this.load.spritesheet('tiles', 'assets/tiles64x64.png', {frameWidth: 64, frameHeight: 64});
-    this.load.spritesheet('ladder', 'assets/ladder64x64.png',{frameWidth: 64, frameHeight: 64});
     this.load.atlas('player', 'assets/player.png', 'assets/player.json');
+    this.load.image('gold', 'assets/goldCoin.png');
+    this.load.image('ladder', 'assets/ladder64x64.png');
 }
 
 function create() {
-    map = this.make.tilemap({key: 'map'});
+    this.map = this.make.tilemap({key: 'map'});
     
-
-
     // Must match tileSets name above ( tiles64x64 )
-    var Tiles = map.addTilesetImage('tiles64x64','tiles');
-
+    this.Tiles = this.map.addTilesetImage('tiles64x64','tiles');
+    this.Coins = this.map.addTilesetImage('goldCoin','gold');
+    this.Ladders = this.map.addTilesetImage('ladder64x64','ladder');
     // create the ground layer
-    groundLayer = map.createStaticLayer('groundLayer', Tiles, 0, 0);
-    platformLayer = map.createStaticLayer('platformLayer', Tiles, 0, 0);
+    this.groundLayer = this.map.createDynamicLayer('groundLayer', this.Tiles, 0, 0);
+    this.platformLayer = this.map.createDynamicLayer('platformLayer', this.Tiles, 0, 0);
+    this.ladderLayer = this.map.createDynamicLayer('ladderLayer', this.Ladders, 0, 0);
+    this.coinLayer = this.map.createDynamicLayer('coinLayer', this.Coins, 0, 0);
 
-    // Set starting and ending position using name
-    startPoint = map.findObject("ObjectLayer", obj => obj.name === "startPoint");
-    endPoint = map.findObject("ObjectLayer", obj => obj.name === "endPoint");
-    
-    // create the player sprite    
-    player = this.physics.add.sprite(0, 0, 'player');
-    player.setBounce(0.1); // our player will bounce from items
-    
-    // small fix to our player images, we resize the physics body object slightly
-    player.body.setSize(player.width*0.8, player.height*0.8);
-    player.setCollideWorldBounds(true); // don't go out of the map  
+    window.ladder = this.coinLayer;
 
-    // Set player to starting position
-    player.setPosition(startPoint.x, startPoint.y);  
+    // create the this.player sprite    
+    this.player = this.physics.add.sprite(0, 0, 'player');
+    this.player.setBounce(0.1); // our this.player will bounce from items
+    this.player.setOrigin(0.5, 0);
+    this.player.setCollideWorldBounds(true); // don't go out of the map  
+    this.player.setPosition(0, 0);  
+
+    window.player = this.player;
+
+    this.physics.add.overlap(this.coinLayer, this.player );
+    this.coinLayer.setTileIndexCallback(17, allowBox,this );
     
+    // See JSON file for ladder, "firstgid":18
+    this.ladderLayer.setTileIndexCallback(18, allowClimb,this );
+    this.physics.add.overlap(this.ladderLayer, this.player );
+
     // set the boundaries of our game world
-    this.physics.world.bounds.width = groundLayer.width;
-    this.physics.world.bounds.height = groundLayer.height;
+    this.physics.world.bounds.width = this.groundLayer.width;
+    this.physics.world.bounds.height = this.groundLayer.height;
 
-    // the player will collide with this layer
-    groundLayer.setCollisionByProperty({ collides: true });
-    platformLayer.setCollisionByProperty({ collides: true });
+    // Testing for collider - working 
+    //this.coinLayer.setCollisionByProperty({ ladder: true });
+    //this.physics.add.collider(this.coinLayer, this.player);
 
-    // Collides with platform and ground
-    this.physics.add.collider(groundLayer, player);
-    this.physics.add.collider(platformLayer, player);
 
-    // Add ladder tiles & layers
-    var ladderTiles = map.addTilesetImage('ladder64x64','ladder');
-    ladderLayer = map.createStaticLayer('ladderLayer', ladderTiles, 0, 0);
-
-    // This one not working
-    var ladderGroup = this.physics.add.group(ladderLayer);
+    // the this.player will collide with this layer
+    this.groundLayer.setCollisionByProperty({ collides: true });
+    this.platformLayer.setCollisionByProperty({ collides: true });
     
-    // If overlapped with ladder, call the function
-    this.physics.add.overlap(player, ladderGroup, function (player) {
-        console.log('ladder overlap',player.x,player.y);               
-    });
+    // Collides with platform and ground
+    this.physics.add.collider(this.groundLayer, this.player);
+    this.physics.add.collider(this.platformLayer, this.player);
 
-    // player walk animation
+    // this.player walk animation
     this.anims.create({
         key: 'walk',
         frames: this.anims.generateFrameNames('player', {prefix: 'p1_walk', start: 1, end: 11, zeroPad: 2}),
@@ -104,56 +93,97 @@ function create() {
         frameRate: 10,
     });
 
-    cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys();
 
   // set bounds so the camera won't go outside the game world
-  this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-  // make the camera follow the player
-  this.cameras.main.startFollow(player);
+  this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+  // make the camera follow the this.player
+  this.cameras.main.startFollow(this.player);
 
   // set background color, so the sky is not black    
   this.cameras.main.setBackgroundColor('#ccccff');
 
 }
 
-
-function onLadder() {
-    ladder = true;
-    console.log('On ladder ', ladder);
+function allowBox(player, tile) {
+    console.log('Allow Box', tile.x,tile.y);
+    this.player.body.setGravityY(0);
+    this.player.anims.play('idle', true);
+    return true;
 }
 
+// function allowBox2(player, tile) {
+//     console.log('Allow Box2 ',tile.x,tile.y);
+
+//     return true;
+// }
+
+function allowClimb(sprite, tile) {
+    //console.log('Allow Climb');
+    this.distance = Math.abs(this.player.x - (tile.pixelX + tile.width / 2)); 
+    //console.log(this.player.x, tile.pixelX, this.distance);
+
+    this.onLadder = true;
+}
 
 function update() {
 
-    ladder = false;
 
-    if (cursors.left.isDown)
-    {
-        player.body.setVelocityX(-200);
-        player.anims.play('walk', true); // walk left
-        player.flipX = true; // flip the sprite to the left
-    }
-    else if (cursors.right.isDown)
-    {
-        player.body.setVelocityX(200);
-        player.anims.play('walk', true);
-        player.flipX = false; // use the original sprite looking to the right
+    this.player.body.debugBodyColor = this.player.body.onOverlap ? 0x00ffff : 0xffff00;
+
+    if ( this.onLadder ) {
+        //console.log('Gravity 0');
+        this.player.setGravityY(0);
     } else {
-        player.body.setVelocityX(0);
-        player.anims.play('idle', true);
+        //console.log('Gravity 300');
+        this.player.setGravityY(300);
     }
-    // jump 
-    if (cursors.up.isDown && player.body.onFloor())
+
+    if (this.cursors.left.isDown )
     {
-        player.body.setVelocityY(-500);        
+        this.player.body.setVelocityX(-200);
+        this.player.anims.play('walk', true); 
+        this.player.flipX = true;    
     }
-
-    //console.log('player ', player.x, player.y);
-
-    // Check for reaching endPoint object
-    if ( player.x >= endPoint.x && player.y >= endPoint.y ) {
-        console.log('Reached endPoint');
+    else if (this.cursors.right.isDown)
+    {
+        this.player.body.setVelocityX(200);
+        this.player.anims.play('walk', true);
+        this.player.flipX = false; 
     }
+    else if (this.cursors.up.isDown && this.onLadder == false )
+    {
+        // Jump
+        this.player.body.setVelocityY(-300);       
+    }
+    else if ( this.cursors.up.isDown && this.onLadder == true )
+    {
+        // Climb up , -Y
+        this.player.anims.play('idle', true);
+        this.player.setGravityY(0);
+        this.player.setVelocityY(-100);
+    }
+    else if ( this.cursors.down.isDown && this.onLadder == true )
+    {
+        // Climb down , +Y
+        this.player.anims.play('idle', true);
+        this.player.setGravityY(0);
+        this.player.setVelocityY(100);
+    }
+    else if ( this.onLadder )
+    {
+        this.player.body.setVelocityX(0);
+        this.player.body.setVelocityY(0);
+        this.player.anims.play('idle', true);
+    } else 
+    {
+        this.player.body.setVelocityX(0);
+        this.player.anims.play('idle', true);
+    }
+    
+    // Reset onLadder flag 
+    this.onLadder = false;
+
     
 }
 
