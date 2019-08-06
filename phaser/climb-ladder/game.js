@@ -1,6 +1,5 @@
 var config = {
     type: Phaser.AUTO,
-    parent	: 'phaser-app',
     width: 800,
     height: 600,
     physics: {
@@ -183,7 +182,5 @@ function update() {
     
     // Reset onLadder flag 
     this.onLadder = false;
-
-    
 }
 
