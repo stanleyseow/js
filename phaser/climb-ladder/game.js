@@ -105,7 +105,7 @@ function create() {
 }
 
 function allowBox(player, tile) {
-    console.log('Allow Box', tile.x,tile.y);
+    //console.log('Allow Box', tile.x,tile.y);
     this.player.body.setGravityY(0);
     this.player.anims.play('idle', true);
     return true;
