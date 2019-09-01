@@ -4,7 +4,6 @@ These are all my javascripts collections..
 
 The gh pages are located at https://stanleyseow.github.io/js/
 
-Stanley
-
+Stanley Seow
 stanleyseow@gmail.com
 
