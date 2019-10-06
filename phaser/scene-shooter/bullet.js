@@ -5,11 +5,12 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     fire(x, y) {
         this.body.reset(x, y);
-        this.setVelocityX(400);
-
         this.body.setAllowGravity(false);
+        
         this.setActive(true);
         this.setVisible(true);
+        this.enableBody();
+        this.setVelocityX(400);
 
         console.log('bullet (x,y) ', this.x, this.y);
     }

@@ -192,7 +192,7 @@ update() {
     {
         this.player.body.setVelocityY(-500);   
     }
-    
+
 } 
 /////////////////////////// end of update() /////////////////////////////////
 
@@ -201,6 +201,8 @@ shootStars(bullets, stars) {
     console.log('stars shot')
     stars.disableBody(true, true);
     bullets.disableBody(true, true);
+    bullets.setActive(false);
+    bullets.setVisible(false);
 
     // Add counter
     this.starCount += 1; 
