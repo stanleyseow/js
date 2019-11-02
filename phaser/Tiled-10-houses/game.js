@@ -178,13 +178,14 @@ function collectItem2(sprite, tile) {
 
 function update() {
 
+    // Disable gravity when on ladder
     if ( this.onLadder ) {
-        //console.log('Gravity 0');
-        player.setGravityY(0);
+        player.body.setAllowGravity(false);
     } else {
-        //console.log('Gravity 300');
-        player.setGravityY(400);
+        player.body.setAllowGravity(true);
     }
+
+
     if (this.cursors.left.isDown )
     {
         player.body.setVelocityX(-200);
@@ -206,14 +207,14 @@ function update() {
     {
         // Climb up , -Y
         player.anims.play('idle', true);
-        player.setGravityY(0);
+        //player.setGravityY(0);
         player.setVelocityY(-100);
     }
     else if ( this.cursors.down.isDown && this.onLadder == true )
     {
         // Climb down , +Y
         player.anims.play('idle', true);
-        player.setGravityY(0);
+        //player.setGravityY(0);
         player.setVelocityY(100);
     }
     else if ( this.onLadder )
