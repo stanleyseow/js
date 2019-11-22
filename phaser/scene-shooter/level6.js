@@ -30,7 +30,7 @@ preload() {
 
 create() {
 
-    this.add.text(0,0, 'Level 6 - Shooter overlap', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
+    this.add.text(0,0, 'Level 6 - Shooter', { font: '24px Courier', fill: '#000000' }).setScrollFactor(0);
 
     // Sound variable
     this.explodeSnd = this.sound.add('explode');
@@ -88,7 +88,7 @@ create() {
 
     // Timed events, drop starts every 2 secs, clear stars every 10 secs
     this.timedEvent = this.time.addEvent({ delay: 2000, callback: this.dropStars, callbackScope: this, loop: true });
-    //this.timedEvent2 = this.time.addEvent({ delay: 5000, callback: this.clearBullets, callbackScope: this, loop: true });
+    this.timedEvent2 = this.time.addEvent({ delay: 10000, callback: this.clearStars, callbackScope: this, loop: true });
     
 
     this.stars.createMultiple({
@@ -167,7 +167,7 @@ this.spaceDown.on('down', function(){
 window.bullets = this.bullets;
 
 // When bullets overlap with stars, run shootStar function
-this.physics.add.overlap(this.bullets, this.stars,this.shootStars, null, this );
+this.physics.add.overlap(this.bullets, this.stars,this.hitStars, null, this );
 
 } 
 ///////////////////////// end of create() //////////////////////////
@@ -196,7 +196,7 @@ update() {
 } 
 /////////////////////////// end of update() /////////////////////////////////
 
-shootStars(bullets, stars) {
+hitStars(bullets, stars) {
     // remove stars once collected
     console.log('stars shot')
     stars.disableBody(true, true);
@@ -230,7 +230,6 @@ dropStars () {
 clearStars() {
     console.log('Clearing stars');    
     this.stars.clear(true,true);
-    //this.explodeSnd.play();
 }
 
 clearBullets() {
