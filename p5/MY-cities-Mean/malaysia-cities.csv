@@ -1,0 +1,16 @@
+city,city_ascii,lat,lng,mean,country,iso2,province
+Kangar,Kangar,6.433001991,100.1899987,4708,Malaysia,MY,Perlis
+Shah Alam,Shah Alam,3.066695996,101.5499977,5446,Malaysia,MY,Selangor
+Alor Setar,Alor Setar,6.113307718,100.3729325,4376,Malaysia,MY,Kedah
+Seremban,Seremban,2.710492166,101.9400203,4969,Malaysia,MY,Negeri Sembilan
+Kuala Terengganu,Kuala Terengganu,5.330409769,103.12,4648,Malaysia,MY,Trengganu
+Johor Bahru,Johor Bahru,1.480024637,103.7300402,4986,Malaysia,MY,Johor
+Ipoh,Ipoh,4.599989236,101.0649833,4411,Malaysia,MY,Perak
+Kota Baharu,Kota Baharu,6.119973978,102.2299768,4645,Malaysia,MY,Kelantan
+Malacca,Malacca,2.206414407,102.2464615,4362,Malaysia,MY,Melaka
+Kuantan,Kuantan,3.829958719,103.3200394,4588,Malaysia,MY,Pahang
+Kota Kinabalu,Kota Kinabalu,5.979982523,116.1100081,4811,Malaysia,MY,Sabah
+George Town,George Town,5.413613156,100.3293679,4647,Malaysia,MY,Pulau Pinang
+Kuching,Kuching,1.529969909,110.3299991,4968,Malaysia,MY,Sarawak
+Putrajaya,Putrajaya,2.914019795,101.701947,5812,Malaysia,MY,WP - PutraJaya
+Kuala Lumpur,Kuala Lumpur,3.166665872,101.6999833,6442,Malaysia,MY,WP - Kuala Lumpur
