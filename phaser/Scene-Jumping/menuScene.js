@@ -17,16 +17,21 @@ class menuScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map2', 'assets/city2.json');
         this.load.tilemapTiledJSON('map3', 'assets/city3.json');
 
-        this.load.audio('world', 'assets/U3ASSORT.mid' )
-
+        this.load.image('main','assets/mainpage.png');
     }
 
     create () {
 
+        // Add image and detect spacebar keypress
+        this.add.image(0, 0, 'main').setOrigin(0, 0);
+        var spaceDown = this.input.keyboard.addKey('SPACE');
+        this.add.text(90,600, 'Press spacebar to continue', { font: '30px Courier', fill: '#FFFFFF' });
+
+
         this.anims.create({
-            key: 'ranger',
+            key: 'dragon',
             frames: this.anims.generateFrameNumbers('u3', 
-                { start:31, end:31}),
+                { start:232, end:235}),
             frameRate: 5,
             repeat : -1
         })
@@ -81,15 +86,53 @@ class menuScene extends Phaser.Scene {
             repeat : -1
         })
 
-        this.player = this.physics.add.sprite(300,300,'u3').play('ranger').setScale(2);
+        // Small animations
+        this.dragon = this.add.sprite(550,500,'u3').play('dragon').setScale(12);
+        this.player = this.add.sprite(250,550,'u3').play('ranger').setScale(4);
+        this.fighter = this.add.sprite(200,550,'u3').play('fig').setScale(4);
+        this.wizard = this.add.sprite(140,550,'u3').play('wiz').setScale(4);
+        this.cleric = this.add.sprite(90,550,'u3').play('cle').setScale(4);
+        
+        // Dragon tweens
+        this.time.addEvent({ delay: 1000, callback: this.moveRightLeft, callbackScope: this, loop: false });
 
+        console.log(this);
         
         
-        // Fixed initial position into map
-        this.player.x = 300;
-        this.player.y = 400;
+        spaceDown.on('down', function(){
         console.log('Jump to world scene');
-        this.scene.start('world', { player : this.player } );
+
+        this.player.x = 300;
+        this.player.y = 300
+        this.horse = 0;
+        this.chest = 0;
+        this.scene.start('world', { player : this.player, chest: this.chest, horse: this.horse } );
+        }, this );
+
+
+        // Fixed initial position into map
+        // this.player.x = 300;
+        // this.player.y = 300;
+        // console.log('Jump to world scene');
+        // this.scene.start('world', { player : this.player } );
+    }
+
+    moveRightLeft() {
+        console.log('moveRightLeft')
+        this.tweens.timeline({
+            targets: this.dragon,
+            loop: -1, // loop forever
+            ease: 'Linear',
+            duration: 2500,
+            tweens: [
+            {
+                x: 350,
+            },
+            {
+                x: 550,
+            },
+        ]
+        });
     }
 
 }

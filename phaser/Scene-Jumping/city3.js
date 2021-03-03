@@ -9,8 +9,8 @@ class city3 extends Phaser.Scene {
 
 
     init(data){
-        this.life = data.life;
-        this.gold = data.gold;
+        this.chest = data.chest
+        this.horse = data.horse
         this.player = data.player
     }
 
@@ -82,7 +82,9 @@ class city3 extends Phaser.Scene {
         // Set position beside city2 in worldmap
         player.x = 300;
         player.y = 200;
-        this.scene.start('world', { player : player });
+        this.scene.start('world', { player : player, 
+                                    chest: this.chest, 
+                                    horse: this.horse });
 
     }
     

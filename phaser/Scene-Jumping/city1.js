@@ -9,8 +9,8 @@ class city1 extends Phaser.Scene {
 
 
     init(data){
-        this.life = data.life;
-        this.gold = data.gold;
+        this.chest = data.chest
+        this.horse = data.horse
         this.player = data.player
     }
 
@@ -43,7 +43,10 @@ class city1 extends Phaser.Scene {
 
         this.player = this.physics.add.sprite(this.player.x,this.player.y,'u3').play('ranger').setScale(2);
 
+        // match for grass tile
         this.citymap.setTileIndexCallback(5, this.worldmap, this);
+        
+        // match for chest tile
         this.citymap.setTileIndexCallback(61, this.collectChest, this);
 
         this.physics.add.overlap(this.citymap, this.player );
@@ -83,13 +86,14 @@ class city1 extends Phaser.Scene {
         // Set position beside city1 in worldmap
         player.x = 120;
         player.y = 500;
-        this.scene.start('world', { player : player });
-
+        this.scene.start('world', { player : player, 
+                                    chest: this.chest, 
+                                    horse: this.horse });
     }
     
     collectChest(player,tile) {
-        //console.log('Tile id: ', tile.index );
-        console.log('Collect Chest');
+        this.chest++;
+        console.log('Collect Chest', this.chest);
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;
     }
