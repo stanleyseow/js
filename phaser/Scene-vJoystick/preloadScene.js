@@ -4,28 +4,40 @@ class preloadScene extends Phaser.Scene {
     {
         super({ key: 'preloadScene' });
     }
-    create () {
-        let graphics = this.add.graphics();
 
-        graphics.fillStyle(0xff3300, 1);
+preload() {
+    // this.mapmade with Tiled in JSON format
+    this.load.tilemapTiledJSON('map', 'assets/map.json');
+    // tiles in spritesheet 
+    this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
+    // simple coin image
+    this.load.image('coin', 'assets/coinGold.png');
+    // this.playeranimations
+    //this.load.atlas('player', 'assets/player.png', 'assets/player.json');
+    // this.load.atlas('girl', 'assets/girl.png', 'assets/girl.json');
 
-        graphics.fillRect(100, 200, 600, 300);
-        graphics.fillRect(100, 100, 100, 100);
+    // Anna is 64x64 9 frames per animation
+    this.load.spritesheet('girl', 'assets/anna.png', {frameWidth: 64, frameHeight: 64});
 
-        this.add.text(120, 110, 'A', { font: '96px Courier', fill: '#000000' });
-        this.add.text(120, 310, 'Press Spacebar to continue', { font: '24px Courier', fill: '#000000' });
+    this.load.spritesheet('fire', 'assets/fire.png',{ frameWidth:40, frameHeight:70 });
+}
 
-        console.log("This is preloadScene spacebar V3");
+create() {
 
-        //this.input.once('pointerdown', function(){
-        var spaceDown = this.input.keyboard.addKey('SPACE');
+    this.add.text(10, 10, 'This is preload Scene', { font: '24px Courier', fill: '#FFFF00' });
+    this.add.text(10, 34, 'Click or space to continue', { font: '24px Courier', fill: '#FFFF00' });
+
+    var spaceDown = this.input.keyboard.addKey('SPACE');
         
-        spaceDown.on('down', function(){
-        console.log("Spacebar pressed, goto gameScene");
-        //this.scene.stop("preloadScene");
-        this.scene.start("gameScene");
+    this.input.on('pointerdown', function (pointer) {
+        this.scene.start("level1");
+        }, this);
+
+    spaceDown.on('down', function(){
+        console.log("Spacebar pressed, goto level1");
+        this.scene.start("level1");
         }, this );
 
-    }
-
 }
+
+} // end of class
