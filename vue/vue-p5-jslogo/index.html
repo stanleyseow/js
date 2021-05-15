@@ -1,0 +1,9 @@
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vue-p5@0.7.x"></script>
+
+<div id="app">
+	<h1>p5 as Vue component JS Logo</h1>
+    <h2>x:{{x}} y:{{y}} </h2>
+  <vue-p5 v-on="{preload,setup,draw,keypressed,mouseclicked}"></vue-p5>
+</div>
+<script src="sketch.js"></script>

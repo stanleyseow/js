@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Top 10 Scores</title>
+</head>
+    <body>
+        <div id="app">
+            <H2> Top 10 High Scores</H2>
+            <ul>
+                <h3 v-for="item in scores">
+                 {{ item.name }} -- {{ item.score }}
+                </h3>
+        </ul>
+        </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

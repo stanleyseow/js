@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>How to make a Mario-style platformer with Phaser 3</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+        
+        <script type="text/javascript" src="../phaser.min.js"></script>
+    </head>
+    <body>        
+    
+    <script type="text/javascript">
+        
+    var config = {
+type: Phaser.AUTO,
+width: 800,
+height: 600,
+physics: {
+    default: 'arcade',
+    arcade: {
+        gravity: {y: 500},
+        debug: false
+    }
+},
+scene: {
+    key: 'main',
+    preload: preload,
+    create: create,
+    update: update
+}
+};
+
+var game = new Phaser.Game(config);
+
+var map;
+var player;
+var cursors;
+var groundLayer, coinLayer;
+var text;
+var score = 0;
+
+function preload() {
+// map made with Tiled in JSON format
+this.load.tilemapTiledJSON('map', 'assets/map.json');
+// tiles in spritesheet 
+this.load.spritesheet('tiles', 'assets/tiles.png', {frameWidth: 70, frameHeight: 70});
+
+}
+
+function create() {
+
+    // load the map 
+    map = this.make.tilemap({key: 'map'});
+
+    // tiles for the ground layer
+    var groundTiles = map.addTilesetImage('tiles');
+    // create the ground layer
+    groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
+
+
+}
+
+function update() {
+
+}
+</script>
+
+</body>
+</html>
