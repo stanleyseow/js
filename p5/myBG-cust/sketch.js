@@ -13,8 +13,16 @@ var data;
 var sales;
 
 function preload() {
-   //var url  = "https://stanleyseow.github.io/js/p5/my-BG-cust/data.json"
+   var url  = "https://stanleyseow.github.io/js/p5/myBG-cust/data.json"
    custData = loadJSON(url);
+//    console.log(custData[0].name);
+//    console.log(custData[0].latitude);
+//    console.log(custData[0].longitude);
+
+   console.log(custData);
+   
+   // console.log(custData);
+
 }
 
 function setup() {
@@ -25,6 +33,7 @@ function setup() {
     initMap();
 
     for (var i = 0; i < custData.length; i++) {
+        console.log(custData[i]);
         var latitude = custData[i].latitude;
         var longitude = custData[i].longitude;
         sales = custData[i].total_price;
