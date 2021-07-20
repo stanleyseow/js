@@ -51,7 +51,7 @@ function addCircle(location, map) {
         fillColor: '#FF0000',
         fillOpacity: 0.35,
         center: location,
-        radius: Math.sqrt(sales) * 10
+        radius: Math.sqrt(sales) * 100
 
     });
 }
