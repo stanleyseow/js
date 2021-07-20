@@ -11,14 +11,15 @@
 var map2;
 var data;
 var sales;
-let custObj = {};
 
 function preload() {
    var url  = "https://stanleyseow.github.io/js/p5/myBG-cust/data.json"
-   loadJSON(url, custData);
-
+   custData = loadJSON(url);
+//    console.log(custData[0].name);
 //    console.log(custData[0].latitude);
 //    console.log(custData[0].longitude);
+
+   console.log(custData);
    
    // console.log(custData);
 
@@ -31,10 +32,11 @@ function setup() {
     // Init Google Maps
     initMap();
 
-    for (var i = 0; i < custObj.length; i++) {
-        var latitude = custObj[i].latitude;
-        var longitude = custObj[i].longitude;
-        sales = custObj[i].total_price;
+    for (var i = 0; i < custData.length; i++) {
+        console.log(custData[i]);
+        var latitude = custData[i].latitude;
+        var longitude = custData[i].longitude;
+        sales = custData[i].total_price;
 
         var pos = {
             lat: latitude,
@@ -58,7 +60,7 @@ function addCircle(location, map) {
         fillColor: '#FF0000',
         fillOpacity: 0.35,
         center: location,
-        radius: Math.sqrt(sales) * 80
+        radius: Math.sqrt(sales) * 50
 
     });
 }
@@ -75,20 +77,13 @@ function initMap() {
     });
 }
 
-function custData(data) {
-    console.log(data);
-
-    custObj = data;
-
-    // custObject = {
-    //   name: d.name,
-    //   city: d.city,
-    //   total_price: d.total_price,
-    //   latitude: d.latitude,
-    //   longitude: d.longitude
-    // });
-
-    console.log(custObj.length);
-
-  }
+// function custData(data) {
+//     custObject = {
+//       name: data.name,
+//       city: data.city,
+//       total_price: data.total_price,
+//       latitude: data.latitude,
+//       longitude: data.longitude
+//     };
+//   }
   
