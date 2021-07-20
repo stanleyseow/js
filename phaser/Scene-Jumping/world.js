@@ -67,8 +67,12 @@ class world extends Phaser.Scene {
     
     update() {
 
-        let speed = 128;
+    let speed = 128;
 
+
+    this.physics.moveToObject( this.paladin, this.player, 30, 3000);
+
+        
         if ( this.cursors.left.isDown ) {
                 this.player.body.setVelocityX(-speed);
         } else if ( this.cursors.right.isDown ) {
