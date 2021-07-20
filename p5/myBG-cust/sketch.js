@@ -9,13 +9,12 @@
 
 //var cities;
 var map2;
-var city;
-var state;
-var pop2;
-
+var data;
+var sales;
 
 function preload() {
-    cities = loadTable("https://stanleyseow.github.io/js/p5/MY-cities-pop/malaysia-cities.csv", "header");
+   //var url  = "https://stanleyseow.github.io/js/p5/my-BG-cust/data.json"
+   custData = loadJSON(url);
 }
 
 function setup() {
@@ -25,13 +24,10 @@ function setup() {
     // Init Google Maps
     initMap();
 
-    for (var i = 0; i < cities.getRowCount(); i++) {
-        var latitude = cities.getNum(i, "lat");
-        var longitude = cities.getNum(i, "lng");
-        city = cities.getString(i, "city");
-        state = cities.getString(i, "province");
-        title = city + ", " + state;
-        pop2 = cities.getNum(i, "pop");
+    for (var i = 0; i < custData.length; i++) {
+        var latitude = custData[i].latitude;
+        var longitude = custData[i].longitude;
+        sales = custData[i].total_price;
 
         var pos = {
             lat: latitude,
@@ -55,7 +51,7 @@ function addCircle(location, map) {
         fillColor: '#FF0000',
         fillOpacity: 0.35,
         center: location,
-        radius: Math.sqrt(pop2) * 50
+        radius: Math.sqrt(sales) * 50
 
     });
 }
@@ -64,10 +60,21 @@ function addCircle(location, map) {
 function initMap() {
     map2 = new google.maps.Map(document.getElementById('map22'), {
         center: {
-            lat: 5.204719,
-            lng: 109.136950
+            lat: 3.139003,
+            lng: 101.68685499999992
         },
         //    center: {lat: 3.139003, lng: 101.68685499999992},
-        zoom: 6
+        zoom: 11
     });
 }
+
+// function custData(data) {
+//     custObject = {
+//       name: data.name,
+//       city: data.city,
+//       total_price: data.total_price,
+//       latitude: data.latitude,
+//       longitude: data.longitude
+//     };
+//   }
+  
