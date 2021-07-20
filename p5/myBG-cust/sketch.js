@@ -52,7 +52,7 @@ function setup() {
 
     }
     const image =
-    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+    "https://stanleyseow.github.io/js/p5/myBG-cust/favicon.png";
     const marker = new google.maps.Marker({
         position: farm,
         map: map2,
