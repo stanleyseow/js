@@ -3,9 +3,7 @@
 // position
 // title = market title when hover on top
 
-// Create an Google API key at 
-// https://console.developers.google.com/apis/dashboard?project=winged-precept-206116&supportedpurview=project&duration=PT1H
-
+// https://developers.google.com/maps/documentation/javascript/overview
 
 //var cities;
 var map2;
@@ -15,7 +13,7 @@ var pop2;
 
 
 function preload() {
-    cities = loadTable("malaysia-cities.csv", "header");
+    cities = loadTable("https://stanleyseow.github.io/js/p5/MY-cities-pop/malaysia-cities.csv", "header");
 }
 
 function setup() {
