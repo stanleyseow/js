@@ -13,7 +13,7 @@ var config = {
     backgroundColor: '#000000',
     pixelArt: true,
     //parent: 'phaser-example',
-    scene: [menuScene, world, city1, city2, city3, arena]
+    scene: [menuScene, world, city1, city2, city3, arena, dungeon]
 };
 
 var game = new Phaser.Game(config);

@@ -11,12 +11,12 @@ class arena extends Phaser.Scene {
 
     init(data) {
         this.player = data.player
-        this.enemy = data.enemy
         this.horse = data.horse
         this.chest = data.chest
 
-        this.playerPOS.x = data.player.x
-        this.playerPOS.y = data.player.y
+        this.enemy = data.enemy
+        this.playerPOS.x = data.player.x 
+        this.playerPOS.y = data.player.y + 10
     }
 
     preload() {
@@ -155,6 +155,7 @@ class arena extends Phaser.Scene {
         player.x = this.playerPOS.x
         player.y = this.playerPOS.y
 
+
         this.scene.start('world', {
             player: player,
             chest: this.chest,
@@ -229,6 +230,7 @@ class arena extends Phaser.Scene {
 
     killPlayer(player, enemy) {
         console.log('killed player');
+
 
         this.cameras.main.shake(500);
         this.explodeSnd.play();

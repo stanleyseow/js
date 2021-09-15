@@ -16,6 +16,7 @@ class menuScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map2', 'assets/city2.json');
         this.load.tilemapTiledJSON('map3', 'assets/city3.json');
         this.load.tilemapTiledJSON('mapArena', 'assets/arena.json');
+        this.load.tilemapTiledJSON('dungeon', 'assets/dungeon.json');
 
         this.load.image('main', 'assets/mainpage.png');
 
@@ -113,6 +114,17 @@ class menuScene extends Phaser.Scene {
             repeat: -1
         })
 
+        this.anims.create({
+            key: 'skel',
+            frames: this.anims.generateFrameNumbers('u3',
+                { start: 196, end: 199 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
+
+
+
 
 
         // Small animations
@@ -143,7 +155,7 @@ class menuScene extends Phaser.Scene {
     }
 
     moveRightLeft() {
-        console.log('moveRightLeft')
+        //console.log('moveRightLeft')
         this.tweens.timeline({
             targets: this.dragon,
             loop: -1, // loop forever
@@ -161,7 +173,7 @@ class menuScene extends Phaser.Scene {
     }
 
     moveRightLeft2() {
-        console.log('moveRightLeft')
+        //console.log('moveRightLeft2')
         this.tweens.timeline({
             targets: this.fireball,
             loop: -1, // loop forever

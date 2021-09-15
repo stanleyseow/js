@@ -35,15 +35,13 @@ class world extends Phaser.Scene {
         let thiefPos = map.findObject("objectLayer", obj => obj.name === "thief");
         let valkriePos = map.findObject("objectLayer", obj => obj.name === "valkrie");
 
-
-
         this.add.text(10, 10, 'C:' + this.chest, { font: '30px Courier', fill: '#FFFFFF' });
         this.add.text(10, 40, 'H:' + this.horse, { font: '30px Courier', fill: '#FFFFFF' });
         // console.log('chest: ', this.chest);
         // console.log('horse: ', this.horse);
 
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(2);
-
+        
         // debug for player
         window.player = this.player;
 
@@ -105,6 +103,10 @@ class world extends Phaser.Scene {
 
         this.physics.moveToObject(this.thief, this.player, 30, 7000);
 
+        // Can fly over mountains
+        this.physics.moveToObject(this.val, this.player, 30, 7000);
+
+
         let speed = 256;
 
         if (this.cursors.left.isDown) {
@@ -144,16 +146,20 @@ class world extends Phaser.Scene {
     arenaAreaVal(player, tile) {
         console.log('Jumping to arena scene')
         this.scene.start('arena', {
-            player: player, chest: this.chest,
-            horse: this.horse, enemy: 1
+            player: player, 
+            chest: this.chest,
+            horse: this.horse,
+            enemy: 1
         })
     }
 
     arenaAreaThi(player, tile) {
         console.log('Jumping to arena scene')
         this.scene.start('arena', {
-            player: player, chest: this.chest,
-            horse: this.horse, enemy: 2
+            player: player, 
+            chest: this.chest,
+            horse: this.horse, 
+            enemy: 2
         })
     }
 
