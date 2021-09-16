@@ -8,9 +8,8 @@ class city3 extends Phaser.Scene {
 
 
     init(data) {
-        this.chest = data.chest
-        this.horse = data.horse
         this.player = data.player
+        this.inventory = data.inventory
     }
 
     preload() {
@@ -19,12 +18,37 @@ class city3 extends Phaser.Scene {
     create() {
         console.log('*** city3');
 
+        this.pingSnd = this.sound.add('ping');
+
         let map = this.make.tilemap({ key: 'map3' });
 
         let groundTiles = map.addTilesetImage('ultima', 'u3');
 
-        this.cityfloor = map.createDynamicLayer('floorLayer', groundTiles, 0, 0).setScale(2);
-        this.citymap = map.createDynamicLayer('cityLayer', groundTiles, 0, 0).setScale(2);
+        let cityfloor = map.createLayer('floorLayer', groundTiles, 0, 0).setScale(2);
+        let castleLayer = map.createLayer('cityLayer', groundTiles, 0, 0).setScale(2);
+
+
+        // Cleric will receive the chest
+        this.british = this.physics.add.sprite(315, 150, 'u3')
+                .play('british').setScale(4).setImmovable(true);
+
+        this.guardGroup1 = this.physics.add.group({
+            key: "u3",
+            repeat: 6,
+            setXY: { x: 250, y: 200, stepY: 50}
+        })
+
+        this.guardGroup2 = this.physics.add.group({
+            key: "u3",
+            repeat: 6,
+            setXY: { x: 380, y: 200, stepY: 50}
+        })
+
+        this.guardGroup1.children.iterate( g => g.play('guard').setScale(3).setImmovable(true))
+        this.guardGroup2.children.iterate( g => g.play('guard').setScale(3).setImmovable(true))
+
+        this.spriteChest = this.add.sprite(270, 150, 'u3').play('chest').setScale(2);
+        this.spriteChest.setVisible(false)
 
         // player position in city2
         this.player.x = 310;
@@ -32,15 +56,23 @@ class city3 extends Phaser.Scene {
 
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(2);
 
-        this.citymap.setTileIndexCallback(5, this.worldmap, this);
+        castleLayer.setTileIndexCallback(5, this.worldmap, this);
+        this.physics.add.overlap(castleLayer, this.player);
 
-        this.physics.add.overlap(this.citymap, this.player);
-        //this.physics.add.overlap(this.citymap, this.player, this.worldmap, null, this);
+        // Overlap with cleric
+        this.physics.add.overlap(this.player, this.british, this.returnChest, null, this);
+        
 
-        this.citymap.setCollisionByProperty({ walls: true });
+        castleLayer.setCollisionByProperty({ walls: true });
 
         // What will collider with what layers
-        this.physics.add.collider(this.citymap, this.player);
+        this.physics.add.collider(castleLayer, this.player);
+
+        this.physics.add.collider(this.player, this.british);
+        this.physics.add.collider(this.player, this.guardGroup1);
+        this.physics.add.collider(this.player, this.guardGroup2);
+
+        //this.physics.add.collider(this.player, this.cleric, this.returnChest, null, this);
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -75,17 +107,24 @@ class city3 extends Phaser.Scene {
         player.x = 300;
         player.y = 200;
         this.scene.start('world', {
-            player: player,
-            chest: this.chest,
-            horse: this.horse
+            player: player,  inventory : this.inventory
         });
 
     }
 
-    collectChest(player, tile) {
-        //console.log('Tile id: ', tile.index );
-        console.log('Collect Chest');
-        this.citymap.removeTileAt(tile.x, tile.y);
+    returnChest(player, tile) {
+        console.log('Return chest to british');
+   
+        if ( this.inventory.chest > 0 ) {
+            this.pingSnd.play();
+            this.inventory.chest--;
+            console.log("chest: ", this.inventory.chest)
+            this.spriteChest.setVisible(true)      
+            this.scene.start('city3Story', {
+                player: player,  inventory : this.inventory
+        });  
+        }
+        
         return false;
     }
 

@@ -8,9 +8,8 @@
 
 
     init(data) {
-        this.chest = data.chest
-        this.horse = data.horse
         this.player = data.player
+        this.inventory = data.inventory
     }
 
     preload() {
@@ -19,6 +18,9 @@
 
     create() {
         console.log('*** city1');
+
+        console.log('chest: ', this.inventory.chest);
+        console.log('horse: ', this.inventory.horse);
 
         this.pingSnd = this.sound.add('ping');
 
@@ -82,16 +84,14 @@
         player.x = 120;
         player.y = 500;
         this.scene.start('world', {
-            player: player,
-            chest: this.chest,
-            horse: this.horse
+            player: player,  inventory : this.inventory
         });
     }
 
     collectChest(player, tile) {
         this.pingSnd.play();
-        this.chest++;
-        console.log('Collect Chest', this.chest);
+        this.inventory.chest++;
+        console.log('Collect Chest', this.inventory.chest);
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;
     }

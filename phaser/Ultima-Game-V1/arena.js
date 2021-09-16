@@ -11,12 +11,11 @@ class arena extends Phaser.Scene {
 
     init(data) {
         this.player = data.player
-        this.horse = data.horse
-        this.chest = data.chest
+        this.inventory = data.inventory
 
         this.enemy = data.enemy
         this.playerPOS.x = data.player.x 
-        this.playerPOS.y = data.player.y + 10
+        this.playerPOS.y = data.player.y + 20
     }
 
     preload() {
@@ -99,7 +98,7 @@ class arena extends Phaser.Scene {
 
         itemLayer.setCollisionByProperty({ mountain: true });
 
-        // match for bush tile
+        // match for bush tile +1
         itemLayer.setTileIndexCallback(6, this.worldmap, this);
 
         // When fireball overlap enemy  
@@ -155,13 +154,8 @@ class arena extends Phaser.Scene {
         player.x = this.playerPOS.x
         player.y = this.playerPOS.y
 
-
-        this.scene.start('world', {
-            player: player,
-            chest: this.chest,
-            horse: this.horse
-        });
-
+        this.scene.start('world', 
+            { player: player,  inventory : this.inventory });
     }
 
     // Tween the entire group together
@@ -253,7 +247,7 @@ class arena extends Phaser.Scene {
     collectChest(player, chest) {
         console.log('Collect Chest');
         this.pingSnd.play();
-        this.chest++;
+        this.inventory.chest++;
         chest.body.setEnable(false)
         chest.setVisible(false)
         return false;

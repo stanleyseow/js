@@ -10,8 +10,7 @@ class city2 extends Phaser.Scene {
 
     init(data) {
         this.player = data.player
-        this.chest = data.chest
-        this.horse = data.horse
+        this.inventory = data.inventory
     }
 
     preload() {
@@ -89,16 +88,14 @@ class city2 extends Phaser.Scene {
         player.x = 520;
         player.y = 560;
         this.scene.start('world', {
-            player: player,
-            chest: this.chest,
-            horse: this.horse
+            player: player,  inventory : this.inventory
         });
 
     }
 
     collectHorse(player, tile) {
-        this.horse++;
-        console.log('Collect Horse', this.horse);
+        this.inventory.horse++;
+        console.log('Collect Horse', this.inventory.horse);
 
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;

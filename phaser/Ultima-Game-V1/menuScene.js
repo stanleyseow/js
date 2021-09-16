@@ -17,6 +17,7 @@ class menuScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map3', 'assets/city3.json');
         this.load.tilemapTiledJSON('mapArena', 'assets/arena.json');
         this.load.tilemapTiledJSON('dungeon', 'assets/dungeon.json');
+        this.load.tilemapTiledJSON('village', 'assets/village.json');
 
         this.load.image('main', 'assets/mainpage.png');
 
@@ -31,6 +32,8 @@ class menuScene extends Phaser.Scene {
         this.add.image(0, 0, 'main').setOrigin(0, 0);
         var spaceDown = this.input.keyboard.addKey('SPACE');
         this.add.text(90, 600, 'Press spacebar to continue', { font: '30px Courier', fill: '#FFFFFF' });
+
+
 
 
         // Create all the animations here
@@ -122,9 +125,37 @@ class menuScene extends Phaser.Scene {
             repeat: -1
         })
 
+        this.anims.create({
+            key: 'guard',
+            frames: this.anims.generateFrameNumbers('u3',
+                { start: 80, end: 81 }),
+            frameRate: 5,
+            repeat: -1
+        })
 
+        this.anims.create({
+            key: 'british',
+            frames: this.anims.generateFrameNumbers('u3',
+                { start: 94, end: 95 }),
+            frameRate: 5,
+            repeat: -1
+        })
 
+        this.anims.create({
+            key: 'horse',
+            frames: this.anims.generateFrameNumbers('u3',
+                { start: 21, end: 21 }),
+            frameRate: 5,
+            repeat: -1
+        })
 
+        this.anims.create({
+            key: 'ankh',
+            frames: this.anims.generateFrameNumbers('u3',
+                { start: 61, end: 61 }),
+            frameRate: 5,
+            repeat: -1
+        })
 
 
         // Small animations
@@ -133,7 +164,7 @@ class menuScene extends Phaser.Scene {
         this.chest = this.add.sprite(30, 550, 'u3').play('chest').setScale(4);
         this.fireball = this.add.sprite(290, 550, 'u3').play('fireball').setScale(4);
 
-        this.player = this.add.sprite(250, 550, 'u3').play('ranger').setScale(4);
+        this.ranger = this.add.sprite(250, 550, 'u3').play('ranger').setScale(4);
         this.fighter = this.add.sprite(200, 550, 'u3').play('fig').setScale(4);
         this.wizard = this.add.sprite(140, 550, 'u3').play('wiz').setScale(4);
         this.cleric = this.add.sprite(90, 550, 'u3').play('cle').setScale(4);
@@ -144,12 +175,15 @@ class menuScene extends Phaser.Scene {
 
         spaceDown.on('down', function () {
             console.log('Jump to world scene');
-
+            this.player = {}
+            this.inventory = {}
             this.player.x = 300;
             this.player.y = 300
-            this.horse = 0;
-            this.chest = 0;
-            this.scene.start('world', { player: this.player, chest: this.chest, horse: this.horse });
+            this.inventory.horse = 1;
+            this.inventory.chest = 1;
+            this.inventory.item = 0;
+
+            this.scene.start('world', { player: this.player, inventory: this.inventory });
         }, this);
 
     }

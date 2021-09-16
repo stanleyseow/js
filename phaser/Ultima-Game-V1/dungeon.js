@@ -3,15 +3,13 @@ class dungeon extends Phaser.Scene {
     constructor() {
         super({ key: 'dungeon' });
 
-
         // Put global variable here
+        this.zoomFactor = 2
     }
-
 
     init(data) {
         this.player = data.player
-        this.chest = data.chest
-        this.horse = data.horse
+        this.inventory = data.inventory
     }
 
     preload() {
@@ -36,16 +34,16 @@ class dungeon extends Phaser.Scene {
         console.log(playerPos.x, playerPos.y)
 
         // player position in city2
-        this.player.x = playerPos.x * 2 + mapOffset
-        this.player.y = playerPos.y * 2 + mapOffset
+        this.player.x = playerPos.x * this.zoomFactor + mapOffset
+        this.player.y = playerPos.y * this.zoomFactor + mapOffset
 
-        this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(2);
+        this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(this.zoomFactor);
         window.player = this.player
 
-
-        this.skel1 = this.physics.add.sprite(enemy1Pos.x*2+mapOffset ,enemy1Pos.y*2+mapOffset, 'u3').play('skel').setScale(2);
-        this.skel2 = this.physics.add.sprite(enemy2Pos.x*2+mapOffset ,enemy2Pos.y*2+mapOffset, 'u3').play('skel').setScale(2);
-
+        this.skel1 = this.physics.add.sprite(enemy1Pos.x * this.zoomFactor + mapOffset ,
+                                                enemy1Pos.y * this.zoomFactor+ mapOffset, 'u3').play('skel').setScale(this.zoomFactor);
+        this.skel2 = this.physics.add.sprite(enemy2Pos.x * this.zoomFactor + mapOffset ,
+                                                enemy2Pos.y * this.zoomFactor + mapOffset, 'u3').play('skel').setScale(this.zoomFactor);
 
         // match for grass tile
         dungeonLayer.setTileIndexCallback(5, this.worldmap, this);
@@ -66,7 +64,6 @@ class dungeon extends Phaser.Scene {
 
         this.physics.moveToObject(this.skel1, this.player, 30, 3000)
         this.physics.moveToObject(this.skel2, this.player, 30, 3000)
-
 
         let speed = 256;
 
@@ -94,9 +91,7 @@ class dungeon extends Phaser.Scene {
         player.x = 852;
         player.y = 255;
         this.scene.start('world', {
-            player: player,
-            chest: this.chest,
-            horse: this.horse
+            player: player,  inventory : this.inventory
         });
 
     }
