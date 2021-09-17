@@ -77,8 +77,9 @@
 
     worldmap(player, tile) {
         //console.log('Tile id: ', tile.index );
+        //if (tile.index !== 5) return;
 
-        if (tile.index !== 5) return;
+        console.log('city1 to world');
 
         // Set position beside city1 in worldmap
         player.x = 120;

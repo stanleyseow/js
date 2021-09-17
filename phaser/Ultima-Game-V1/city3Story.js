@@ -35,10 +35,13 @@ class city3Story extends Phaser.Scene {
         this.time.addEvent({ delay: 200, callback: this.moveRightLeft2, callbackScope: this, loop: false });
 
         spaceDown.on('down', function () {
-            console.log('Jump to city3');
-
+            console.log('Re-jump to city3');
             this.player.x = 300;
             this.player.y = 300
+
+            // Add display horse to inventory
+            this.inventory.displayHorse = 1
+
             this.scene.start('city3', { player: this.player, inventory : this.inventory  });
         }, this);
 

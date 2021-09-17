@@ -17,6 +17,7 @@ class city3 extends Phaser.Scene {
 
     create() {
         console.log('*** city3');
+        console.log('inventory: ', this.inventory);
 
         this.pingSnd = this.sound.add('ping');
 
@@ -26,7 +27,6 @@ class city3 extends Phaser.Scene {
 
         let cityfloor = map.createLayer('floorLayer', groundTiles, 0, 0).setScale(2);
         let castleLayer = map.createLayer('cityLayer', groundTiles, 0, 0).setScale(2);
-
 
         // Cleric will receive the chest
         this.british = this.physics.add.sprite(315, 150, 'u3')
@@ -50,10 +50,16 @@ class city3 extends Phaser.Scene {
         this.spriteChest = this.add.sprite(270, 150, 'u3').play('chest').setScale(2);
         this.spriteChest.setVisible(false)
 
-        // player position in city2
+        // player position in city3
         this.player.x = 310;
         this.player.y = 500;
 
+        if ( this.inventory.displayHorse == 1) {
+            this.horse = this.physics.add.sprite(100, 550, 'u3').play('horse').setScale(2);
+            this.physics.add.collider(this.horse, this.guardGroup1);
+            this.physics.add.collider(this.horse, this.guardGroup2);
+        }
+        
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(2);
 
         castleLayer.setTileIndexCallback(5, this.worldmap, this);
@@ -61,7 +67,8 @@ class city3 extends Phaser.Scene {
 
         // Overlap with cleric
         this.physics.add.overlap(this.player, this.british, this.returnChest, null, this);
-        
+
+        //this.physics.add.overlap(this.player, this.horse, this.collectHorse, null, this);
 
         castleLayer.setCollisionByProperty({ walls: true });
 
@@ -74,7 +81,6 @@ class city3 extends Phaser.Scene {
 
         //this.physics.add.collider(this.player, this.cleric, this.returnChest, null, this);
 
-
         this.cursors = this.input.keyboard.createCursorKeys();
 
     }
@@ -82,6 +88,12 @@ class city3 extends Phaser.Scene {
     update() {
 
         let speed = 256;
+
+        // Attached horse to player ( +32 offset )
+        if ( this.inventory.displayHorse == 1) {
+            this.horse.x = this.player.x + 32
+            this.horse.y = this.player.y
+        }    
 
         if (this.cursors.left.isDown) {
             this.player.body.setVelocityX(-speed);
@@ -98,14 +110,21 @@ class city3 extends Phaser.Scene {
     }
 
     worldmap(player, tile) {
-        console.log('Tile id: ', tile.index);
+        //console.log('Tile id: ', tile.index);
 
         if (tile.index !== 5) return;
-        //console.log('Jump to Worldmap');
+        console.log('city3 to world');
 
         // Set position beside city2 in worldmap
         player.x = 300;
         player.y = 200;
+
+        // Disable display horse on next entry
+        if ( this.inventory.displayHorse == 1) {
+              this.inventory.displayHorse = 0
+              this.inventory.horse++  
+        }    
+
         this.scene.start('world', {
             player: player,  inventory : this.inventory
         });
@@ -125,6 +144,14 @@ class city3 extends Phaser.Scene {
         });  
         }
         
+        return false;
+    }
+
+    collectHorse(player, horse) {
+        console.log('Collect Horse', this.inventory.horse);
+        this.inventory.horse++;
+        this.horse.x = this.player.x + 32
+        this.horse.y = this.player.y
         return false;
     }
 

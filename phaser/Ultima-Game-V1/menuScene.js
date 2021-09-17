@@ -40,7 +40,7 @@ class menuScene extends Phaser.Scene {
         this.anims.create({
             key: 'chest',
             frames: this.anims.generateFrameNumbers('u3',
-                { start: 172, end: 173 }),
+                { start: 172, end: 172 }),
             frameRate: 5,
             repeat: -1
         })
@@ -49,6 +49,14 @@ class menuScene extends Phaser.Scene {
             key: 'fireball',
             frames: this.anims.generateFrameNumbers('u3',
                 { start: 79, end: 79 }),
+            frameRate: 5,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'iceball',
+            frames: this.anims.generateFrameNumbers('u3',
+                { start: 78, end: 78 }),
             frameRate: 5,
             repeat: -1
         })
@@ -182,6 +190,8 @@ class menuScene extends Phaser.Scene {
             this.inventory.horse = 1;
             this.inventory.chest = 1;
             this.inventory.item = 0;
+            this.inventory.iceball = 0;
+            this.inventory.fireball = 0;
 
             this.scene.start('world', { player: this.player, inventory: this.inventory });
         }, this);

@@ -10,6 +10,10 @@ var config = {
             debug: true
         }
     },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     backgroundColor: '#000000',
     pixelArt: true,
     //parent: 'phaser-example',
