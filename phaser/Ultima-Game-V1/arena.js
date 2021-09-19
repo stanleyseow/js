@@ -24,8 +24,8 @@ class arena extends Phaser.Scene {
     create() {
 
         // Sound variable
-        this.explodeSnd = this.sound.add('explode');
-        this.shooterSnd = this.sound.add('shooter');
+        this.explodeSnd = this.sound.add('explode').setVolume(0.2);
+        this.shooterSnd = this.sound.add('shooter').setVolume(0.3);
         this.pingSnd = this.sound.add('ping');
 
         console.log('*** arena');
@@ -48,9 +48,6 @@ class arena extends Phaser.Scene {
         switch (this.enemy) {
 
             case 1:
-                //this.enemy2 = this.physics.add.sprite(192, 128, 'u3').play('val').setScale(2);
-                //this.enemy2 = this.physics.add.sprite(448, 128, 'u3').play('val').setScale(2);
-
                 this.enemies = this.physics.add.group({
                     key: 'u3',
                     repeat: 4,
@@ -63,9 +60,6 @@ class arena extends Phaser.Scene {
                 break;
 
             case 2:
-                //this.enemy1 = this.physics.add.sprite(192, 128, 'u3').play('thi').setScale(2);
-                //this.enemy2 = this.physics.add.sprite(448, 128, 'u3').play('thi').setScale(2);
-
                 this.enemies = this.physics.add.group({
                     key: 'u3',
                     repeat: 4,
@@ -95,6 +89,9 @@ class arena extends Phaser.Scene {
         this.fireball = this.physics.add.sprite(0, 0, 'u3').play('fireball').setScale(2);
         this.fireball.setVisible(false)
 
+        this.iceball = this.physics.add.sprite(0, 0, 'u3').play('iceball').setScale(2);
+        this.iceball.setVisible(false)
+
 
         itemLayer.setCollisionByProperty({ mountain: true });
 
@@ -103,6 +100,7 @@ class arena extends Phaser.Scene {
 
         // When fireball overlap enemy  
         this.physics.add.overlap(this.fireball, this.enemies, this.killEnemy, null, this);
+        this.physics.add.overlap(this.iceball, this.enemies, this.killEnemy2, null, this);
 
         this.physics.add.overlap(this.player, this.enemyChest, this.collectChest, null, this);
 
@@ -115,11 +113,37 @@ class arena extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
+
         var spaceDown = this.input.keyboard.addKey('SPACE');
+        
         spaceDown.on('down', function () {
             this.shootFireball()
         }, this);
 
+        var cDown = this.input.keyboard.addKey('c');
+        
+        cDown.on('down', function(){
+            this.castSpell()
+        }, this);
+  
+
+
+        ////////// Black bar 64 pixels for inventory / menu
+        let rect = new Phaser.Geom.Rectangle(0, 576, 640, 64);
+        let graphics = this.add.graphics({ fillStyle: { color: 0x000000 } });
+        graphics.fillRectShape(rect).setScrollFactor(0)
+
+        this.chestSprite = this.add.sprite(20, 595, 'u3').play('chest').setScale(2).setScrollFactor(0)
+        this.horseSprite = this.add.sprite(70, 595, 'u3').play('horse').setScale(2).setScrollFactor(0)
+        this.iceballSprite = this.add.sprite(120, 595, 'u3').play('iceball').setScale(2).setScrollFactor(0)
+        this.fireballSprite = this.add.sprite(170, 595, 'u3').play('fireball').setScale(2).setScrollFactor(0)
+
+        this.chestNum = this.add.text(13, 615, this.inventory.chest, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        this.horseNum = this.add.text(63, 615, this.inventory.horse, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        this.iceballNum = this.add.text(113, 615, this.inventory.iceball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        this.fireballNum = this.add.text(163, 615, this.inventory.fireball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        /////////////////////////////////////
+    
     }
 
     update() {
@@ -178,21 +202,21 @@ class arena extends Phaser.Scene {
         });
     }
 
-    moveDownUp2() {
-        //console.log('moveDownUp2')
-        this.enemies.children.iterate(c => {
-            var value = Phaser.Math.Between(50, 100);
-            c.body.setVelocityY(value)
-        })
-    }
+    // moveDownUp2() {
+    //     //console.log('moveDownUp2')
+    //     this.enemies.children.iterate(c => {
+    //         var value = Phaser.Math.Between(50, 100);
+    //         c.body.setVelocityY(value)
+    //     })
+    // }
 
-    moveDownUp3() {
-        //console.log('moveDownUp3')
-        this.enemies.children.iterate(c => {
-            var value = Phaser.Math.Between(-50, -100);
-            c.body.setVelocityY(value)
-        })
-    }
+    // moveDownUp3() {
+    //     //console.log('moveDownUp3')
+    //     this.enemies.children.iterate(c => {
+    //         var value = Phaser.Math.Between(-50, -100);
+    //         c.body.setVelocityY(value)
+    //     })
+    // }
 
     shootFireball() {
         console.log('shoot fireball')
@@ -202,6 +226,46 @@ class arena extends Phaser.Scene {
         this.fireball.body.setVelocityY(-500)
         this.fireball.x = this.player.x
         this.fireball.y = this.player.y
+    }
+
+    castSpell() {
+
+        // Radomly select a number between 0 to 4       
+        let i = Phaser.Math.Between(0,4);
+        console.log('Cast spell', i)
+        this.shooterSnd.play();
+        //this.cameras.main.shake(100);
+
+        // Randomly get a children
+        let enemy = this.enemies.getChildren()[i]
+
+        // iceball starts at player
+        this.iceball.x = this.player.x
+        this.iceball.y = this.player.y
+        this.iceball.body.setEnable(true)
+        this.iceball.setVisible(true)
+
+        this.physics.moveToObject(this.iceball, enemy, 30, 200);
+        //this.iceball.setVisible(false)
+        
+    }
+
+    killEnemy2(iceball, enemy) {
+        console.log('hit enemy 1')
+        this.explodeSnd.play();
+        enemy.setVisible(false)
+        enemy.body.setEnable(false)
+        iceball.setVisible(false)
+        iceball.body.setEnable(false)
+
+        this.enemyCount++
+        console.log('enemyCount: ', this.enemyCount)
+
+        if (this.enemyCount > 4) {
+            this.enemyChest.setVisible(true)
+            this.enemyChest.body.setEnable(true)
+            this.enemyCount = 0;
+        }
     }
 
     killEnemy(fireball, enemy) {
@@ -226,21 +290,24 @@ class arena extends Phaser.Scene {
         console.log('killed player');
 
 
-        this.cameras.main.shake(500);
+        this.cameras.main.shake(1000);
         this.explodeSnd.play();
 
         player.x = 300;
         player.y = 380;
 
         console.log('removed all items');
-        this.chest = 0;
-        this.horse = 0;
+        this.inventory.chest = 0;
+        this.inventory.horse = 0;
+        this.inventory.iceball = 0;
+        this.inventory.fireball = 0;
 
-        // this.scene.start('world', {
-        //     player: player,
-        //     chest: this.chest,
-        //     horse: this.horse
-        // });
+        // Update menu numbers with setText
+        this.chestNum.setText( this.inventory.chest )
+        this.horseNum.setText( this.inventory.horse )
+        this.iceballNum.setText( this.inventory.iceball )
+        this.fireballNum.setText( this.inventory.fireball )
+
 
     }
 
@@ -250,6 +317,10 @@ class arena extends Phaser.Scene {
         this.inventory.chest++;
         chest.body.setEnable(false)
         chest.setVisible(false)
+
+        // Update menu numbers
+        this.chestNum.setText( this.inventory.chest )
+
         return false;
     }
 

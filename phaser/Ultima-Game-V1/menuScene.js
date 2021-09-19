@@ -181,17 +181,26 @@ class menuScene extends Phaser.Scene {
         this.time.addEvent({ delay: 1000, callback: this.moveRightLeft, callbackScope: this, loop: false });
         this.time.addEvent({ delay: 200, callback: this.moveRightLeft2, callbackScope: this, loop: false });
 
+        // Define objects for player and inventory
+        this.player = {}
+        this.inventory = {}
+        this.player.x = 300;
+        this.player.y = 300
+        this.inventory.horse = 1;
+        this.inventory.chest = 1;
+        this.inventory.item = 0;
+        this.inventory.iceball = 0;
+        this.inventory.fireball = 0;
+
         spaceDown.on('down', function () {
-            console.log('Jump to world scene');
-            this.player = {}
-            this.inventory = {}
-            this.player.x = 300;
-            this.player.y = 300
-            this.inventory.horse = 1;
-            this.inventory.chest = 1;
-            this.inventory.item = 0;
-            this.inventory.iceball = 0;
-            this.inventory.fireball = 0;
+            console.log('space - Jump to world scene');
+
+            this.scene.start('world', { player: this.player, inventory: this.inventory });
+        }, this);
+
+        // mouse or touch
+        this.input.on('pointerdown', function (pointer) {
+            console.log('mouse - Jump to world scene');
 
             this.scene.start('world', { player: this.player, inventory: this.inventory });
         }, this);

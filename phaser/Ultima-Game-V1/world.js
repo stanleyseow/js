@@ -124,10 +124,10 @@ class world extends Phaser.Scene {
         this.iceballSprite = this.add.sprite(120, 595, 'u3').play('iceball').setScale(2).setScrollFactor(0)
         this.fireballSprite = this.add.sprite(170, 595, 'u3').play('fireball').setScale(2).setScrollFactor(0)
 
-        this.add.text(13, 615, this.inventory.chest, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.add.text(63, 615, this.inventory.horse, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.add.text(113, 615, this.inventory.iceball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.add.text(163, 615, this.inventory.fireball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        this.chestNum = this.add.text(13, 615, this.inventory.chest, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        this.horseNum = this.add.text(63, 615, this.inventory.horse, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        this.iceballNum = this.add.text(113, 615, this.inventory.iceball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        this.fireballNum = this.add.text(163, 615, this.inventory.fireball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
 
         console.log('game canvas (w,h): ', this.sys.game.canvas.width, this.sys.game.canvas.height)
         console.log('InPixels (w,h): ', map.widthInPixels, map.heightInPixels)
