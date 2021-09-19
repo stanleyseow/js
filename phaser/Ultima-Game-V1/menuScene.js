@@ -24,17 +24,23 @@ class menuScene extends Phaser.Scene {
         this.load.audio('explode', 'assets/explosion.mp3');
         this.load.audio('shooter', 'assets/shooter.mp3');
         this.load.audio('ping', 'assets/ping.mp3');
+        this.load.audio('bgMusic', 'assets/bgMusic.mp3');
+
     }
 
     create() {
+
+
+        // Add any sound and music here
+        // ( 0 = mute to 1 is loudest )
+        this.music = this.sound.add('bgMusic').setVolume(0.3) // 30% volume
+
+        this.music.play()
 
         // Add image and detect spacebar keypress
         this.add.image(0, 0, 'main').setOrigin(0, 0);
         var spaceDown = this.input.keyboard.addKey('SPACE');
         this.add.text(90, 600, 'Press spacebar to continue', { font: '30px Courier', fill: '#FFFFFF' });
-
-
-
 
         // Create all the animations here
         this.anims.create({
