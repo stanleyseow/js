@@ -112,6 +112,7 @@ class pathfinder extends Phaser.Scene {
         console.log('this.map.tileWidth', this.map.tileWidth)
         console.log('this.map.tileHeight', this.map.tileHeight)
 
+        // Bind this into finder
         game.finder.findPath(fromX, fromY, toX, toY, function (path) {
             console.log('path in findPath: ', path);
             if (path === null) {
@@ -147,6 +148,5 @@ class pathfinder extends Phaser.Scene {
                 tweens: tweenArr
             });
         };
-
 
 }
