@@ -18,6 +18,8 @@ class dungeon extends Phaser.Scene {
     create() {
         console.log('*** dungeon');
 
+        this.pingSnd = this.sound.add('ping');
+
         let map = this.make.tilemap({ key: 'dungeon' });
 
         let groundTiles = map.addTilesetImage('ultima', 'u3');
@@ -25,7 +27,7 @@ class dungeon extends Phaser.Scene {
         let mapOffset = 160 
 
         let floorLayer = map.createLayer('floorLayer', groundTiles, mapOffset, mapOffset).setScale(2);
-        let dungeonLayer = map.createLayer('dungeonLayer', groundTiles, mapOffset, mapOffset).setScale(2);
+        this.dungeonLayer = map.createLayer('dungeonLayer', groundTiles, mapOffset, mapOffset).setScale(2);
 
         let playerPos = map.findObject("objectLayer", obj => obj.name === "playerPos");
         let enemy1Pos = map.findObject("objectLayer", obj => obj.name === "enemy1Pos");
@@ -46,14 +48,16 @@ class dungeon extends Phaser.Scene {
                                                 enemy2Pos.y * this.zoomFactor + mapOffset, 'u3').play('skel').setScale(this.zoomFactor);
 
         // match for grass tile
-        dungeonLayer.setTileIndexCallback(5, this.worldmap, this);
+        this.dungeonLayer.setTileIndexCallback(5, this.worldmap, this);
+
+        this.dungeonLayer.setTileIndexCallback(80, this.collectFireball, this);
 
 
         // mountain will collide with player
-        dungeonLayer.setCollisionByProperty({ mountain: true });
+        this.dungeonLayer.setCollisionByProperty({ mountain: true });
 
         // What will collider with what layers
-        this.physics.add.collider(this.player, dungeonLayer);
+        this.physics.add.collider(this.player, this.dungeonLayer);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -82,10 +86,6 @@ class dungeon extends Phaser.Scene {
     }
 
     worldmap(player, tile) {
-        //console.log('Tile id: ', tile.index );
-
-        if (tile.index !== 5) return;
-        //console.log('Jump to Worldmap');
 
         // Set position beside city2 in worldmap
         player.x = 852;
@@ -94,6 +94,21 @@ class dungeon extends Phaser.Scene {
             player: player,  inventory : this.inventory
         });
 
+    }
+
+    collectFireball(player, tile ) {
+
+        this.pingSnd.play();
+        
+        this.inventory.fireball++;
+        console.log('Collect fireball', this.inventory.fireball);
+
+        console.log('Emit event', this.inventory)
+        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
+        this.invEvent( "inventory", this.inventory);
+
+        this.dungeonLayer.removeTileAt(tile.x, tile.y);
+        return false;
     }
 
 }

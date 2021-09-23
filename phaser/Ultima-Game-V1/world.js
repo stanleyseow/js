@@ -4,6 +4,7 @@ class world extends Phaser.Scene {
         super({ key: 'world' });
         // Put global variable here
         this.zoomFactor = 2
+        console.log("worldScene")
     }
     
     // incoming data from scene below
@@ -39,7 +40,6 @@ class world extends Phaser.Scene {
         //this.add.text(10, 40, 'H:' + this.horse, { font: '30px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
         console.log('inventory: ', this.inventory);
 
-
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(this.zoomFactor);
         
         //this.player.setCollideWorldBounds(true); // don't go out of the this.map  
@@ -51,7 +51,6 @@ class world extends Phaser.Scene {
                         paladinPos.y * this.zoomFactor, 'u3').play('pal').setScale(this.zoomFactor);
         this.fighter = this.physics.add.sprite(fighterPos.y * this.zoomFactor, 
                         fighterPos.y * this.zoomFactor, 'u3').play('fig').setScale(this.zoomFactor);
-
 
         this.cleric = this.physics.add.sprite(270 , 500, 'u3').play('cle').setScale(this.zoomFactor);
 
@@ -114,20 +113,8 @@ class world extends Phaser.Scene {
         this.minimap.setBackgroundColor(0x000000);
         this.minimap.startFollow(this.player)
 
-        // Black bar 64 pixels for inventory / menu
-        let rect = new Phaser.Geom.Rectangle(0, 576, 640, 64);
-        let graphics = this.add.graphics({ fillStyle: { color: 0x000000 } });
-        graphics.fillRectShape(rect).setScrollFactor(0)
-
-        this.chestSprite = this.add.sprite(20, 595, 'u3').play('chest').setScale(2).setScrollFactor(0)
-        this.horseSprite = this.add.sprite(70, 595, 'u3').play('horse').setScale(2).setScrollFactor(0)
-        this.iceballSprite = this.add.sprite(120, 595, 'u3').play('iceball').setScale(2).setScrollFactor(0)
-        this.fireballSprite = this.add.sprite(170, 595, 'u3').play('fireball').setScale(2).setScrollFactor(0)
-
-        this.chestNum = this.add.text(13, 615, this.inventory.chest, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.horseNum = this.add.text(63, 615, this.inventory.horse, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.iceballNum = this.add.text(113, 615, this.inventory.iceball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.fireballNum = this.add.text(163, 615, this.inventory.fireball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
+        // start another scene in parallel
+        this.scene.launch('showInventory', { player: player,inventory : this.inventory })
 
         console.log('game canvas (w,h): ', this.sys.game.canvas.width, this.sys.game.canvas.height)
         console.log('InPixels (w,h): ', map.widthInPixels, map.heightInPixels)

@@ -2,8 +2,9 @@ class menuScene extends Phaser.Scene {
 
     constructor() {
         super({ key: 'menuScene' });
-        console.log('*** menuScene');
+        
         // Put global variable here
+        
     }
 
 
@@ -11,6 +12,7 @@ class menuScene extends Phaser.Scene {
 
         // Preload all the assets and maps here
         this.load.spritesheet('u3', 'assets/ultima.gif', { frameWidth: 16, frameHeight: 16 });
+        
         this.load.tilemapTiledJSON('map0', 'assets/map1.json');
         this.load.tilemapTiledJSON('map1', 'assets/city1.json');
         this.load.tilemapTiledJSON('map2', 'assets/city2.json');
@@ -30,12 +32,18 @@ class menuScene extends Phaser.Scene {
 
     create() {
 
+        this.scene.bringToTop();
+        //this.scene.sendToBack('showInventory');
 
         // Add any sound and music here
         // ( 0 = mute to 1 is loudest )
-        this.music = this.sound.add('bgMusic').setVolume(0.3) // 30% volume
-
+        this.music = this.sound.add('bgMusic').setVolume(0.2) // 30% volume
         this.music.play()
+
+
+        var rect = new Phaser.Geom.Rectangle(0, 576, 640, 64);
+        var graphics = this.add.graphics({ fillStyle: { color: 0x000000 } });
+        graphics.fillRectShape(rect).setScrollFactor(0)
 
         // Add image and detect spacebar keypress
         this.add.image(0, 0, 'main').setOrigin(0, 0);

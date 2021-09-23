@@ -110,9 +110,7 @@ class arena extends Phaser.Scene {
         this.physics.add.collider(itemLayer, this.player);
         this.physics.add.collider(itemLayer, this.enemies);
 
-
         this.cursors = this.input.keyboard.createCursorKeys();
-
 
         var spaceDown = this.input.keyboard.addKey('SPACE');
         
@@ -126,24 +124,11 @@ class arena extends Phaser.Scene {
             this.castSpell()
         }, this);
   
+        /////////////////////////////////////  
 
 
-        ////////// Black bar 64 pixels for inventory / menu
-        let rect = new Phaser.Geom.Rectangle(0, 576, 640, 64);
-        let graphics = this.add.graphics({ fillStyle: { color: 0x000000 } });
-        graphics.fillRectShape(rect).setScrollFactor(0)
 
-        this.chestSprite = this.add.sprite(20, 595, 'u3').play('chest').setScale(2).setScrollFactor(0)
-        this.horseSprite = this.add.sprite(70, 595, 'u3').play('horse').setScale(2).setScrollFactor(0)
-        this.iceballSprite = this.add.sprite(120, 595, 'u3').play('iceball').setScale(2).setScrollFactor(0)
-        this.fireballSprite = this.add.sprite(170, 595, 'u3').play('fireball').setScale(2).setScrollFactor(0)
 
-        this.chestNum = this.add.text(13, 615, this.inventory.chest, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.horseNum = this.add.text(63, 615, this.inventory.horse, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.iceballNum = this.add.text(113, 615, this.inventory.iceball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        this.fireballNum = this.add.text(163, 615, this.inventory.fireball, { font: '20px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        /////////////////////////////////////
-    
     }
 
     update() {
@@ -202,24 +187,19 @@ class arena extends Phaser.Scene {
         });
     }
 
-    // moveDownUp2() {
-    //     //console.log('moveDownUp2')
-    //     this.enemies.children.iterate(c => {
-    //         var value = Phaser.Math.Between(50, 100);
-    //         c.body.setVelocityY(value)
-    //     })
-    // }
-
-    // moveDownUp3() {
-    //     //console.log('moveDownUp3')
-    //     this.enemies.children.iterate(c => {
-    //         var value = Phaser.Math.Between(-50, -100);
-    //         c.body.setVelocityY(value)
-    //     })
-    // }
-
     shootFireball() {
         console.log('shoot fireball')
+
+        if ( this.inventory.fireball < 1 ) {
+            console.log("No more fireball")
+            return
+        }
+
+        this.inventory.fireball--;
+        // Update display
+        this.updateDisplay()
+
+
         this.shooterSnd.play();
         this.fireball.setVisible(true)
         this.fireball.body.setEnable(true)
@@ -229,10 +209,21 @@ class arena extends Phaser.Scene {
     }
 
     castSpell() {
+        
+        if ( this.inventory.iceball < 1 ) {
+            console.log("No more iceball")
+            return
+        }
 
         // Radomly select a number between 0 to 4       
         let i = Phaser.Math.Between(0,4);
         console.log('Cast spell', i)
+
+        this.inventory.iceball--;
+
+        // Update display
+        this.updateDisplay()
+
         this.shooterSnd.play();
         //this.cameras.main.shake(100);
 
@@ -290,7 +281,7 @@ class arena extends Phaser.Scene {
         console.log('killed player');
 
 
-        this.cameras.main.shake(1000);
+        this.cameras.main.shake(2000);
         this.explodeSnd.play();
 
         player.x = 300;
@@ -302,12 +293,14 @@ class arena extends Phaser.Scene {
         this.inventory.iceball = 0;
         this.inventory.fireball = 0;
 
-        // Update menu numbers with setText
-        this.chestNum.setText( this.inventory.chest )
-        this.horseNum.setText( this.inventory.horse )
-        this.iceballNum.setText( this.inventory.iceball )
-        this.fireballNum.setText( this.inventory.fireball )
+        // Update display
+        this.updateDisplay()
 
+        player.x = this.playerPOS.x
+        player.y = this.playerPOS.y
+
+        this.scene.start('world', 
+            { player: player,  inventory : this.inventory });
 
     }
 
@@ -318,10 +311,17 @@ class arena extends Phaser.Scene {
         chest.body.setEnable(false)
         chest.setVisible(false)
 
-        // Update menu numbers
-        this.chestNum.setText( this.inventory.chest )
+        // Update display
+        this.updateDisplay()
 
         return false;
+    }
+
+    updateDisplay() {
+        // Emit events showInventory
+        console.log('Emit event', this.inventory)
+        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
+        this.invEvent( "inventory", this.inventory);
     }
 
 }

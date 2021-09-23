@@ -91,8 +91,14 @@
 
     collectChest(player, tile) {
         this.pingSnd.play();
+        
         this.inventory.chest++;
         console.log('Collect Chest', this.inventory.chest);
+
+        console.log('Emit event', this.inventory)
+        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
+        this.invEvent( "inventory", this.inventory);
+
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;
     }

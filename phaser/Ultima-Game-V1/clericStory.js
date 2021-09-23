@@ -24,9 +24,10 @@ class clericStory extends Phaser.Scene {
         this.add.text(90, 600, 'Press spacebar to continue', { font: '30px Courier', fill: '#FFFFFF' });
 
 
-        this.ankhSprite = this.add.sprite(-55, 0, 'u3').play('ankh').setScale(4);
         this.player = this.add.sprite(0, 0, 'u3').play('ranger').setScale(4);
         this.horseSprite = this.add.sprite(55, 0, 'u3').play('horse').setScale(4);
+        this.ankhSprite = this.add.sprite(-33, -10, 'u3').play('ankh').setScale(2);
+
 
         this.wizard = this.add.sprite(600, 550, 'u3').play('wiz').setScale(4);
 

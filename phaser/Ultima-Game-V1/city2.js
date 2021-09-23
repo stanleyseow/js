@@ -19,6 +19,8 @@ class city2 extends Phaser.Scene {
     create() {
         console.log('*** city2');
 
+        this.pingSnd = this.sound.add('ping');
+
         let map = this.make.tilemap({ key: 'map2' });
 
         let groundTiles = map.addTilesetImage('ultima', 'u3');
@@ -93,8 +95,15 @@ class city2 extends Phaser.Scene {
     }
 
     collectIceball(player, tile ) {
+
+        this.pingSnd.play();
+        
         this.inventory.iceball++;
         console.log('Collect iceball', this.inventory.iceball);
+
+        console.log('Emit event', this.inventory)
+        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
+        this.invEvent( "inventory", this.inventory);
 
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;
