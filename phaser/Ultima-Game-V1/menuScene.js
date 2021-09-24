@@ -12,7 +12,7 @@ class menuScene extends Phaser.Scene {
 
         // Preload all the assets and maps here
         this.load.spritesheet('u3', 'assets/ultima.gif', { frameWidth: 16, frameHeight: 16 });
-        
+
         this.load.tilemapTiledJSON('map0', 'assets/map1.json');
         this.load.tilemapTiledJSON('map1', 'assets/city1.json');
         this.load.tilemapTiledJSON('map2', 'assets/city2.json');
@@ -26,7 +26,8 @@ class menuScene extends Phaser.Scene {
         this.load.audio('explode', 'assets/explosion.mp3');
         this.load.audio('shooter', 'assets/shooter.mp3');
         this.load.audio('ping', 'assets/ping.mp3');
-        this.load.audio('bgMusic', 'assets/bgMusic.mp3');
+        this.load.audio('bgMusic', 'assets/U3_wanderer.ogg');
+        this.load.audio('moongate', 'assets/escape.wav');
 
     }
 
@@ -37,7 +38,7 @@ class menuScene extends Phaser.Scene {
 
         // Add any sound and music here
         // ( 0 = mute to 1 is loudest )
-        this.music = this.sound.add('bgMusic').setVolume(0.2) // 30% volume
+        this.music = this.sound.add('bgMusic', { loop:true } ).setVolume(0.2) // 30% volume
         this.music.play()
 
 
@@ -179,11 +180,20 @@ class menuScene extends Phaser.Scene {
             repeat: -1
         })
 
+        this.anims.create({
+            key: 'moongate',
+            frames: this.anims.generateFrameNumbers('u3',
+                { start: 64, end: 67 }),
+            frameRate: 1,
+            repeat: -1
+        })
 
         // Small animations
         this.dragon = this.add.sprite(550, 500, 'u3').play('dragon').setScale(12);
 
-        this.chest = this.add.sprite(30, 550, 'u3').play('chest').setScale(4);
+        //this.chest = this.add.sprite(30, 550, 'u3').play('chest').setScale(4);
+        this.moongate = this.add.sprite(30, 550, 'u3').play('moongate').setScale(4);
+
         this.fireball = this.add.sprite(290, 550, 'u3').play('fireball').setScale(4);
 
         this.ranger = this.add.sprite(250, 550, 'u3').play('ranger').setScale(4);
@@ -200,11 +210,10 @@ class menuScene extends Phaser.Scene {
         this.inventory = {}
         this.player.x = 300;
         this.player.y = 300
-        this.inventory.horse = 1;
-        this.inventory.chest = 1;
-        this.inventory.item = 0;
-        this.inventory.iceball = 0;
-        this.inventory.fireball = 0;
+        this.inventory.horse = 4;
+        this.inventory.chest = 2;
+        this.inventory.iceball = 10;
+        this.inventory.fireball = 10;
 
         spaceDown.on('down', function () {
             console.log('space - Jump to world scene');
