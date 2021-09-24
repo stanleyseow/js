@@ -3,32 +3,38 @@ class arena extends Phaser.Scene {
     constructor() {
         super({ key: 'arena' });
 
-        // Put global variable here
-        this.enemyCount = 0;
+        // Put global variable here, initialised on game load
         this.playerPOS = {}
     }
 
 
     init(data) {
+
+        // Put scene variable here, initialised on scene load
+
         this.player = data.player
         this.inventory = data.inventory
 
         this.enemy = data.enemy
         this.playerPOS.x = data.player.x 
         this.playerPOS.y = data.player.y + 20
+
+        // Reset enemyCount when entering scene
+        this.enemyCount = 0;
     }
 
     preload() {
     }
 
     create() {
+        console.log('*** arena');
+
+        console.log('enemyCount: ', this.enemyCount)
 
         // Sound variable
         this.explodeSnd = this.sound.add('explode').setVolume(0.2);
         this.shooterSnd = this.sound.add('shooter').setVolume(0.3);
         this.pingSnd = this.sound.add('ping');
-
-        console.log('*** arena');
 
         let map = this.make.tilemap({ key: 'mapArena' });
 
@@ -83,8 +89,6 @@ class arena extends Phaser.Scene {
 
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(2);
         //this.player.setCollideWorldBounds(true);
-
-
 
         this.fireball = this.physics.add.sprite(0, 0, 'u3').play('fireball').setScale(2);
         this.fireball.setVisible(false)
@@ -278,16 +282,18 @@ class arena extends Phaser.Scene {
     }
 
     killPlayer(player, enemy) {
-        console.log('killed player');
+        console.log('Player killed');
 
-
+        // Shake screen
         this.cameras.main.shake(2000);
+
+        // Play sound
         this.explodeSnd.play();
 
         player.x = 300;
         player.y = 380;
 
-        console.log('removed all items');
+        console.log('Removed all items');
         this.inventory.chest = 0;
         this.inventory.horse = 0;
         this.inventory.iceball = 0;
