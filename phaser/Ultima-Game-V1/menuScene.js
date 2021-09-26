@@ -4,6 +4,8 @@ class menuScene extends Phaser.Scene {
         super({ key: 'menuScene' });
         
         // Put global variable here
+        this.randomNum = Phaser.Math.Between(1, 4)
+        console.log('menuScene random1: ', this.randomNum);
         
     }
 
@@ -214,6 +216,7 @@ class menuScene extends Phaser.Scene {
         this.inventory.chest = 2;
         this.inventory.iceball = 10;
         this.inventory.fireball = 10;
+        this.inventory.random = this.randomNum
 
         spaceDown.on('down', function () {
             console.log('space - Jump to world scene');

@@ -17,7 +17,8 @@ class city2 extends Phaser.Scene {
     }
 
     create() {
-        console.log('*** city2');
+        console.log('*** city2/castle');
+        console.log('inventory: ', this.inventory);
 
         this.pingSnd = this.sound.add('ping');
 
@@ -54,6 +55,35 @@ class city2 extends Phaser.Scene {
         this.physics.add.collider(this.val1, this.val2);
 
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        switch(this.inventory.random) {
+
+            case 1: 
+                console.log(1)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                break
+            case 2:
+                console.log(2)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
+                break
+            case 3:
+                console.log(3)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
+                this.val23 = this.add.sprite(150,50, 'u3').play('val').setScale(2);
+                break  
+            case 4:
+                console.log(4)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
+                this.val23 = this.add.sprite(150,50, 'u3').play('val').setScale(2);
+                this.val24 = this.add.sprite(200,50, 'u3').play('val').setScale(2);
+                break 
+            
+        }
+
+        
 
     }
 
