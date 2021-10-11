@@ -4,6 +4,7 @@ class world extends Phaser.Scene {
         super({ key: 'world' });
         // Put global variable here
         this.zoomFactor = 2
+        console.log("worldScene")
     }
     
     // incoming data from scene below
@@ -19,7 +20,6 @@ class world extends Phaser.Scene {
     create() {
 
         console.log('*** world');
-        console.log(this);
 
         let map = this.make.tilemap({ key: 'map0' });
 
@@ -38,9 +38,7 @@ class world extends Phaser.Scene {
 
         //this.add.text(10, 10, 'C:' + this.chest, { font: '30px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
         //this.add.text(10, 40, 'H:' + this.horse, { font: '30px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        console.log('chest: ', this.inventory.chest);
-        console.log('horse: ', this.inventory.horse);
-        console.log('item: ', this.inventory.item);
+        console.log('inventory: ', this.inventory);
 
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(this.zoomFactor);
         
@@ -54,13 +52,10 @@ class world extends Phaser.Scene {
         this.fighter = this.physics.add.sprite(fighterPos.y * this.zoomFactor, 
                         fighterPos.y * this.zoomFactor, 'u3').play('fig').setScale(this.zoomFactor);
 
+        this.cleric = this.physics.add.sprite(270 , 500, 'u3').play('cle').setScale(this.zoomFactor);
 
 
-        this.cleric = this.physics.add.sprite(clericPos.x * this.zoomFactor , 
-                                                clericPos.y * this.zoomFactor, 'u3').play('cle').setScale(this.zoomFactor);
-
-
-        this.wizard = this.physics.add.sprite(250, 250, 'u3').play('wiz').setScale(this.zoomFactor);
+        this.wizard = this.physics.add.sprite(250, 750, 'u3').play('wiz').setScale(this.zoomFactor);
 
         this.thief = this.physics.add.sprite(thiefPos.x*2, thiefPos.y*2, 'u3').play('thi').setScale(this.zoomFactor);
         this.val = this.physics.add.sprite(valkriePos.x*2,valkriePos.y*2, 'u3').play('val').setScale(this.zoomFactor);
@@ -71,7 +66,7 @@ class world extends Phaser.Scene {
         // Fighter move up & down
         this.time.addEvent({ delay: 1000, callback: this.moveDownUp, callbackScope: this, loop: false });
 
-        // move in square
+        // move in circles
         this.time.addEvent({ delay: 1000, callback: this.moveSquare, callbackScope: this, loop: false });
 
         this.mapLayer.setTileIndexCallback(10, this.dungeon, this);
@@ -82,8 +77,8 @@ class world extends Phaser.Scene {
   
         this.mapLayer.setTileIndexCallback(15, this.bigcastle, this);
 
-        this.mapLayer.setCollisionByProperty({ mountain: true });
-        //this.mapLayer.setCollisionByProperty({ water: true });
+        // this.mapLayer.setCollisionByProperty({ mountain: true });
+        // this.mapLayer.setCollisionByProperty({ water: true });
 
 
         // What will collider witg what layers
@@ -102,21 +97,24 @@ class world extends Phaser.Scene {
         //this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         // make the camera follow the player
 
-        // set bounds so the camera won't go outside the game world
+        // set bounds so the camera won't go outside the game world + 64 for inventory
         this.cameras.main.setBounds(
         0,
         0,
         map.widthInPixels * this.zoomFactor,
-        map.heightInPixels * this.zoomFactor
+        (map.heightInPixels * this.zoomFactor) + 64
       );
 
         this.cameras.main.startFollow(this.player);
 
         // mini map
-        this.minimap = this.cameras.add( 430, 10 ,200, 100).setZoom(0.2).setName('mini');
-        this.minimap.setBackgroundColor(0x002244);
+        this.minimap = this.cameras.add( 480, 10 ,150, 150)
+                .setZoom(0.2).setName('mini')
+        this.minimap.setBackgroundColor(0x000000);
         this.minimap.startFollow(this.player)
 
+        // start another scene in parallel
+        this.scene.launch('showInventory', { player: player,inventory : this.inventory })
 
         console.log('game canvas (w,h): ', this.sys.game.canvas.width, this.sys.game.canvas.height)
         console.log('InPixels (w,h): ', map.widthInPixels, map.heightInPixels)
@@ -207,13 +205,10 @@ class world extends Phaser.Scene {
             duration: 2000,
             tweens: [
                 {
-                    x: 240,
+                    x: 220,
                 },
                 {
-                    x: 200,
-                },
-                {
-                    x: 240,
+                    x: 270,
                 },
             ]
         });
@@ -250,16 +245,16 @@ class world extends Phaser.Scene {
             duration: 1000,
             tweens: [
                 {
-                    y: 450,
+                    x: 400,
                 },
                 {
-                    x: 450,
-                },
-                {
-                    y: 250,
+                    y: 850,
                 },
                 {
                     x: 250,
+                },
+                {
+                    y: 750,
                 },
             ]
         });

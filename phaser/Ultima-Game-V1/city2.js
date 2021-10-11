@@ -17,7 +17,10 @@ class city2 extends Phaser.Scene {
     }
 
     create() {
-        console.log('*** city2');
+        console.log('*** city2/castle');
+        console.log('inventory: ', this.inventory);
+
+        this.pingSnd = this.sound.add('ping');
 
         let map = this.make.tilemap({ key: 'map2' });
 
@@ -39,7 +42,7 @@ class city2 extends Phaser.Scene {
         this.citymap.setTileIndexCallback(5, this.worldmap, this);
 
 
-        this.citymap.setTileIndexCallback(93, this.collectHorse, this);
+        this.citymap.setTileIndexCallback(79, this.collectIceball, this);
 
         this.physics.add.overlap(this.citymap, this.player);
         //this.physics.add.overlap(this.citymap, this.player, this.worldmap, null, this);
@@ -53,6 +56,35 @@ class city2 extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        switch(this.inventory.random) {
+
+            case 1: 
+                console.log(1)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                break
+            case 2:
+                console.log(2)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
+                break
+            case 3:
+                console.log(3)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
+                this.val23 = this.add.sprite(150,50, 'u3').play('val').setScale(2);
+                break  
+            case 4:
+                console.log(4)
+                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
+                this.val23 = this.add.sprite(150,50, 'u3').play('val').setScale(2);
+                this.val24 = this.add.sprite(200,50, 'u3').play('val').setScale(2);
+                break 
+            
+        }
+
+        
+
     }
 
     update() {
@@ -60,7 +92,6 @@ class city2 extends Phaser.Scene {
 
         this.physics.moveToObject(this.val1, this.player, 30, 3000)
         this.physics.moveToObject(this.val2, this.player, 30, 3000)
-
 
         let speed = 256;
 
@@ -82,7 +113,7 @@ class city2 extends Phaser.Scene {
         //console.log('Tile id: ', tile.index );
 
         if (tile.index !== 5) return;
-        //console.log('Jump to Worldmap');
+        console.log('city2 to world');
 
         // Set position beside city2 in worldmap
         player.x = 520;
@@ -93,9 +124,16 @@ class city2 extends Phaser.Scene {
 
     }
 
-    collectHorse(player, tile) {
-        this.inventory.horse++;
-        console.log('Collect Horse', this.inventory.horse);
+    collectIceball(player, tile ) {
+
+        this.pingSnd.play();
+        
+        this.inventory.iceball++;
+        console.log('Collect iceball', this.inventory.iceball);
+
+        console.log('Emit event', this.inventory)
+        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
+        this.invEvent( "inventory", this.inventory);
 
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;

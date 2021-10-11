@@ -77,8 +77,9 @@
 
     worldmap(player, tile) {
         //console.log('Tile id: ', tile.index );
+        //if (tile.index !== 5) return;
 
-        if (tile.index !== 5) return;
+        console.log('city1 to world');
 
         // Set position beside city1 in worldmap
         player.x = 120;
@@ -90,8 +91,14 @@
 
     collectChest(player, tile) {
         this.pingSnd.play();
+        
         this.inventory.chest++;
         console.log('Collect Chest', this.inventory.chest);
+
+        console.log('Emit event', this.inventory)
+        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
+        this.invEvent( "inventory", this.inventory);
+
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;
     }

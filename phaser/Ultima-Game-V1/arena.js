@@ -3,32 +3,38 @@ class arena extends Phaser.Scene {
     constructor() {
         super({ key: 'arena' });
 
-        // Put global variable here
-        this.enemyCount = 0;
+        // Put global variable here, initialised on game load
         this.playerPOS = {}
     }
 
 
     init(data) {
+
+        // Put scene variable here, initialised on scene load
+
         this.player = data.player
         this.inventory = data.inventory
 
         this.enemy = data.enemy
         this.playerPOS.x = data.player.x 
         this.playerPOS.y = data.player.y + 20
+
+        // Reset enemyCount when entering scene
+        this.enemyCount = 0;
     }
 
     preload() {
     }
 
     create() {
+        console.log('*** arena');
+
+        console.log('enemyCount: ', this.enemyCount)
 
         // Sound variable
-        this.explodeSnd = this.sound.add('explode');
-        this.shooterSnd = this.sound.add('shooter');
+        this.explodeSnd = this.sound.add('explode').setVolume(0.2);
+        this.shooterSnd = this.sound.add('shooter').setVolume(0.3);
         this.pingSnd = this.sound.add('ping');
-
-        console.log('*** arena');
 
         let map = this.make.tilemap({ key: 'mapArena' });
 
@@ -48,9 +54,6 @@ class arena extends Phaser.Scene {
         switch (this.enemy) {
 
             case 1:
-                //this.enemy2 = this.physics.add.sprite(192, 128, 'u3').play('val').setScale(2);
-                //this.enemy2 = this.physics.add.sprite(448, 128, 'u3').play('val').setScale(2);
-
                 this.enemies = this.physics.add.group({
                     key: 'u3',
                     repeat: 4,
@@ -63,9 +66,6 @@ class arena extends Phaser.Scene {
                 break;
 
             case 2:
-                //this.enemy1 = this.physics.add.sprite(192, 128, 'u3').play('thi').setScale(2);
-                //this.enemy2 = this.physics.add.sprite(448, 128, 'u3').play('thi').setScale(2);
-
                 this.enemies = this.physics.add.group({
                     key: 'u3',
                     repeat: 4,
@@ -90,10 +90,11 @@ class arena extends Phaser.Scene {
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(2);
         //this.player.setCollideWorldBounds(true);
 
-
-
         this.fireball = this.physics.add.sprite(0, 0, 'u3').play('fireball').setScale(2);
         this.fireball.setVisible(false)
+
+        this.iceball = this.physics.add.sprite(0, 0, 'u3').play('iceball').setScale(2);
+        this.iceball.setVisible(false)
 
 
         itemLayer.setCollisionByProperty({ mountain: true });
@@ -103,6 +104,7 @@ class arena extends Phaser.Scene {
 
         // When fireball overlap enemy  
         this.physics.add.overlap(this.fireball, this.enemies, this.killEnemy, null, this);
+        this.physics.add.overlap(this.iceball, this.enemies, this.killEnemy2, null, this);
 
         this.physics.add.overlap(this.player, this.enemyChest, this.collectChest, null, this);
 
@@ -112,13 +114,24 @@ class arena extends Phaser.Scene {
         this.physics.add.collider(itemLayer, this.player);
         this.physics.add.collider(itemLayer, this.enemies);
 
-
         this.cursors = this.input.keyboard.createCursorKeys();
 
         var spaceDown = this.input.keyboard.addKey('SPACE');
+        
         spaceDown.on('down', function () {
             this.shootFireball()
         }, this);
+
+        var cDown = this.input.keyboard.addKey('c');
+        
+        cDown.on('down', function(){
+            this.castSpell()
+        }, this);
+  
+        /////////////////////////////////////  
+
+
+
 
     }
 
@@ -178,30 +191,76 @@ class arena extends Phaser.Scene {
         });
     }
 
-    moveDownUp2() {
-        //console.log('moveDownUp2')
-        this.enemies.children.iterate(c => {
-            var value = Phaser.Math.Between(50, 100);
-            c.body.setVelocityY(value)
-        })
-    }
-
-    moveDownUp3() {
-        //console.log('moveDownUp3')
-        this.enemies.children.iterate(c => {
-            var value = Phaser.Math.Between(-50, -100);
-            c.body.setVelocityY(value)
-        })
-    }
-
     shootFireball() {
         console.log('shoot fireball')
+
+        if ( this.inventory.fireball < 1 ) {
+            console.log("No more fireball")
+            return
+        }
+
+        this.inventory.fireball--;
+        // Update display
+        this.updateDisplay()
+
+
         this.shooterSnd.play();
         this.fireball.setVisible(true)
         this.fireball.body.setEnable(true)
         this.fireball.body.setVelocityY(-500)
         this.fireball.x = this.player.x
         this.fireball.y = this.player.y
+    }
+
+    castSpell() {
+        
+        if ( this.inventory.iceball < 1 ) {
+            console.log("No more iceball")
+            return
+        }
+
+        // Radomly select a number between 0 to 4       
+        let i = Phaser.Math.Between(0,4);
+        console.log('Cast spell', i)
+
+        this.inventory.iceball--;
+
+        // Update display
+        this.updateDisplay()
+
+        this.shooterSnd.play();
+        //this.cameras.main.shake(100);
+
+        // Randomly get a children
+        let enemy = this.enemies.getChildren()[i]
+
+        // iceball starts at player
+        this.iceball.x = this.player.x
+        this.iceball.y = this.player.y
+        this.iceball.body.setEnable(true)
+        this.iceball.setVisible(true)
+
+        this.physics.moveToObject(this.iceball, enemy, 30, 200);
+        //this.iceball.setVisible(false)
+        
+    }
+
+    killEnemy2(iceball, enemy) {
+        console.log('hit enemy 1')
+        this.explodeSnd.play();
+        enemy.setVisible(false)
+        enemy.body.setEnable(false)
+        iceball.setVisible(false)
+        iceball.body.setEnable(false)
+
+        this.enemyCount++
+        console.log('enemyCount: ', this.enemyCount)
+
+        if (this.enemyCount > 4) {
+            this.enemyChest.setVisible(true)
+            this.enemyChest.body.setEnable(true)
+            this.enemyCount = 0;
+        }
     }
 
     killEnemy(fireball, enemy) {
@@ -223,24 +282,31 @@ class arena extends Phaser.Scene {
     }
 
     killPlayer(player, enemy) {
-        console.log('killed player');
+        console.log('Player killed');
 
+        // Shake screen
+        this.cameras.main.shake(2000);
 
-        this.cameras.main.shake(500);
+        // Play sound
         this.explodeSnd.play();
 
         player.x = 300;
         player.y = 380;
 
-        console.log('removed all items');
-        this.chest = 0;
-        this.horse = 0;
+        console.log('Removed all items');
+        this.inventory.chest = 0;
+        this.inventory.horse = 0;
+        this.inventory.iceball = 0;
+        this.inventory.fireball = 0;
 
-        // this.scene.start('world', {
-        //     player: player,
-        //     chest: this.chest,
-        //     horse: this.horse
-        // });
+        // Update display
+        this.updateDisplay()
+
+        player.x = this.playerPOS.x
+        player.y = this.playerPOS.y
+
+        this.scene.start('world', 
+            { player: player,  inventory : this.inventory });
 
     }
 
@@ -250,7 +316,18 @@ class arena extends Phaser.Scene {
         this.inventory.chest++;
         chest.body.setEnable(false)
         chest.setVisible(false)
+
+        // Update display
+        this.updateDisplay()
+
         return false;
+    }
+
+    updateDisplay() {
+        // Emit events showInventory
+        console.log('Emit event', this.inventory)
+        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
+        this.invEvent( "inventory", this.inventory);
     }
 
 }
