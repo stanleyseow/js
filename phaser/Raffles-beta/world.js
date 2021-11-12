@@ -20,6 +20,12 @@ class world extends Phaser.Scene {
     this.load.image("pippoya", "assets/pippoya.png");
     this.load.image("raffles", "assets/rafflesTiless-01.png");
     this.load.image("tree", "assets/tree.png");
+
+    this.load.scenePlugin({
+      key: "rexuiplugin",
+      url: "./rexuiplugin.min.js",
+      sceneKey: "rexUI",
+    });
   }
 
   create() {
@@ -71,11 +77,12 @@ class world extends Phaser.Scene {
     this.add.sprite(240, 1100, "lib").play("libAnim");
     this.add.sprite(1720, 420, "cafe").play("cafeAnim");
 
-    this.add.sprite(720, 656, "fren").play("frenAnim");
     this.add.sprite(1122, 570, "boy").play("boyAnim");
     this.add.sprite(1487, 520, "girl").play("girlAnim");
     this.add.sprite(816, 213, "boy2").play("boy2Anim");
     this.add.sprite(340, 600, "girl2").play("girl2Anim");
+
+    this.friend = this.physics.add.sprite(720, 656, "fren").play("frenAnim");
 
     // // create the arrow keys
     this.cursors = this.input.keyboard.createCursorKeys();

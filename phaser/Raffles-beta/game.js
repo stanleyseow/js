@@ -18,6 +18,7 @@
   pixelArt: true,
   scene: [
     preload,
+    storyTextbox,
     world,
     blockA,
     library,

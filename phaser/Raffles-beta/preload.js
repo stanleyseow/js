@@ -314,7 +314,7 @@ class preload extends Phaser.Scene {
         playerPos.x = 687;
         playerPos.y = 1230;
         playerPos.dir = "up";
-        this.scene.start("world", { playerPos: playerPos });
+        this.scene.start("storyTextbox", { playerPos: playerPos });
       },
       this
     );
