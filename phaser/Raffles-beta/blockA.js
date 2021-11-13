@@ -1,3 +1,7 @@
+var content2 = `Welcome to Block A, on your left is the library, on upper right corner is the computer lab.
+
+Press spacebar to continue`;
+
 class blockA extends Phaser.Scene {
   constructor() {
     super("blockA");
@@ -14,6 +18,12 @@ class blockA extends Phaser.Scene {
     // this.load.image("road", "assets/road.png");
     this.load.image("atlasPng", "assets/atlas32x32.png");
     this.load.image("modernPng", "assets/mordern32x32.png");
+
+    this.load.scenePlugin({
+      key: "rexuiplugin",
+      url: "./rexuiplugin.min.js",
+      sceneKey: "rexUI",
+    });
   }
 
   create() {
@@ -55,7 +65,29 @@ class blockA extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // // camera follow player
-    this.cameras.main.startFollow(this.player);
+    //this.cameras.main.startFollow(this.player);
+
+    this.textbox = createTextBox(this, 50, -100, {
+      wrapWidth: 490,
+    }).start(content2, 50);
+
+    this.camPosition = {};
+    this.camPosition.x = 320;
+    this.camPosition.y = 0;
+
+    this.cameras.main.startFollow(this.camPosition);
+
+    // Detect spacebar pressed
+    var spaceDown = this.input.keyboard.addKey("SPACE");
+
+    spaceDown.on(
+      "down",
+      function () {
+        console.log("Spacebar pressed, enable camera");
+        this.cameras.main.startFollow(this.player);
+      },
+      this
+    );
   }
 
   update() {
