@@ -56,7 +56,7 @@ class blockB extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // // camera follow player
-    //this.cameras.main.startFollow(this.player);
+    this.cameras.main.startFollow(this.player);
   }
 
   update() {

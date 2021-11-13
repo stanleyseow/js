@@ -19,6 +19,7 @@
   scene: [
     preload,
     storyTextbox,
+    worldCam,
     world,
     blockA,
     library,

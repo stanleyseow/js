@@ -1,13 +1,3 @@
-const COLOR_PRIMARY = 0x3574dc;
-const COLOR_LIGHT = 0xffffff;
-const COLOR_DARK = 0xff00ff;
-
-var content1 = `Welcome to 2D world of Raffles College Kuala Lumpur. Please walk around to explore the map. You may enter different buildings.
-
-You may also interact with non player characters in the game.
-
-Press spacebar to continue`;
-
 class storyTextbox extends Phaser.Scene {
   constructor() {
     super("storyTextbox");
@@ -18,6 +8,7 @@ class storyTextbox extends Phaser.Scene {
   }
 
   preload() {
+    // load rexUI plugins
     this.load.scenePlugin({
       key: "rexuiplugin",
       url: "./rexuiplugin.min.js",
@@ -39,7 +30,7 @@ class storyTextbox extends Phaser.Scene {
       "down",
       function () {
         console.log("Spacebar pressed, goto world");
-        this.scene.start("world", { playerPos: this.playerPos });
+        this.scene.start("worldCam", { playerPos: this.playerPos });
       },
       this
     );
@@ -47,6 +38,18 @@ class storyTextbox extends Phaser.Scene {
 
   update() {}
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+
+var content1 = `Welcome to 2D world of Raffles College Kuala Lumpur. Please walk around to explore the map. You may enter different buildings.
+
+You may also interact with non player characters in the game.
+
+Press spacebar to continue`;
+
+const COLOR_PRIMARY = 0x3574dc;
+const COLOR_LIGHT = 0xffffff;
+const COLOR_DARK = 0xff00ff;
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -134,3 +137,5 @@ var getBuiltInText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
     })
     .setFixedSize(fixedWidth, fixedHeight);
 };
+
+/////////////////////////////////////////////////////////////////////////////////
