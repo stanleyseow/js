@@ -1,0 +1,65 @@
+{
+  "frames": [
+    {
+      "filename": "npcb2",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 31
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 7,
+        "y": 1,
+        "w": 20,
+        "h": 31
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 33
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "npcb1",
+      "frame": {
+        "x": 0,
+        "y": 31,
+        "w": 18,
+        "h": 31
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 8,
+        "y": 1,
+        "w": 18,
+        "h": 31
+      },
+      "sourceSize": {
+        "w": 33,
+        "h": 33
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "npcb.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 20,
+      "h": 62
+    },
+    "scale": 1
+  }
+}
