@@ -1,0 +1,22 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "jrusly",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "glslify": "^6.1.1",
+    "parcel-bundler": "^1.8.1",
+    "phaser": "^3.55.2",
+    "socket.io": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  }
+}
