@@ -21,8 +21,6 @@ class world extends Phaser.Scene {
     // Step 2
     this.load.image("buildingIMG", "assets/Buildings32x32.png");
     this.load.image("streetIMG", "assets/Street32x32.png");
-    this.load.image("pipoyaIMG", "assets/pipoya.png");
-    this.load.image("tuxmonIMG", "assets/tuxmon-32x32.png");
 
     this.load.spritesheet("fire", "assets/fire.png", {
       frameWidth: 40,
@@ -43,10 +41,8 @@ class world extends Phaser.Scene {
     // 2nd parameter is key in Preload
     let buildingTiles = map.addTilesetImage("Buildings32x32", "buildingIMG");
     let streetTiles = map.addTilesetImage("Street32x32", "streetIMG");
-    let pipoyaTiles = map.addTilesetImage("pipoya", "pipoyaIMG");
-    let tuxmonTiles = map.addTilesetImage("tuxmon-32x32", "tuxmonIMG");
 
-    let tilesArray = [buildingTiles, streetTiles, pipoyaTiles, tuxmonTiles];
+    let tilesArray = [buildingTiles, streetTiles];
 
     //Load in layers by layers
     this.groundLayer = map.createLayer("ground Layer", tilesArray, 0, 0);
