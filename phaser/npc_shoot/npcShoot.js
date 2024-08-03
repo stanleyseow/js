@@ -132,7 +132,6 @@ class npcShoot extends Phaser.Scene {
 
     update() {
 
-
         this.angle1= Phaser.Math.Angle.BetweenPoints(this.npc1, this.player);
         this.angle2 = Phaser.Math.Angle.BetweenPoints(this.npc2, this.player);
 
@@ -161,7 +160,9 @@ class npcShoot extends Phaser.Scene {
 
 
     shootKnife (){
-        console.log("shoot knife", this.angle1, this.angle2)
+        let deg1 = Phaser.Math.RadToDeg(this.angle1)
+        let deg2 = Phaser.Math.RadToDeg(this.angle2)
+        console.log("shoot knife degree: ",90-deg1, 90-deg2)
 
         this.physics.velocityFromRotation(this.angle1, 300, this.knife1.body.velocity);
         this.physics.velocityFromRotation(this.angle2, 300, this.knife2.body.velocity);
