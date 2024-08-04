@@ -13,6 +13,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
+    //plugins: PhaserPluginInspector.DefaultPluginsConfig,
     backgroundColor: '#000000',
     pixelArt: true,
     //parent: 'phaser-example',
@@ -21,5 +22,7 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
+
+
 
 

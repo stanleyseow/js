@@ -2,7 +2,7 @@ class preloadScene extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'preloadScene' });
+        super('preloadScene');
     }
     create () {
         let graphics = this.add.graphics();
@@ -18,11 +18,10 @@ class preloadScene extends Phaser.Scene {
         console.log("This is preloadScene spacebar V3");
 
         //this.input.once('pointerdown', function(){
-        var spaceDown = this.input.keyboard.addKey('SPACE');
+        let spaceDown = this.input.keyboard.addKey('SPACE');
         
         spaceDown.on('down', function(){
         console.log("Spacebar pressed, goto gameScene");
-        this.scene.stop("preloadScene");
         this.scene.start("gameScene");
         }, this );
 

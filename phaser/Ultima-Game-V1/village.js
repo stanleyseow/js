@@ -22,6 +22,7 @@ class village extends Phaser.Scene {
 
     create() {
         console.log('*** village');
+        console.log('inventory: ', this.inventory);
 
         console.log('dropHorse: ', this.dropHorseCnt);
         console.log('dropChest: ', this.dropChestCnt);

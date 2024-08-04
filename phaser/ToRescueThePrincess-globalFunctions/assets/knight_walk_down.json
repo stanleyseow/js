@@ -1,0 +1,190 @@
+{
+  "frames": [
+    {
+      "filename": "knight_29",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 53
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 53
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 53
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_30",
+      "frame": {
+        "x": 0,
+        "y": 53,
+        "w": 49,
+        "h": 53
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 53
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 53
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_32",
+      "frame": {
+        "x": 0,
+        "y": 106,
+        "w": 49,
+        "h": 53
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 53
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 53
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_28",
+      "frame": {
+        "x": 0,
+        "y": 159,
+        "w": 48,
+        "h": 53
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 53
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 53
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_31",
+      "frame": {
+        "x": 0,
+        "y": 212,
+        "w": 47,
+        "h": 53
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 47,
+        "h": 53
+      },
+      "sourceSize": {
+        "w": 47,
+        "h": 53
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_27",
+      "frame": {
+        "x": 0,
+        "y": 265,
+        "w": 46,
+        "h": 53
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 46,
+        "h": 53
+      },
+      "sourceSize": {
+        "w": 46,
+        "h": 53
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "knight_33",
+      "frame": {
+        "x": 0,
+        "y": 318,
+        "w": 48,
+        "h": 52
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 52
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 52
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "knight_walk_front.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 49,
+      "h": 370
+    },
+    "scale": 1
+  }
+}

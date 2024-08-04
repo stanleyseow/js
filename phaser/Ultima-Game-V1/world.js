@@ -4,7 +4,8 @@ class world extends Phaser.Scene {
         super({ key: 'world' });
         // Put global variable here
         this.zoomFactor = 2
-        console.log("worldScene")
+        console.log("Constructor world")
+
     }
     
     // incoming data from scene below
@@ -20,6 +21,7 @@ class world extends Phaser.Scene {
     create() {
 
         console.log('*** world');
+        console.log('inventory: ', this.inventory);
 
         let map = this.make.tilemap({ key: 'map0' });
 
@@ -38,7 +40,7 @@ class world extends Phaser.Scene {
 
         //this.add.text(10, 10, 'C:' + this.chest, { font: '30px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
         //this.add.text(10, 40, 'H:' + this.horse, { font: '30px Courier', fill: '#FFFFFF' }).setScrollFactor(0);
-        console.log('inventory: ', this.inventory);
+        
 
         this.player = this.physics.add.sprite(this.player.x, this.player.y, 'u3').play('ranger').setScale(this.zoomFactor);
         
@@ -51,23 +53,38 @@ class world extends Phaser.Scene {
                         paladinPos.y * this.zoomFactor, 'u3').play('pal').setScale(this.zoomFactor);
         this.fighter = this.physics.add.sprite(fighterPos.y * this.zoomFactor, 
                         fighterPos.y * this.zoomFactor, 'u3').play('fig').setScale(this.zoomFactor);
-
         this.cleric = this.physics.add.sprite(270 , 500, 'u3').play('cle').setScale(this.zoomFactor);
-
-
         this.wizard = this.physics.add.sprite(250, 750, 'u3').play('wiz').setScale(this.zoomFactor);
-
         this.thief = this.physics.add.sprite(thiefPos.x*2, thiefPos.y*2, 'u3').play('thi').setScale(this.zoomFactor);
         this.val = this.physics.add.sprite(valkriePos.x*2,valkriePos.y*2, 'u3').play('val').setScale(this.zoomFactor);
 
-        // Cleric move right & left
-        this.time.addEvent({ delay: 1000, callback: this.moveRightLeft, callbackScope: this, loop: false });
+        // New tweens for 3.60
+        this.tweens.add({
+            targets: this.cleric,
+            x: 470,
+            yoyo: true,
+            duration: 3000,
+            repeat: -1
+          })
 
-        // Fighter move up & down
-        this.time.addEvent({ delay: 1000, callback: this.moveDownUp, callbackScope: this, loop: false });
+          this.tweens.add({
+            targets: this.fighter,
+            y: 200,
+            yoyo: true,
+            duration: 3000,
+            repeat: -1
+          })
+
+          this.tweens.add({
+            targets: this.paladin,
+            y: 300,
+            yoyo: true,
+            duration: 2000,
+            repeat: -1
+          })
 
         // move in circles
-        this.time.addEvent({ delay: 1000, callback: this.moveSquare, callbackScope: this, loop: false });
+        //this.time.addEvent({ delay: 1000, callback: this.moveSquare, callbackScope: this, loop: false });
 
         this.mapLayer.setTileIndexCallback(10, this.dungeon, this);
 
@@ -146,27 +163,27 @@ class world extends Phaser.Scene {
     } /////////////////// end of update //////////////////////////////////////
 
     dungeon(player, tile) {
-        console.log('dungeon: ')
+        console.log('dungeon ')
         this.scene.start('dungeon', { player: player,inventory : this.inventory });
     }
 
     village(player, tile) {
-        console.log('village: ')
+        console.log('village ')
         this.scene.start('village', { player: player,inventory : this.inventory });
     }
 
     city1(player, tile) {
-        console.log('city: ', tile.index)
+        console.log('city: ')
         this.scene.start('city1Story', { player: player, inventory : this.inventory });
     }
 
     castle(player, tile) {
-        console.log('castle: ', tile.index)
+        console.log('castle ')
         this.scene.start('city2', { player: player, inventory : this.inventory })
     }
 
     bigcastle(player, tile) {
-        console.log('big castle: ', tile.index)
+        console.log('big castle ')
         this.scene.start('city3', { player: player, inventory : this.inventory })
     }
 
@@ -194,70 +211,6 @@ class world extends Phaser.Scene {
             player: player, 
             inventory : this.inventory,
         })
-    }
-
-    moveRightLeft() {
-        //console.log('moveRightLeft')
-        this.tweens.timeline({
-            targets: this.cleric,
-            loop: -1, // loop forever
-            ease: 'Linear',
-            duration: 2000,
-            tweens: [
-                {
-                    x: 220,
-                },
-                {
-                    x: 270,
-                },
-            ]
-        });
-    }
-
-    moveDownUp() {
-        //console.log('moveDownUp')
-        this.tweens.timeline({
-            targets: [this.fighter,this.paladin],
-            ease: 'Linear',
-            loop: -1, // loop forever
-            duration: 2000,
-            tweens: [
-                {
-                    y: 400,
-                },
-                {
-                    y: 200,
-                },
-                {
-                    y: 400,
-                },
-            ]
-        });
-    }
-
-    moveSquare() {
-        //console.log('moveDownUp')
-        this.tweens.timeline({
-            // 200,200 starting point
-            targets: [this.wizard],
-            ease: 'Linear',
-            loop: -1, // loop forever
-            duration: 1000,
-            tweens: [
-                {
-                    x: 400,
-                },
-                {
-                    y: 850,
-                },
-                {
-                    x: 250,
-                },
-                {
-                    y: 750,
-                },
-            ]
-        });
     }
 
 } //////////// end of class world ////////////////////////

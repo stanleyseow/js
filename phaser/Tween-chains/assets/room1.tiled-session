@@ -1,0 +1,67 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx": {
+            "scale": 0.15016927083333334,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1924.4949275990637,
+                "y": 1921.165351599757
+            }
+        },
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx#Monkiddo_Land": {
+            "scaleInDock": 1
+        },
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx#TY_city1": {
+            "scaleInDock": 1
+        },
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx#TY_city2": {
+            "scaleInDock": 1
+        },
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx#TY_tile1": {
+            "scaleInDock": 1
+        },
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx#TY_tile2": {
+            "scaleInDock": 1
+        },
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx#nombs-building": {
+            "scaleInDock": 1
+        },
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx#rgbbox-32x32": {
+            "scaleInDock": 1
+        },
+        "rooom1.tmx": {
+            "scale": 1.9011,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 126.76871285045499,
+                "y": 160.69643890379257
+            }
+        },
+        "rooom1.tmx#pippoya": {
+            "scaleInDock": 1.5
+        }
+    },
+    "last.exportedFilePath": "/Users/stanleyseow/MA1/sampleGame2/assets",
+    "last.imagePath": "/Users/stanleyseow/MA1/sampleGame2/assets",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": null,
+    "map.width": 20,
+    "openFiles": [
+        "rooom1.tmx",
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx"
+    ],
+    "project": "room1.tiled-project",
+    "recentFiles": [
+        "rooom1.tmx",
+        "/Users/stanleyseow/Documents/GitHub/pixelworld-vue2/src/game/scenes/assets/maps/TomyamCity3.tmx"
+    ],
+    "tileset.embedInMap": true
+}

@@ -1,0 +1,65 @@
+{
+  "frames": [
+    {
+      "filename": "Asset 136",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 433,
+        "h": 329
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 433,
+        "h": 329
+      },
+      "sourceSize": {
+        "w": 433,
+        "h": 329
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "Asset 135",
+      "frame": {
+        "x": 433,
+        "y": 0,
+        "w": 411,
+        "h": 332
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 411,
+        "h": 332
+      },
+      "sourceSize": {
+        "w": 411,
+        "h": 332
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "guard_right_anim.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 844,
+      "h": 332
+    },
+    "scale": 1
+  }
+}

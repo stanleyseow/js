@@ -1,0 +1,65 @@
+{
+  "frames": [
+    {
+      "filename": "Asset 138",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 45,
+        "h": 70
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 45,
+        "h": 70
+      },
+      "sourceSize": {
+        "w": 45,
+        "h": 70
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "Asset 139",
+      "frame": {
+        "x": 0,
+        "y": 70,
+        "w": 44,
+        "h": 70
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 44,
+        "h": 70
+      },
+      "sourceSize": {
+        "w": 44,
+        "h": 70
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "princess.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 45,
+      "h": 140
+    },
+    "scale": 1
+  }
+}

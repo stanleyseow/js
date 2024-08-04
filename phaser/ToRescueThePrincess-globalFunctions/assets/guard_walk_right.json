@@ -1,0 +1,340 @@
+{
+  "frames": [
+    {
+      "filename": "guard_23",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 53,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 53,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 53,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_25",
+      "frame": {
+        "x": 0,
+        "y": 60,
+        "w": 52,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 52,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 52,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_26",
+      "frame": {
+        "x": 0,
+        "y": 120,
+        "w": 52,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 52,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 52,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_16",
+      "frame": {
+        "x": 0,
+        "y": 180,
+        "w": 49,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_21",
+      "frame": {
+        "x": 0,
+        "y": 240,
+        "w": 49,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_22",
+      "frame": {
+        "x": 0,
+        "y": 300,
+        "w": 49,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_17",
+      "frame": {
+        "x": 0,
+        "y": 360,
+        "w": 48,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_18",
+      "frame": {
+        "x": 0,
+        "y": 420,
+        "w": 48,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_19",
+      "frame": {
+        "x": 0,
+        "y": 480,
+        "w": 48,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_20",
+      "frame": {
+        "x": 0,
+        "y": 540,
+        "w": 48,
+        "h": 60
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 60
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 60
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_24",
+      "frame": {
+        "x": 0,
+        "y": 600,
+        "w": 54,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 54,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 54,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_14",
+      "frame": {
+        "x": 48,
+        "y": 360,
+        "w": 49,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_15",
+      "frame": {
+        "x": 49,
+        "y": 180,
+        "w": 49,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 49,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 49,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "guard_walk_right.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 98,
+      "h": 659
+    },
+    "scale": 1
+  }
+}
