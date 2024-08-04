@@ -1,7 +1,9 @@
 class city2 extends Phaser.Scene {
 
     constructor() {
-        super({ key: 'city2' });
+        super({
+            key: 'city2'
+        });
 
 
         // Put global variable here
@@ -13,8 +15,7 @@ class city2 extends Phaser.Scene {
         this.inventory = data.inventory
     }
 
-    preload() {
-    }
+    preload() {}
 
     create() {
         console.log('*** city2/castle');
@@ -22,7 +23,9 @@ class city2 extends Phaser.Scene {
 
         this.pingSnd = this.sound.add('ping');
 
-        let map = this.make.tilemap({ key: 'map2' });
+        let map = this.make.tilemap({
+            key: 'map2'
+        });
 
         let groundTiles = map.addTilesetImage('ultima', 'u3');
 
@@ -47,7 +50,9 @@ class city2 extends Phaser.Scene {
         this.physics.add.overlap(this.citymap, this.player);
         //this.physics.add.overlap(this.citymap, this.player, this.worldmap, null, this);
 
-        this.citymap.setCollisionByProperty({ walls: true });
+        this.citymap.setCollisionByProperty({
+            walls: true
+        });
 
         // What will collider with what layers
         this.physics.add.collider(this.citymap, this.player);
@@ -56,34 +61,34 @@ class city2 extends Phaser.Scene {
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        switch(this.inventory.random) {
+        switch (this.inventory.random) {
 
-            case 1: 
+            case 1:
                 console.log(1)
-                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
+                this.val21 = this.add.sprite(50, 50, 'u3').play('val').setScale(2);
                 break
             case 2:
                 console.log(2)
-                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
-                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
+                this.val21 = this.add.sprite(50, 50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100, 50, 'u3').play('val').setScale(2);
                 break
             case 3:
                 console.log(3)
-                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
-                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
-                this.val23 = this.add.sprite(150,50, 'u3').play('val').setScale(2);
-                break  
+                this.val21 = this.add.sprite(50, 50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100, 50, 'u3').play('val').setScale(2);
+                this.val23 = this.add.sprite(150, 50, 'u3').play('val').setScale(2);
+                break
             case 4:
                 console.log(4)
-                this.val21 = this.add.sprite(50,50, 'u3').play('val').setScale(2);
-                this.val22 = this.add.sprite(100,50, 'u3').play('val').setScale(2);
-                this.val23 = this.add.sprite(150,50, 'u3').play('val').setScale(2);
-                this.val24 = this.add.sprite(200,50, 'u3').play('val').setScale(2);
-                break 
-            
+                this.val21 = this.add.sprite(50, 50, 'u3').play('val').setScale(2);
+                this.val22 = this.add.sprite(100, 50, 'u3').play('val').setScale(2);
+                this.val23 = this.add.sprite(150, 50, 'u3').play('val').setScale(2);
+                this.val24 = this.add.sprite(200, 50, 'u3').play('val').setScale(2);
+                break
+
         }
 
-        
+
 
     }
 
@@ -119,21 +124,22 @@ class city2 extends Phaser.Scene {
         player.x = 520;
         player.y = 560;
         this.scene.start('world', {
-            player: player,  inventory : this.inventory
+            player: player,
+            inventory: this.inventory
         });
 
     }
 
-    collectIceball(player, tile ) {
+    collectIceball(player, tile) {
 
         this.pingSnd.play();
-        
+
         this.inventory.iceball++;
         console.log('Collect iceball', this.inventory.iceball);
 
         console.log('Emit event', this.inventory)
-        this.invEvent = (event, data)=> this.scene.get('showInventory').events.emit( event, data);
-        this.invEvent( "inventory", this.inventory);
+        this.invEvent = (event, data) => this.scene.get('showInventory').events.emit(event, data);
+        this.invEvent("inventory", this.inventory);
 
         this.citymap.removeTileAt(tile.x, tile.y);
         return false;

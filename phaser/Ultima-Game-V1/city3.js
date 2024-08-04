@@ -4,6 +4,7 @@ class city3 extends Phaser.Scene {
         super({ key: 'city3' });
 
         // Put global variable here
+        this.showGuard = true;
     }
 
 
@@ -16,7 +17,7 @@ class city3 extends Phaser.Scene {
     }
 
     create() {
-        console.log('*** city3');
+        console.log('*** city3/bigcastle ');
         console.log('inventory: ', this.inventory);
 
         this.pingSnd = this.sound.add('ping');
@@ -53,6 +54,9 @@ class city3 extends Phaser.Scene {
         // player position in city3
         this.player.x = 310;
         this.player.y = 500;
+
+        this.time.addEvent({ delay: 3000, callback: this.showGuardfunc, callbackScope: this, loop: true });
+
 
         if ( this.inventory.displayHorse == 1) {
             this.horse = this.physics.add.sprite(100, 550, 'u3').play('horse').setScale(2);
@@ -107,6 +111,23 @@ class city3 extends Phaser.Scene {
             this.player.body.setVelocity(0);
         }
 
+    }
+
+    showGuardfunc() {
+
+        if ( this.showGuard == true ) {
+            console.log("*** Hide guard")
+            this.guardGroup1.children.iterate( g => g.setVisible(false))
+            this.guardGroup1.children.iterate( g => g.disableBody(true))
+            this.showGuard = false
+        } else {
+            console.log("*** Show guard")
+            this.guardGroup1.children.iterate( g => g.setVisible(true))
+            this.guardGroup1.children.iterate( g => {
+                console.log(g)
+                g.enableBody(false, g.x, g.y, true) })
+            this.showGuard = true
+        }
     }
 
     worldmap(player, tile) {

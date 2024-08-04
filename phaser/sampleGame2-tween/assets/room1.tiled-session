@@ -1,0 +1,78 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "RafflesklMap.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "#pippoya": {
+            "scaleInDock": 1
+        },
+        "/Users/stanleyseow/MA1/sampleGame2-old/assets/rooom1.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 158,
+                "y": 620
+            }
+        },
+        "/Users/stanleyseow/MA1/sampleGame2-old/assets/rooom1.tmx#pippoya": {
+            "scaleInDock": 1
+        },
+        "RafflesklMap.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 802,
+                "y": 776
+            }
+        },
+        "RafflesklMap.tmx#kenny03": {
+            "scaleInDock": 1
+        },
+        "RafflesklMap.tmx#pippoya05": {
+            "scaleInDock": 1
+        },
+        "RafflesklMap.tmx#raffles01": {
+            "scaleInDock": 1
+        },
+        "RafflesklMap.tmx#road02": {
+            "scaleInDock": 1
+        },
+        "RafflesklMap.tmx#tree04": {
+            "scaleInDock": 1
+        },
+        "room1.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 318.66666666666663,
+                "y": 509.33333333333326
+            }
+        },
+        "room1.tmx#pippoya": {
+            "scaleInDock": 1.5
+        }
+    },
+    "last.exportedFilePath": "/Users/stanleyseow/MA1/sampleGame2/assets",
+    "last.imagePath": "/Users/stanleyseow/MA1/sampleGame2/assets",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": "1",
+    "map.width": 20,
+    "openFiles": [
+        "RafflesklMap.tmx"
+    ],
+    "project": "room1.tiled-project",
+    "recentFiles": [
+        "RafflesklMap.tmx",
+        "room1.tmx",
+        "/Users/stanleyseow/MA1/sampleGame2-old/assets/rooom1.tmx"
+    ],
+    "tileset.embedInMap": true
+}

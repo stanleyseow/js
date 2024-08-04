@@ -18,12 +18,9 @@
 
     create() {
         console.log('*** city1');
-
-        console.log('chest: ', this.inventory.chest);
-        console.log('horse: ', this.inventory.horse);
+        console.log('inventory: ', this.inventory);
 
         this.pingSnd = this.sound.add('ping');
-
 
         let map = this.make.tilemap({ key: 'map1' });
 
@@ -82,11 +79,15 @@
         console.log('city1 to world');
 
         // Set position beside city1 in worldmap
-        player.x = 120;
-        player.y = 500;
-        this.scene.start('world', {
-            player: player,  inventory : this.inventory
-        });
+        player.x = 137;
+        player.y = 491;
+        this.scene.start('world'
+        , 
+        {
+            player: player,  
+            inventory : this.inventory
+        }
+        );
     }
 
     collectChest(player, tile) {

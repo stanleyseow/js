@@ -1,0 +1,190 @@
+{
+  "frames": [
+    {
+      "filename": "guard_32",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 47,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 47,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 47,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_33",
+      "frame": {
+        "x": 0,
+        "y": 59,
+        "w": 47,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 47,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 47,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_28",
+      "frame": {
+        "x": 0,
+        "y": 118,
+        "w": 46,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 46,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 46,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_27",
+      "frame": {
+        "x": 0,
+        "y": 177,
+        "w": 45,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 45,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 45,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_29",
+      "frame": {
+        "x": 0,
+        "y": 236,
+        "w": 44,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 44,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 44,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_31",
+      "frame": {
+        "x": 0,
+        "y": 295,
+        "w": 44,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 44,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 44,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "filename": "guard_30",
+      "frame": {
+        "x": 0,
+        "y": 354,
+        "w": 43,
+        "h": 59
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 43,
+        "h": 59
+      },
+      "sourceSize": {
+        "w": 43,
+        "h": 59
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  ],
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "guard_walk_down.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 47,
+      "h": 413
+    },
+    "scale": 1
+  }
+}

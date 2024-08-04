@@ -17,6 +17,7 @@ class dungeon extends Phaser.Scene {
 
     create() {
         console.log('*** dungeon');
+        console.log('inventory: ', this.inventory);
 
         this.pingSnd = this.sound.add('ping');
 
