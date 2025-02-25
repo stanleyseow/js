@@ -200,7 +200,7 @@ function attack(time) {
         let whip = whips.create(
             player.x + offsetX,
             player.y + offsetY,
-            'whip'
+            'sword'
         ).setScale(0.5)
         
         whip.damage = playerStats.damage;
