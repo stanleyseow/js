@@ -58,12 +58,22 @@ class preload extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.add.text(50, 50, "navMesh Testing, click to move, no keyboard, press space to continue", {
+    this.add.text(50, 50, "navMesh Testing, click to move, click or space to continue", {
       font: "20px Courier",
       fill: "#FFFFFF",
     });
 
     let spaceDown = this.input.keyboard.addKey("SPACE");
+
+    // on mouse click event, call the world scene
+    this.input.on("pointerdown", function (pointer) {
+      console.log("Jump to world");
+      let playerPos = {};
+      playerPos.x = 687;
+      playerPos.y = 1230;
+      playerPos.dir = "gen";
+      this.scene.start("world", { playerPos: playerPos });
+    }, this )
 
     // On spacebar event, call the world scene
     spaceDown.on(
@@ -76,8 +86,7 @@ class preload extends Phaser.Scene {
         playerPos.dir = "gen";
         this.scene.start("world", { playerPos: playerPos });
       },
-      this
-    );
+      this );
 
   }
 }
