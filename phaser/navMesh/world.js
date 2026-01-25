@@ -10,7 +10,7 @@ class world extends Phaser.Scene {
 
   preload() {
     // Step 1, load JSON
-    this.load.tilemapTiledJSON("worldmap", "assets/RaffleskMesh.tmj");
+    this.load.tilemapTiledJSON("worldmap", "assets/NavMeshMap.tmj");
 
     // // Step 2 : Preload any images here, nickname, filename
 
