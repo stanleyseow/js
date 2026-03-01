@@ -45,11 +45,21 @@ class animationScene extends Phaser.Scene {
 
     // Player setup
     this.player = this.physics.add.sprite(100, 250, "gen128");
+    this.player.hp = 100; // Starting health
 
     // Initialize state variables
     this.player.facing = "down";
     this.isAttacking = false;
     this.lastFired = 0;
+
+    // Add Health Text
+    this.hpText = this.add.text(16, 16, "HP: 100", {
+      fontSize: "24px",
+      fill: "#fff",
+      stroke: "#000",
+      strokeThickness: 4,
+    });
+    this.hpText.setScrollFactor(0); // Keeps text fixed on screen if camera moves
 
     // Set initial walking hitbox
     this.resetPlayerBody();
@@ -89,6 +99,14 @@ class animationScene extends Phaser.Scene {
       null,
       this,
     );
+
+    this.physics.add.overlap(
+      this.player,
+      [this.npc1, this.npc2],
+      this.hitNPC,
+      null,
+      this,
+    );
   }
 
   // Helper to keep body size consistent for walking
@@ -106,15 +124,19 @@ class animationScene extends Phaser.Scene {
       return;
     }
     // Only move knife1 if it hasn't hit the player
-    if (this.knife1.isActive) {
+    // Inside update(time)
+    if (this.knife1.isActive && this.npc1.active) {
       this.angle1 = Phaser.Math.Angle.BetweenPoints(this.npc1, this.player);
       this.physics.velocityFromRotation(this.angle1, 300, this.knife1.body.velocity);
+    } else if (!this.npc1.active) {
+      this.knife1.isActive = false; // Stop knife logic if NPC is dead
     }
 
-    // Only move knife2 if it hasn't hit the player
-    if (this.knife2.isActive) {
+    if (this.knife2.isActive && this.npc2.active) {
       this.angle2 = Phaser.Math.Angle.BetweenPoints(this.npc2, this.player);
       this.physics.velocityFromRotation(this.angle2, 300, this.knife2.body.velocity);
+    } else if (!this.npc2.active) {
+      this.knife2.isActive = false;
     }
 
     // Movement Logic
@@ -145,26 +167,51 @@ class animationScene extends Phaser.Scene {
     }
   }
 
+  reduceHP(amount) {
+    this.player.hp -= amount;
+
+    // Prevent HP from going below 0
+    if (this.player.hp < 0) this.player.hp = 0;
+
+    // Update Display
+    this.hpText.setText(`HP: ${this.player.hp}`);
+
+    // Game Over Check
+    if (this.player.hp <= 0) {
+      this.physics.pause(); // Stop all movement
+      this.player.setTint(0xff0000);
+      this.add
+        .text(400, 300, "GAME OVER", { fontSize: "64px", fill: "#ff0000" })
+        .setOrigin(0.5);
+
+      // Restart after 2 seconds
+      this.time.delayedCall(5000, () => {
+        this.scene.restart();
+      });
+    }
+  }
+
   shootKnife() {
-    // 1. CRITICAL: Cancel any pending reset timers so they don't
-    // hide the knife we are about to shoot.
     if (this.resetTimer) {
       this.resetTimer.remove();
     }
 
-    // 2. Prepare Knife 1
-    this.knife1.enableBody(true, this.npc1.x, this.npc1.y, true, true);
-    this.knife1.isActive = true;
-    this.knife1.setVisible(true).setAlpha(1).clearTint();
-    this.knife1.play("knifeAnim", true);
+    // Only shoot Knife 1 if NPC1 is still alive
+    if (this.npc1.active) {
+      this.knife1.enableBody(true, this.npc1.x, this.npc1.y, true, true);
+      this.knife1.isActive = true;
+      this.knife1.setVisible(true).setAlpha(1).clearTint();
+      this.knife1.play("knifeAnim", true);
+    }
 
-    // 3. Prepare Knife 2
-    this.knife2.enableBody(true, this.npc2.x, this.npc2.y, true, true);
-    this.knife2.isActive = true;
-    this.knife2.setVisible(true).setAlpha(1).clearTint();
-    this.knife2.play("knifeAnim", true);
+    // Only shoot Knife 2 if NPC2 is still alive
+    if (this.npc2.active) {
+      this.knife2.enableBody(true, this.npc2.x, this.npc2.y, true, true);
+      this.knife2.isActive = true;
+      this.knife2.setVisible(true).setAlpha(1).clearTint();
+      this.knife2.play("knifeAnim", true);
+    }
 
-    // 4. Store the timer in a variable so we can cancel it next time
     this.resetTimer = this.time.delayedCall(2500, this.resetKnife, [], this);
   }
 
@@ -181,27 +228,41 @@ class animationScene extends Phaser.Scene {
   }
 
   hitPlayer(player, knife) {
-    // If the player is currently in the middle of a slash animation
     if (this.isAttacking) {
-      // OPTIONAL: Play a "clink" sound or show a spark here
-
-      // Deflect the knife:
-      // We disable it immediately so it doesn't trigger again
       knife.isActive = false;
-      knife.disableBody(true, true); // Hide it immediately
-
+      knife.disableBody(true, true);
       console.log("Attack parried!");
-      return; // Exit the function so the player doesn't get hurt
+      return;
     }
 
-    // --- Normal Hit Logic (when not attacking) ---
+    // --- Player takes damage ---
+    this.reduceHP(10); // Take 10 damage
+    this.cameras.main.shake(200, 0.02);
+
     knife.isActive = false;
     knife.setVelocity(0);
-    knife.disableBody(true, true); // Keep it visible but stuck
-    knife.setTint(0xff0000);
+    knife.disableBody(true, true);
+    console.log("Player hit! HP remaining: " + this.player.hp);
+  }
 
-    // Optional: Add player knockback or health reduction here
-    console.log("Player hit!");
+  hitNPC(player, npc) {
+    if (this.isAttacking) {
+      npc.disableBody(true, true);
+      console.log("Player Attack NPC!!!");
+
+      if (!this.npc1.active && !this.npc2.active) {
+        this.timer1.remove();
+      }
+      return;
+    }
+
+    // --- Player touches NPC without attacking ---
+    this.reduceHP(5); // Touching an enemy hurts!
+    this.cameras.main.shake(200, 0.01);
+
+    // Optional: Add a brief invincibility tint so HP doesn't drain instantly
+    this.player.setTint(0xff0000);
+    this.time.delayedCall(200, () => this.player.clearTint());
   }
 
   attackAction(time) {
