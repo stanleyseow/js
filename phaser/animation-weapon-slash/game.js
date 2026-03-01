@@ -20,4 +20,3 @@ let config = {
 };
 
 let game = new Phaser.Game(config);
-let lastFired = 0;
