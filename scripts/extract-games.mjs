@@ -77,6 +77,14 @@ for (const cat of categories) {
   }
 }
 
+if (games.length === 0) {
+  console.error(
+    'No <li><a> links found in the Student Game section — index.html already contains the generated card grid.\n' +
+      'Edit scripts/games.json directly instead, then run build-student-section.mjs.'
+  );
+  process.exit(1);
+}
+
 const out = categories
   .map((c) => ({
     title: c.title,

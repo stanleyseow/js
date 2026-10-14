@@ -1,5 +1,6 @@
 // Captures preview screenshots for every game in scripts/games.json into previews/.
-// Usage: node scripts/capture-previews.mjs [--limit=N] [--concurrency=N] [--settle=MS] [--only=slug1,slug2]
+// Usage: node scripts/capture-previews.mjs [--limit=N] [--concurrency=N] [--settle=MS] [--only=slug1,slug2] [--headed]
+// --headed: use a visible browser (fixes white screens from some WebGL games in headless mode)
 import { readFileSync, existsSync, mkdirSync, appendFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
@@ -41,7 +42,7 @@ pending = pending.slice(0, limit);
 
 console.log(`${games.length} games total, ${pending.length} to capture (concurrency ${concurrency}, settle ${settle}ms)`);
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({ headless: !args.includes('--headed') });
 
 async function capture(game) {
   const context = await browser.newContext({

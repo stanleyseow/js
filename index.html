@@ -1,146 +1,166 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
 
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
-
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?" />
 
     <title>Collection of JavaSripts</title>
 
     <style>
+      .game-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin: 8px 0 24px;
+        max-width: 1200px;
+      }
+
+      .game-card {
+        display: block;
+        text-decoration: none;
+        color: #222;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .game-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .game-thumb {
+        display: block;
+        aspect-ratio: 4 / 3;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .game-thumb img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .game-thumb img.missing {
+        visibility: hidden;
+      }
+
+      .game-name {
+        display: block;
+        padding: 8px 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      @media (max-width: 1100px) {
         .game-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            margin: 8px 0 24px;
-            max-width: 1200px;
+          grid-template-columns: repeat(3, 1fr);
         }
+      }
 
-        .game-card {
-            display: block;
-            text-decoration: none;
-            color: #222;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
-            transition: transform .15s ease, box-shadow .15s ease;
+      @media (max-width: 700px) {
+        .game-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
+      }
 
-        .game-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, .15);
+      @media (max-width: 480px) {
+        .game-grid {
+          grid-template-columns: 1fr;
         }
-
-        .game-thumb {
-            display: block;
-            aspect-ratio: 4 / 3;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .game-thumb img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .game-thumb img.missing {
-            visibility: hidden;
-        }
-
-        .game-name {
-            display: block;
-            padding: 8px 10px;
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (max-width: 1100px) {
-            .game-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        @media (max-width: 700px) {
-            .game-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 480px) {
-            .game-grid { grid-template-columns: 1fr; }
-        }
+      }
     </style>
 
     <script src="p5/libraries/p5.js"></script>
     <script src="p5/libraries/p5.dom.js"></script>
     <script src="p5/libraries/p5.sound.js"></script>
+  </head>
 
-</head>
+  <body>
+    <h3>Phaser3 - Start Here</h3>
+    <a
+      href="https://www.notion.so/stanleyseow/Phaser3-Examples-532ef2aff4da4de285ce75227dc6422e"
+    >
+      Notion Code Snippits</a
+    >
 
-<body>
+    <h4>Platform and Ladders</h4>
+    <li><a href="phaser/game1/">First Phaser Game</a></li>
+    <li><a href="phaser/platform1/">Platform Phaser Game 1</a></li>
+    <li><a href="phaser/climb-ladder/">Platform Climb Ladder</a></li>
+    <li><a href="phaser/Tiled-10-houses/">Platform Climb Ladder Houses</a></li>
 
-    <H3>Phaser3 - Start Here</H3>
-        <a href="https://www.notion.so/stanleyseow/Phaser3-Examples-532ef2aff4da4de285ce75227dc6422e">
-        Notion Code Snippits</a>
+    <h4>Shoot Examples</h4>
+    <li><a href="phaser/scene-shooter/">Platform Shooter</a></li>
+    <li><a href="phaser/mouse-shooter/">Mouse Shooter</a></li>
+    <li><a href="phaser/npc_shoot/">NPC Auto Shoot Player</a></li>
 
+    <h4>Vampire Survival Examples</h4>
+    <li>
+      <a href="phaser/vampire-clone/"
+        >Player with sword + random fire enemies</a
+      >
+    </li>
+    <li>
+      <a href="phaser/vampireClone-class/">Player sword + fire, shoot knife</a>
+    </li>
 
-        <H4>Platform and Ladders</H4>
-        <li><a href="phaser/game1/">First Phaser Game</a></li>
-        <li><a href="phaser/platform1/">Platform Phaser Game 1</a></li>
-        <li><a href="phaser/climb-ladder/">Platform Climb Ladder</a></li>
-        <li><a href="phaser/Tiled-10-houses/">Platform Climb Ladder Houses</a></li>
+    <h4>Tween updown - leftright examples</h4>
+    <li><a href="phaser/tween-updown/">Tween up/down and left/right</a></li>
 
-        <h4>Shoot Examples</h4>
-        <li><a href="phaser/scene-shooter/">Platform Shooter</a></li>
-        <li><a href="phaser/mouse-shooter/">Mouse Shooter</a></li>
-        <li><a href="phaser/npc_shoot/">NPC Auto Shoot Player</a></li>
+    <h4>Walk/Run Examples</h4>
+    <li><a href="phaser/Tiled-walk-run/">Player Walk / Run</a></li>
 
-        <h4>Vampire Survival Examples</h4>
-        <li><a href="phaser/vampire-clone/">Player with sword + random fire enemies</a></li>
-        <li><a href="phaser/vampireClone-class/">Player sword + fire, shoot knife</a></li>
+    <h4>Sword Attack</h4>
+    <li><a href="phaser/animation-chargen-attack/">Sword Attack</a></li>
 
-        <h4>Tween updown - leftright examples</h4>
-        <li><a href="phaser/tween-updown/">Tween up/down and left/right</a></li>
+    <h4>Text Popup Area</h4>
+    <li><a href="phaser/signBoard/">Text popup when near signboard</a></li>
 
-        <h4>Walk/Run Examples</h4>
-        <li><a href="phaser/Tiled-walk-run/">Player Walk / Run</a></li>
+    <h4>NavMesh Path Finder</h4>
+    <li><a href="phaser/navMesh/">NavMesh Demo</a></li>
 
-        <h4>Sword Attack</h4>
-        <li><a href="phaser/animation-chargen-attack/">Sword Attack</a></li>
+    <h4>Scenes Examples</h4>
+    <li><a href="phaser/scene-levels/">Scene Levels 1 to 9</a></li>
+    <li>
+      <a href="phaser/scene-levels-buttons/">Scene Levels with Buttons</a>
+    </li>
 
-        <h4>Text Popup Area</h4>
-        <li><a href="phaser/signBoard/">Text popup when near signboard</a></li>
+    <li><a href="phaser/adventure-girl/">Adventure Girl</a></li>
+    <li>
+      <a href="phaser/adventure-girl-scene-vjoystick/"
+        >Adventure Girl vjoystick</a
+      >
+    </li>
+    <br />
+    <li><a href="phaser/Ultima-Game-V1/">Ultima Demo V1</a></li>
+    <li><a href="phaser/pathfinding/">Path Finding with easystar.js</a></li>
+    <li><a href="phaser/Scene-DialogBox/">Dialog textBox</a></li>
+    <br />
 
-        <h4>NavMesh Path Finder</h4>
-        <li><a href="phaser/navMesh/">NavMesh Demo</a></li>
+    <h2>Student's Game</h2>
 
-        <h4>Scenes Examples</h4>
-        <li><a href="phaser/scene-levels/">Scene Levels 1 to 9</a></li>
-        <li><a href="phaser/scene-levels-buttons/">Scene Levels with Buttons</a></li>
-
-        <li><a href="phaser/adventure-girl/">Adventure Girl</a></li>
-        <li><a href="phaser/adventure-girl-scene-vjoystick/">Adventure Girl vjoystick</a></li>
-        <BR>
-        <li><a href="phaser/Ultima-Game-V1/">Ultima Demo V1</a></li>
-        <li><a href="phaser/pathfinding/">Path Finding with easystar.js</a></li>
-        <li><a href="phaser/Scene-DialogBox/">Dialog textBox</a></li>
-        <BR>
-
-
-        <H2>Student's Game</H2>
-
-        <!-- STUDENT-GAMES:START -->
+    <!-- STUDENT-GAMES:START -->
         <h4>Platform Style</h4>
         <div class="game-grid">
           <a class="game-card" href="https://yiktung.github.io/js/Bunbun/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yiktung-Bunbun.jpg" alt="Yik Tung preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yik Tung</span></a>
@@ -187,7 +207,6 @@
           <a class="game-card" href="https://liewweifeng2000.github.io/js/dr.escape/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/liewweifeng2000-dr.escape.jpg" alt="Wei Feng preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Wei Feng</span></a>
           <a class="game-card" href="https://kamilapav.github.io/js/Tiled-farmMap/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kamilapav-Tiled-farmMap.jpg" alt="Kamila preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kamila</span></a>
           <a class="game-card" href="https://laiwengyan.github.io/js/robberyTreasure/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/laiwengyan-robberyTreasure.jpg" alt="Weng Yan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Weng Yan</span></a>
-          <a class="game-card" href="https://stueey.github.io/js/StueyChallenge3/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/stueey-StueyChallenge3.jpg" alt="Aldrin preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Aldrin</span></a>
           <a class="game-card" href="https://204c.github.io/js/SantaDelivery/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/204c-SantaDelivery.jpg" alt="Kelly preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kelly</span></a>
           <a class="game-card" href="https://kanrenwei.github.io/js/PiratesChestweek14/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kanrenwei-PiratesChestweek14.jpg" alt="Jeremy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jeremy</span></a>
           <a class="game-card" href="https://iamjack020523.github.io/js/Phantomania/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/iamjack020523-Phantomania.jpg" alt="Jacky preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jacky</span></a>
@@ -277,7 +296,7 @@
         <h3>Jan 2025</h3>
         <div class="game-grid">
           <a class="game-card" href="https://aisyahraffleskl.github.io/MA1/MintyEscape/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/aisyahraffleskl-MintyEscape.jpg" alt="Aisyah (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Aisyah (Platform) ***</span></a>
-          <a class="game-card" href="https://itxlinax.github.io/the-serenities/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/itxlinax-the-serenities.jpg" alt="Shelly (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Shelly (Platform) ***</span></a>
+          <a class="game-card" href="https://shellyyx.github.io/the-serenities/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/shellyyx-the-serenities.jpg" alt="Shelly (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Shelly (Platform) ***</span></a>
           <a class="game-card" href="https://channelorene.github.io/js/FortuneDash/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/channelorene-FortuneDash.jpg" alt="Rene *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Rene ***</span></a>
           <a class="game-card" href="https://summeruwu.github.io/js/Meow_Mission/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/summeruwu-Meow_Mission.jpg" alt="Summer preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Summer</span></a>
           <a class="game-card" href="https://joeiyeo.github.io/js/OKUCare/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/joeiyeo-OKUCare.jpg" alt="Joey preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Joey</span></a>
@@ -325,52 +344,47 @@
         </div>
         <!-- STUDENT-GAMES:END -->
 
-        <H2>p5.js</H2>
-        <P2>Visualizations</P2>
-        <li><a href="p5/fractal_Invaders2">Fractal Invaders</a></li>
-        <li><a href="p5/meteora">Meteora</a></li>
-        <li><a href="p5/circleObjects">Circle like Audio Wave</a></li>
-        <li><a href="p5/movingballLines">Moving Balls with Lines</a></li>
-        <li><a href="p5/matrix_digitalrain">Matrix Digital Rain</a></li>
-        <li><a href="p5/circle_barcharts">Circle Bar Charts</a></li>
-        <li><a href="p5/particle_simulation">Particle Simulations</a></li>
+    <h2>p5.js</h2>
+    <P2>Visualizations</P2>
+    <li><a href="p5/fractal_Invaders2">Fractal Invaders</a></li>
+    <li><a href="p5/meteora">Meteora</a></li>
+    <li><a href="p5/circleObjects">Circle like Audio Wave</a></li>
+    <li><a href="p5/movingballLines">Moving Balls with Lines</a></li>
+    <li><a href="p5/matrix_digitalrain">Matrix Digital Rain</a></li>
+    <li><a href="p5/circle_barcharts">Circle Bar Charts</a></li>
+    <li><a href="p5/particle_simulation">Particle Simulations</a></li>
 
+    <br />
+    <P2>Movements</P2>
+    <li><a href="p5/keyboard_movement">Keyboard Movement</a></li>
+    <li><a href="p5/movingBall">Moving Ball</a></li>
+    <li><a href="p5/dino_game">Dino Jump</a></li>
+    <br />
 
-        <BR>
-        <P2>Movements</P2>
-        <li><a href="p5/keyboard_movement">Keyboard Movement</a></li>
-        <li><a href="p5/movingBall">Moving Ball</a></li>
-        <li><a href="p5/dino_game">Dino Jump</a></li>
-        <BR>
+    <P2>Objects</P2>
+    <li><a href="p5/raindropObject">Raindrops Objects</a></li>
+    <li><a href="p5/movingballObject">Moving Balls Objects</a></li>
+    <li><a href="p5/ballObject">Ball Objects</a></li>
+    <li><a href="p5/beeObject">Bee Objects</a></li>
+    <br />
 
-        <P2>Objects</P2>
-        <li><a href="p5/raindropObject">Raindrops Objects</a></li>
-        <li><a href="p5/movingballObject">Moving Balls Objects</a></li>
-        <li><a href="p5/ballObject">Ball Objects</a></li>
-        <li><a href="p5/beeObject">Bee Objects</a></li>
-        <BR>
+    <P2>Tranlate & Rotate</P2>
+    <li><a href="p5/sun_and_earth">Sun, Earth & Moon</a></li>
+    <li><a href="p5/translate_rotate/">Translate & Rotate</a></li>
+    <br />
 
-        <P2>Tranlate & Rotate</P2>
-        <li><a href="p5/sun_and_earth">Sun, Earth & Moon</a></li>
-        <li><a href="p5/translate_rotate/">Translate & Rotate</a></li>
-        <BR>
+    <P2>Images</P2>
+    <li><a href="p5/story1">Gif Story Page</a></li>
+    <br />
 
-        <P2>Images</P2>
-        <li><a href="p5/story1">Gif Story Page</a></li>
-        <BR>
+    <P2>Fonts and Clock</P2>
+    <li><a href="p5/clock">Clock</a></li>
+    <li><a href="p5/analogDigitalClock">A Million Times Clock</a></li>
+    <br />
 
-        <P2>Fonts and Clock</P2>
-        <li><a href="p5/clock">Clock</a></li>
-        <li><a href="p5/analogDigitalClock">A Million Times Clock</a></li>
-        <BR>
-
-        <BR>
-        <BR>
-        <script src="p5/fractal_Invaders/sketch.js"></script>
-        <BR>
-
-</body>
-
+    <br />
+    <br />
+    <script src="p5/fractal_Invaders/sketch.js"></script>
+    <br />
+  </body>
 </html>
-
-
