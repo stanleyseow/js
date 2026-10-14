@@ -15,6 +15,73 @@
 
     <title>Collection of JavaSripts</title>
 
+    <style>
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 8px 0 24px;
+            max-width: 1200px;
+        }
+
+        .game-card {
+            display: block;
+            text-decoration: none;
+            color: #222;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .15);
+        }
+
+        .game-thumb {
+            display: block;
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .game-thumb img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .game-thumb img.missing {
+            visibility: hidden;
+        }
+
+        .game-name {
+            display: block;
+            padding: 8px 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 1100px) {
+            .game-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 700px) {
+            .game-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .game-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+
     <script src="p5/libraries/p5.js"></script>
     <script src="p5/libraries/p5.dom.js"></script>
     <script src="p5/libraries/p5.sound.js"></script>
@@ -73,179 +140,190 @@
 
         <H2>Student's Game</H2>
 
+        <!-- STUDENT-GAMES:START -->
         <h4>Platform Style</h4>
-        <li><a href="https://yiktung.github.io/js/Bunbun/">Yik Tung </a></li>
-        <li><a href="https://ctkt06.github.io/js/LittleHood/">Catherine </a></li>
-        <li><a href="https://cherylkok00.github.io/js/coco-cafe/">Cheryl </a></li>
-        <li><a href="https://3kneetea.github.io/js/MM_scene/">Trinity </a></li>
-        <li><a href="https://waihongg.github.io/js/zackgame/">Wai Hong </a></li>
-        <li><a href="https://aisyah160700.github.io/js/paparat/">Aisyah </a></li>
-        <li><a href="https://vivianloix.github.io/js/roti-neko/">Vivian </a></li>
-        <li><a href="https://thuhoo.github.io/js/MermaidAdventure/">Thuhu </a></li>
-        <li><a href="https://haikalazizi.github.io/js/TheTimidBoyAbu/">Haikal </a></li>
-        <li><a href="https://yxuan228.github.io/js/candyworld/">Yin Xuan </a></li>
-        <BR>
+        <div class="game-grid">
+          <a class="game-card" href="https://yiktung.github.io/js/Bunbun/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yiktung-Bunbun.jpg" alt="Yik Tung preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yik Tung</span></a>
+          <a class="game-card" href="https://ctkt06.github.io/js/LittleHood/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/ctkt06-LittleHood.jpg" alt="Catherine preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Catherine</span></a>
+          <a class="game-card" href="https://cherylkok00.github.io/js/coco-cafe/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/cherylkok00-coco-cafe.jpg" alt="Cheryl preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Cheryl</span></a>
+          <a class="game-card" href="https://3kneetea.github.io/js/MM_scene/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/3kneetea-MM_scene.jpg" alt="Trinity preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Trinity</span></a>
+          <a class="game-card" href="https://waihongg.github.io/js/zackgame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/waihongg-zackgame.jpg" alt="Wai Hong preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Wai Hong</span></a>
+          <a class="game-card" href="https://aisyah160700.github.io/js/paparat/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/aisyah160700-paparat.jpg" alt="Aisyah preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Aisyah</span></a>
+          <a class="game-card" href="https://vivianloix.github.io/js/roti-neko/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/vivianloix-roti-neko.jpg" alt="Vivian preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Vivian</span></a>
+          <a class="game-card" href="https://thuhoo.github.io/js/MermaidAdventure/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/thuhoo-MermaidAdventure.jpg" alt="Thuhu preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Thuhu</span></a>
+          <a class="game-card" href="https://haikalazizi.github.io/js/TheTimidBoyAbu/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/haikalazizi-TheTimidBoyAbu.jpg" alt="Haikal preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Haikal</span></a>
+          <a class="game-card" href="https://yxuan228.github.io/js/candyworld/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yxuan228-candyworld.jpg" alt="Yin Xuan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yin Xuan</span></a>
+        </div>
 
         <h4>RPG Style</h4>
-        <li><a href="https://xxjiaweixx.github.io/js/DadaAdventure/">JiaWei </a></li>
-        <li><a href="https://xxjycxx.github.io/js/McoPrincess/">YC </a></li>
-        <li><a href="https://kyxin.github.io/js/DeliveryBoy/">Yan Xin </a></li>
-        <li><a href="https://22ndteam.github.io/js/TheLegendofTomoeGozen/game/">Joel Yeoh </a></li>
-        <li><a href="https://kiki0307.github.io/js/maisy-challenge/">Kiki </a></li>
-        <li><a href="https://yikaiteo.github.io/magicalGirlElaine/">Yikai </a></li>
-        <li><a href="https://zhilinx.github.io/js/EscapeTime/">Zhi Lin </a></li>
+        <div class="game-grid">
+          <a class="game-card" href="https://xxjiaweixx.github.io/js/DadaAdventure/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/xxjiaweixx-DadaAdventure.jpg" alt="JiaWei preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">JiaWei</span></a>
+          <a class="game-card" href="https://xxjycxx.github.io/js/McoPrincess/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/xxjycxx-McoPrincess.jpg" alt="YC preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">YC</span></a>
+          <a class="game-card" href="https://kyxin.github.io/js/DeliveryBoy/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kyxin-DeliveryBoy.jpg" alt="Yan Xin preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yan Xin</span></a>
+          <a class="game-card" href="https://22ndteam.github.io/js/TheLegendofTomoeGozen/game/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/22ndteam-game.jpg" alt="Joel Yeoh preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Joel Yeoh</span></a>
+          <a class="game-card" href="https://kiki0307.github.io/js/maisy-challenge/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kiki0307-maisy-challenge.jpg" alt="Kiki preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kiki</span></a>
+          <a class="game-card" href="https://yikaiteo.github.io/magicalGirlElaine/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yikaiteo-magicalGirlElaine.jpg" alt="Yikai preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yikai</span></a>
+          <a class="game-card" href="https://zhilinx.github.io/js/EscapeTime/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/zhilinx-EscapeTime.jpg" alt="Zhi Lin preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Zhi Lin</span></a>
+          <a class="game-card" href="https://zhiyanh.github.io/js/Lee-Mission/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/zhiyanh-Lee-Mission.jpg" alt="Zhi Yan *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Zhi Yan ***</span></a>
+          <a class="game-card" href="https://shuenninglau.github.io/js/FalconCourier/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/shuenninglau-FalconCourier.jpg" alt="Shuen Ning *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Shuen Ning ***</span></a>
+          <a class="game-card" href="https://sdral.github.io/js/ToRescueThePrincess/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/sdral-ToRescueThePrincess.jpg" alt="Sandra *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Sandra ***</span></a>
+          <a class="game-card" href="https://kancaleb.github.io/js/WheresMyPen/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kancaleb-WheresMyPen.jpg" alt="Caleb *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Caleb ***</span></a>
+          <a class="game-card" href="https://phangphangwen.github.io/js/desert_survival/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/phangphangwen-desert_survival.jpg" alt="Sylvia preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Sylvia</span></a>
+          <a class="game-card" href="https://xiaupeng.github.io/js/Sun_Descendants/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/xiaupeng-Sun_Descendants.jpg" alt="Xiau Peng preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Xiau Peng</span></a>
+          <a class="game-card" href="https://suzaneleejiayu.github.io/js/CoffeeWithMe/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/suzaneleejiayu-CoffeeWithMe.jpg" alt="Suzane preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Suzane</span></a>
+          <a class="game-card" href="https://nicoleqiqi.github.io/js/Castaway/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/nicoleqiqi-Castaway.jpg" alt="Nicole Yap preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Nicole Yap</span></a>
+          <a class="game-card" href="https://3mooorey.github.io/js/samurai-rescue/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/3mooorey-samurai-rescue.jpg" alt="Omar preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Omar</span></a>
+          <a class="game-card" href="https://ongjiayee.github.io/js/sotonggame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/ongjiayee-sotonggame.jpg" alt="Ong Jia Yee preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Ong Jia Yee</span></a>
+          <a class="game-card" href="https://sugardarling.github.io/js/GoBroomer/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/sugardarling-GoBroomer.jpg" alt="Jia Xuan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jia Xuan</span></a>
+          <a class="game-card" href="https://mjlimm.github.io/js/RunBoraRun/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/mjlimm-RunBoraRun.jpg" alt="MJ preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">MJ</span></a>
+          <a class="game-card" href="https://snowysy.github.io/js/Snowace/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/snowysy-Snowace.jpg" alt="Snowy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Snowy</span></a>
+          <a class="game-card" href="https://99josc.github.io/js/foodHunt/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/99josc-foodHunt.jpg" alt="Jojo preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jojo</span></a>
+          <a class="game-card" href="https://tiimothy.github.io/Js/Student-JIM/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/tiimothy-Student-JIM.jpg" alt="Timothy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Timothy</span></a>
+          <a class="game-card" href="https://xinyilau01.github.io/js/emmy_pammy/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/xinyilau01-emmy_pammy.jpg" alt="Xin Yi preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Xin Yi</span></a>
+          <a class="game-card" href="https://lim320.github.io/JS/RafflesMap3S/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/lim320-RafflesMap3S.jpg" alt="Si Yin *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Si Yin ***</span></a>
+          <a class="game-card" href="https://whiskyfox.github.io/js/ThiefMagician/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/whiskyfox-ThiefMagician.jpg" alt="Tranxy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Tranxy</span></a>
+          <a class="game-card" href="https://loongsweeman.github.io/js/HalloweenWitch/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/loongsweeman-HalloweenWitch.jpg" alt="Swee Man preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Swee Man</span></a>
+          <a class="game-card" href="https://teuyutian.github.io/js/alexstask/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/teuyutian-alexstask.jpg" alt="Yu Tian preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yu Tian</span></a>
+          <a class="game-card" href="https://liewweifeng2000.github.io/js/dr.escape/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/liewweifeng2000-dr.escape.jpg" alt="Wei Feng preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Wei Feng</span></a>
+          <a class="game-card" href="https://kamilapav.github.io/js/Tiled-farmMap/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kamilapav-Tiled-farmMap.jpg" alt="Kamila preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kamila</span></a>
+          <a class="game-card" href="https://laiwengyan.github.io/js/robberyTreasure/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/laiwengyan-robberyTreasure.jpg" alt="Weng Yan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Weng Yan</span></a>
+          <a class="game-card" href="https://stueey.github.io/js/StueyChallenge3/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/stueey-StueyChallenge3.jpg" alt="Aldrin preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Aldrin</span></a>
+          <a class="game-card" href="https://204c.github.io/js/SantaDelivery/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/204c-SantaDelivery.jpg" alt="Kelly preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kelly</span></a>
+          <a class="game-card" href="https://kanrenwei.github.io/js/PiratesChestweek14/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kanrenwei-PiratesChestweek14.jpg" alt="Jeremy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jeremy</span></a>
+          <a class="game-card" href="https://iamjack020523.github.io/js/Phantomania/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/iamjack020523-Phantomania.jpg" alt="Jacky preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jacky</span></a>
+        </div>
 
-        <BR />
-        <li><a href="https://zhiyanh.github.io/js/Lee-Mission/">Zhi Yan ***</a></li>
-        <li><a href="https://shuenninglau.github.io/js/FalconCourier/">Shuen Ning ***</a></li>
-        <li><a href="https://sdral.github.io/js/ToRescueThePrincess/">Sandra ***</a></li>
-        <li><a href="https://kancaleb.github.io/js/WheresMyPen/">Caleb ***</a></li>
-        <li><a href="https://phangphangwen.github.io/js/desert_survival/">Sylvia </a></li>
-        <li><a href="https://xiaupeng.github.io/js/Sun_Descendants/">Xiau Peng </a></li>
-        <li><a href="https://suzaneleejiayu.github.io/js/CoffeeWithMe/">Suzane </a></li>
-        <li><a href="https://nicoleqiqi.github.io/js/Castaway/">Nicole Yap </a></li>
-        <li><a href="https://3mooorey.github.io/js/samurai-rescue/">Omar </a></li>
-        <li><a href="https://ongjiayee.github.io/js/sotonggame/">Ong Jia Yee </a></li>
-        <li><a href="https://sugardarling.github.io/js/GoBroomer/">Jia Xuan </a></li>
-        <li><a href="https://mjlimm.github.io/js/RunBoraRun/">MJ </a></li>
+        <h3>Sep 2022</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://kimochinehh.github.io/MA1/Befast/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kimochinehh-Befast.jpg" alt="Shawn preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Shawn</span></a>
+          <a class="game-card" href="https://yowntyann.github.io/MA1/Unknownworld-game/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yowntyann-Unknownworld-game.jpg" alt="Yownt Yan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yownt Yan</span></a>
+          <a class="game-card" href="https://subhas45.github.io/MA1/johntherancher/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/subhas45-johntherancher.jpg" alt="Subas preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Subas</span></a>
+          <a class="game-card" href="https://nzhiqi.github.io/MA1/WitchcraftInternship/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/nzhiqi-WitchcraftInternship.jpg" alt="Zhi Qi preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Zhi Qi</span></a>
+          <a class="game-card" href="https://pzhyying.github.io/MA1/TheMissingTaste/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/pzhyying-TheMissingTaste.jpg" alt="Zhy Ying preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Zhy Ying</span></a>
+          <a class="game-card" href="https://alfredcrescent.github.io/MA1/Alfred_game3/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/alfredcrescent-Alfred_game3.jpg" alt="Alfred preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Alfred</span></a>
+          <a class="game-card" href="https://tanql123.github.io/MA1/ForgottenMemory/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/tanql123-ForgottenMemory.jpg" alt="Qian Ling preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Qian Ling</span></a>
+          <a class="game-card" href="https://jeyismyname.github.io/MA1/CatGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/jeyismyname-CatGame.jpg" alt="Jey Min *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jey Min ***</span></a>
+          <a class="game-card" href="https://jenleews.github.io/MA1/JollieEscape/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/jenleews-JollieEscape.jpg" alt="Jen preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jen</span></a>
+          <a class="game-card" href="https://moniqk.github.io/MA1/DontBeNaughty/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/moniqk-DontBeNaughty.jpg" alt="Monique *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Monique ***</span></a>
+          <a class="game-card" href="https://juliy818.github.io/MA1/Whereismyfriend/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/juliy818-Whereismyfriend.jpg" alt="Julie preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Julie</span></a>
+          <a class="game-card" href="https://jasminelimmm.github.io/MA1/Chef_vs_FoodMonster/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/jasminelimmm-Chef_vs_FoodMonster.jpg" alt="Jasmine *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jasmine ***</span></a>
+          <a class="game-card" href="https://kaienchong.github.io/MA1/Amy%27sTasks/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kaienchong-Amy-sTasks.jpg" alt="Kai En preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kai En</span></a>
+          <a class="game-card" href="https://piggymin.github.io/MA1/TheCursedWorld/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/piggymin-TheCursedWorld.jpg" alt="Hui Min preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Hui Min</span></a>
+          <a class="game-card" href="https://lxinyee0105.github.io/MA1/AnimalRetriever/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/lxinyee0105-AnimalRetriever.jpg" alt="Xin Yee preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Xin Yee</span></a>
+          <a class="game-card" href="https://erinkhor.github.io/MA1/ERIN/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/erinkhor-ERIN.jpg" alt="Erin preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Erin</span></a>
+          <a class="game-card" href="https://galactosedawn.github.io/MA1/dreamscape/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/galactosedawn-dreamscape.jpg" alt="Dawn (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Dawn (Platform) ***</span></a>
+          <a class="game-card" href="https://seranabs.github.io/MA1/AgentApplejack/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/seranabs-AgentApplejack.jpg" alt="Sara (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Sara (Platform) ***</span></a>
+        </div>
 
-        <BR>
+        <h3>May 2023</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://racllll.github.io/MA1/mygame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/racllll-mygame.jpg" alt="Rachael Game preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Rachael Game</span></a>
+          <a class="game-card" href="https://deels10.github.io/MA1/Frogs_and_Potions/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/deels10-Frogs_and_Potions.jpg" alt="Adelia Game *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Adelia Game ***</span></a>
+          <a class="game-card" href="https://peyjenn.github.io/MA1/Bearkery/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/peyjenn-Bearkery.jpg" alt="Pey Jenn Game preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Pey Jenn Game</span></a>
+          <a class="game-card" href="https://xinn15.github.io/MA1/TheMuseHotel/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/xinn15-TheMuseHotel.jpg" alt="Andrea Game preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Andrea Game</span></a>
+          <a class="game-card" href="https://thejazzcollosal.github.io/MA1/Jazfe22/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/thejazzcollosal-Jazfe22.jpg" alt="Thejas Game preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Thejas Game</span></a>
+        </div>
 
-        <li><a href="https://snowysy.github.io/js/Snowace/">Snowy </a></li>
-        <li><a href="https://99josc.github.io/js/foodHunt/">Jojo </a></li>
-        <li><a href="https://tiimothy.github.io/Js/Student-JIM/">Timothy </a></li>
-        <li><a href="https://xinyilau01.github.io/js/emmy_pammy/">Xin Yi </a></li>
-        <li><a href="https://lim320.github.io/JS/RafflesMap3S/">Si Yin ***</a></li>
-        <li><a href="https://whiskyfox.github.io/js/ThiefMagician/">Tranxy </a></li>
-        <li><a href="https://loongsweeman.github.io/js/HalloweenWitch/">Swee Man </a></li>
-        <li><a href="https://teuyutian.github.io/js/alexstask/">Yu Tian </a></li>
-        <li><a href="https://liewweifeng2000.github.io/js/dr.escape/">Wei Feng </a></li>
-        <li><a href="https://kamilapav.github.io/js/Tiled-farmMap/">Kamila </a></li>
-        <li><a href="https://laiwengyan.github.io/js/robberyTreasure/">Weng Yan </a></li>
-        <li><a href="https://stueey.github.io/js/StueyChallenge3/">Aldrin </a></li>
-        <li><a href="https://204c.github.io/js/SantaDelivery/">Kelly </a></li>
-        <li><a href="https://kanrenwei.github.io/js/PiratesChestweek14/">Jeremy </a></li>
-        <li><a href="https://iamjack020523.github.io/js/Phantomania/">Jacky</a></li>
+        <h3>Sep 2023</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://kssssh.github.io/MA1/desert/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kssssh-desert.jpg" alt="Kian Seng Game preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kian Seng Game</span></a>
+          <a class="game-card" href="https://amandalee0880.github.io/MA1/MouseRescue/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/amandalee0880-MouseRescue.jpg" alt="Amanda Game preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Amanda Game</span></a>
+        </div>
 
-        <BR>
+        <h3>Jan 2024 AM</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://joke0988.github.io/js/Lord%20of%20the%20Curse/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/joke0988-Lord-of-the-Curse.jpg" alt="Kah How preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kah How</span></a>
+          <a class="game-card" href="https://raycando.github.io/JS/SmellyArmpit/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/raycando-SmellyArmpit.jpg" alt="Julian preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Julian</span></a>
+          <a class="game-card" href="https://herligel.github.io/js/mygame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/herligel-mygame.jpg" alt="Eliza preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Eliza</span></a>
+          <a class="game-card" href="https://vickylee05.github.io/js2/Darat/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/vickylee05-Darat.jpg" alt="Vicky preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Vicky</span></a>
+          <a class="game-card" href="https://jiaqiantan.github.io/JS/MyGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/jiaqiantan-MyGame.jpg" alt="Jia Qian preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jia Qian</span></a>
+          <a class="game-card" href="https://yuxuen.github.io/Js/game/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yuxuen-game.jpg" alt="Kenix preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kenix</span></a>
+          <a class="game-card" href="https://isabellecwy.github.io/JS/Mygame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/isabellecwy-Mygame.jpg" alt="Isabelle preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Isabelle</span></a>
+          <a class="game-card" href="https://cassandrawu.github.io/js3/myGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/cassandrawu-myGame.jpg" alt="Cassandra preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Cassandra</span></a>
+          <a class="game-card" href="https://chloyechau.github.io/js/AttireGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/chloyechau-AttireGame.jpg" alt="Chloye preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Chloye</span></a>
+          <a class="game-card" href="https://jaxinthelai.github.io/JS/MyGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/jaxinthelai-MyGame.jpg" alt="Jaxinthe preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jaxinthe</span></a>
+          <a class="game-card" href="https://chinghueyting.github.io/js/mygame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/chinghueyting-mygame.jpg" alt="Huey Ting *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Huey Ting ***</span></a>
+          <a class="game-card" href="https://amarayshlai.github.io/js/MyGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/amarayshlai-MyGame.jpg" alt="Amaraysh *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Amaraysh ***</span></a>
+          <a class="game-card" href="https://ileanachong.github.io/JS/Mygame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/ileanachong-Mygame.jpg" alt="Ileana preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Ileana</span></a>
+        </div>
 
-        <H3>Sep 2022</H3>
-        <li><a href="https://kimochinehh.github.io/MA1/Befast/">Shawn</a></li>
-        <li><a href="https://yowntyann.github.io/MA1/Unknownworld-game/">Yownt Yan</a></li>
-        <li><a href="https://subhas45.github.io/MA1/johntherancher/">Subas</a></li>
-        <li><a href="https://nzhiqi.github.io/MA1/WitchcraftInternship/">Zhi Qi</a></li>
-        <li><a href="https://pzhyying.github.io/MA1/TheMissingTaste/">Zhy Ying</a></li>
-        <li><a href="https://alfredcrescent.github.io/MA1/Alfred_game3/">Alfred</a></li>
-        <li><a href="https://tanql123.github.io/MA1/ForgottenMemory/">Qian Ling</a></li>
-        <li><a href="https://jeyismyname.github.io/MA1/CatGame/">Jey Min ***</a></li>
-        <li><a href="https://jenleews.github.io/MA1/JollieEscape/">Jen</a></li>
+        <h3>Jan 2024 PM</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://v1k1i.github.io/js/Olympics_Oddysey/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/v1k1i-Olympics_Oddysey.jpg" alt="Victoria preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Victoria</span></a>
+          <a class="game-card" href="https://gaiaguppy.github.io/js/GAIA-GAME/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/gaiaguppy-GAIA-GAME.jpg" alt="Gaia preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Gaia</span></a>
+          <a class="game-card" href="https://cindywawawa.github.io/js/BubblePop/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/cindywawawa-BubblePop.jpg" alt="Cindy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Cindy</span></a>
+          <a class="game-card" href="https://ngyaozheng.github.io/js/Epic_Shake_Quest/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/ngyaozheng-Epic_Shake_Quest.jpg" alt="Louis *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Louis ***</span></a>
+          <a class="game-card" href="https://flc1217.github.io/js/WesternFood/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/flc1217-WesternFood.jpg" alt="Felicia preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Felicia</span></a>
+          <a class="game-card" href="https://lrongzii.github.io/js/MandyBurgerShop/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/lrongzii-MandyBurgerShop.jpg" alt="Rachel *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Rachel ***</span></a>
+          <a class="game-card" href="https://brandonlw0883.github.io/js/Gametile/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/brandonlw0883-Gametile.jpg" alt="Brandon preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Brandon</span></a>
+          <a class="game-card" href="https://yummyyyyyyyy.github.io/js2/TheGreatTurdTrek/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yummyyyyyyyy-TheGreatTurdTrek.jpg" alt="Hui En preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Hui En</span></a>
+          <a class="game-card" href="https://peiyin515.github.io/js/cat_roach/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/peiyin515-cat_roach.jpg" alt="Pei Yin preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Pei Yin</span></a>
+          <a class="game-card" href="https://chentotheluehao.github.io/js/NuclearBurger/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/chentotheluehao-NuclearBurger.jpg" alt="Lue Hao *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Lue Hao ***</span></a>
+          <a class="game-card" href="https://jianhao03.github.io/js/dungeonfruit/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/jianhao03-dungeonfruit.jpg" alt="Jian Hao preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jian Hao</span></a>
+          <a class="game-card" href="https://bryanteo917.github.io/js/summerBeach/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/bryanteo917-summerBeach.jpg" alt="Bryan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Bryan</span></a>
+        </div>
 
-        <BR>
-        <li><a href="https://moniqk.github.io/MA1/DontBeNaughty/">Monique ***</a></li>
-        <li><a href="https://juliy818.github.io/MA1/Whereismyfriend/">Julie</a></li>
-        <li><a href="https://jasminelimmm.github.io/MA1/Chef_vs_FoodMonster/">Jasmine ***</a></li>
-        <li><a href="https://kaienchong.github.io/MA1/Amy%27sTasks/">Kai En</a></li>
-        <li><a href="https://piggymin.github.io/MA1/TheCursedWorld/">Hui Min</a></li>
-        <li><a href="https://https://lxinyee0105.github.io/MA1/AnimalRetriever/">Xin Yee</a></li>
-        <li><a href="https://erinkhor.github.io/MA1/ERIN/">Erin</a></li>
-        <li><a href="https://galactosedawn.github.io/MA1/dreamscape/">Dawn (Platform) ***</a></li>
-        <li><a href="https://seranabs.github.io/MA1/AgentApplejack/">Sara (Platform) ***</a></li>
+        <h3>May 2024</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://megdonalds.github.io/js/HamsterHarvest/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/megdonalds-HamsterHarvest.jpg" alt="Megan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Megan</span></a>
+          <a class="game-card" href="https://angelina0508.github.io/js/BlackWood/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/angelina0508-BlackWood.jpg" alt="Angelina preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Angelina</span></a>
+          <a class="game-card" href="https://zzenw.github.io/js/Nightmare_Escape/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/zzenw-Nightmare_Escape.jpg" alt="Stephanie preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Stephanie</span></a>
+          <a class="game-card" href="https://cswei123.github.io/Js/Virus_maze/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/cswei123-Virus_maze.jpg" alt="Song Wei preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Song Wei</span></a>
+          <a class="game-card" href="https://broccoli23.github.io/js/rescue_from_the_abyss/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/broccoli23-rescue_from_the_abyss.jpg" alt="Jean preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jean</span></a>
+          <a class="game-card" href="https://jazluk.github.io/js/ParisZolympics2024/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/jazluk-ParisZolympics2024.jpg" alt="Jason *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jason ***</span></a>
+          <a class="game-card" href="https://shaine21.github.io/js/little_leaf_guardian/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/shaine21-little_leaf_guardian.jpg" alt="Shaine (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Shaine (Platform) ***</span></a>
+        </div>
 
-        <BR>
-        <H3>May 2023</H3>
-        <li><a href="https://racllll.github.io/MA1/mygame/">Rachael Game</a></li>
-        <li><a href="https://deels10.github.io/MA1/Frogs_and_Potions/">Adelia Game ***</a></li>
-        <li><a href="https://peyjenn.github.io/MA1/Bearkery/">Pey Jenn Game</a></li>
-        <li><a href="https://xinn15.github.io/MA1/TheMuseHotel/">Andrea Game</a></li>
-        <li><a href="https://thejazzcollosal.github.io/MA1/Jazfe22/">Thejas Game</a></li>
-      
+        <h3>Jan 2025</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://aisyahraffleskl.github.io/MA1/MintyEscape/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/aisyahraffleskl-MintyEscape.jpg" alt="Aisyah (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Aisyah (Platform) ***</span></a>
+          <a class="game-card" href="https://itxlinax.github.io/the-serenities/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/itxlinax-the-serenities.jpg" alt="Shelly (Platform) *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Shelly (Platform) ***</span></a>
+          <a class="game-card" href="https://channelorene.github.io/js/FortuneDash/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/channelorene-FortuneDash.jpg" alt="Rene *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Rene ***</span></a>
+          <a class="game-card" href="https://summeruwu.github.io/js/Meow_Mission/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/summeruwu-Meow_Mission.jpg" alt="Summer preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Summer</span></a>
+          <a class="game-card" href="https://joeiyeo.github.io/js/OKUCare/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/joeiyeo-OKUCare.jpg" alt="Joey preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Joey</span></a>
+          <a class="game-card" href="https://joeyxyap.github.io/MA1/DIYHaven/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/joeyxyap-DIYHaven.jpg" alt="Shi Mei preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Shi Mei</span></a>
+          <a class="game-card" href="https://minsyuan.github.io/JS/007/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/minsyuan-007.jpg" alt="Min Syuan preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Min Syuan</span></a>
+          <a class="game-card" href="https://skye020524.github.io/MA1/MyBakingKitchenGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/skye020524-MyBakingKitchenGame.jpg" alt="Skye preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Skye</span></a>
+        </div>
 
-        <BR>
-        <H3>Sep 2023</H3>
-        <li><a href="https://kssssh.github.io/MA1/desert/">Kian Seng Game</a></li>
-        <li><a href="https://amandalee0880.github.io/MA1/MouseRescue/">Amanda Game</a></li>
+        <h3>Sep 2025</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://yanqileong.github.io/js/myGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/yanqileong-myGame.jpg" alt="Yan Qi preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Yan Qi</span></a>
+          <a class="game-card" href="https://atillymp.github.io/js/mygame2/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/atillymp-mygame2.jpg" alt="Tilly preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Tilly</span></a>
+          <a class="game-card" href="https://roshinyyy.github.io/js/islandgame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/roshinyyy-islandgame.jpg" alt="Roshini preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Roshini</span></a>
+          <a class="game-card" href="https://firahhhhh.github.io/js/NightFlower" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/firahhhhh-NightFlower.jpg" alt="Firah preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Firah</span></a>
+          <a class="game-card" href="https://lavanitaa.github.io/js/lavaGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/lavanitaa-lavaGame.jpg" alt="Lava preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Lava</span></a>
+          <a class="game-card" href="https://dayna04.github.io/js/daynagame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/dayna04-daynagame.jpg" alt="Dayna preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Dayna</span></a>
+        </div>
 
-        <BR>
-        <H3>Jan 2024 AM</H3>
-        <li><a href="https://joke0988.github.io/js/Lord%20of%20the%20Curse/">Kah How</a></li>
-        <li><a href="https://raycando.github.io/JS/SmellyArmpit/">Julian</a></li>
-        <li><a href="https://herligel.github.io/js/mygame/">Eliza</a></li>
-        <li><a href="https://vickylee05.github.io/js2/Darat/">Vicky</a></li>
-        <li><a href="https://jiaqiantan.github.io/JS/MyGame/">Jia Qian</a></li>
-        <li><a href="https://yuxuen.github.io/Js/game/">Kenix</a></li>
-        <li><a href="https://isabellecwy.github.io/JS/Mygame/">Isabelle</a></li>
-        <li><a href="https://cassandrawu.github.io/js3/myGame/">Cassandra</a></li>
-        <li><a href="https://chloyechau.github.io/js/AttireGame/">Chloye</a></li>
-        <li><a href="https://jaxinthelai.github.io/JS/MyGame/">Jaxinthe</a></li>
-        <li><a href="https://chinghueyting.github.io/js/mygame/">Huey Ting ***</a></li>
-        <li><a href="https://amarayshlai.github.io/js/MyGame/">Amaraysh ***</a></li>
-        <li><a href="https://ileanachong.github.io/JS/Mygame/">Ileana</a></li>
+        <h3>Jan 2026</h3>
+        <div class="game-grid">
+          <a class="game-card" href="https://elise1710.github.io/js/PathoftheLoneWolf/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/elise1710-PathoftheLoneWolf.jpg" alt="Elise preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Elise</span></a>
+          <a class="game-card" href="https://beatrixkok.github.io/js/GN/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/beatrixkok-GN.jpg" alt="Beatrice *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Beatrice ***</span></a>
+          <a class="game-card" href="https://elitebanana25.github.io/Js/TanJunMing/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/elitebanana25-TanJunMing.jpg" alt="Jimmy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jimmy</span></a>
+          <a class="game-card" href="https://adibbezo.github.io/js/BalikKampungRush/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/adibbezo-BalikKampungRush.jpg" alt="Adib preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Adib</span></a>
+          <a class="game-card" href="https://enabelle.github.io/js/myGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/enabelle-myGame.jpg" alt="Enabelle preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Enabelle</span></a>
+          <a class="game-card" href="https://andyccj.github.io/JS/mygame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/andyccj-mygame.jpg" alt="Andy preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Andy</span></a>
+          <a class="game-card" href="https://selinemargo.github.io/js/myGame/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/selinemargo-myGame.jpg" alt="Gabriella preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Gabriella</span></a>
+        </div>
 
-        <H3>Jan 2024 PM</H3>
-        <li><a href="https://v1k1i.github.io/js/Olympics_Oddysey/">Victoria</a></li>
-        <li><a href="https://gaiaguppy.github.io/js/GAIA-GAME/">Gaia</a></li>
-        <li><a href="https://cindywawawa.github.io/js/BubblePop/">Cindy</a></li>
-        <li><a href="https://ngyaozheng.github.io/js/Epic_Shake_Quest/">Louis ***</a></li>
-        <li><a href="https://flc1217.github.io/js/WesternFood/">Felicia</a></li>
-        <li><a href="https://lrongzii.github.io/js/MandyBurgerShop/">Rachel ***</a></li>
-        <li><a href="https://brandonlw0883.github.io/js/Gametile/">Brandon</a></li>
-        <li><a href="https://yummyyyyyyyy.github.io/js2/TheGreatTurdTrek/">Hui En</a></li>
-        <li><a href="https://peiyin515.github.io/js/cat_roach/">Pei Yin</a></li>
-        <li><a href="https://chentotheluehao.github.io/js/NuclearBurger/">Lue Hao ***</a></li>
-        <li><a href="https://jianhao03.github.io/js/dungeonfruit/">Jian Hao</a></li>
-        <li><a href="https://bryanteo917.github.io/js/summerBeach/">Bryan</a></li>
-
-        <H3>May 2024</H3>
-        <li><a href="https://megdonalds.github.io/js/HamsterHarvest/">Megan</a></li>
-        <li><a href="https://angelina0508.github.io/js/BlackWood/">Angelina</a></li>
-        <li><a href="https://zzenw.github.io/js/Nightmare_Escape/">Stephanie</a></li>
-        <li><a href="https://cswei123.github.io/Js/Virus_maze/">Song Wei</a></li>
-        <li><a href="https://broccoli23.github.io/js/rescue_from_the_abyss/">Jean</a></li>
-        <li><a href="https://jazluk.github.io/js/ParisZolympics2024/">Jason ***</a></li>
-        <li><a href="https://shaine21.github.io/js/little_leaf_guardian/">Shaine (Platform) ***</a></li>
-
-        <H3>Jan 2025</H3>
-        <li><a href="https://aisyahraffleskl.github.io/MA1/MintyEscape/">Aisyah (Platform) ***</a></li>
-        <li><a href="https://itxlinax.github.io/the-serenities/">Shelly (Platform) ***</a></li>
-        <li><a href="https://channelorene.github.io/js/FortuneDash/">Rene ***</a></li>
-        <li><a href="https://summeruwu.github.io/js/Meow_Mission/">Summer</a></li>
-        <li><a href="https://joeiyeo.github.io/js/OKUCare/">Joey</a></li>
-        <li><a href="https://joeyxyap.github.io/MA1/DIYHaven/">Shi Mei</a></li>
-        <li><a href="https://minsyuan.github.io/JS/007/">Min Syuan</a></li>
-        <li><a href="https://skye020524.github.io/MA1/MyBakingKitchenGame/">Skye</a></li>
-
-    
-        <H3>Sep 2025</H3>
-        <li><a href="https://yanqileong.github.io/js/myGame/">Yan Qi</a></li>
-        <li><a href="https://atillymp.github.io/js/mygame2/">Tilly</a></li>
-        <li><a href="https://roshinyyy.github.io/js/islandgame/">Roshini</a></li>
-        <li><a href="https://firahhhhh.github.io/js/NightFlower">Firah</a></li>
-        <li><a href="https://lavanitaa.github.io/js/lavaGame/">Lava</a></li>
-        <li><a href="https://dayna04.github.io/js/daynagame/">Dayna</a></li>
-
-        <H3>Jan 2026</H3>
-        <li><a href="https://elise1710.github.io/js/PathoftheLoneWolf/">Elise</a></li>
-        <li><a href="https://beatrixkok.github.io/js/GN/">Beatrice ***</a></li>
-        <li><a href="https://elitebanana25.github.io/Js/TanJunMing/">Jimmy</a></li>
-        <li><a href="https://adibbezo.github.io/js/BalikKampungRush/">Adib</a></li>
-        <li><a href="https://enabelle.github.io/js/myGame/">Enabelle</a></li>
-        <li><a href="https://andyccj.github.io/JS/mygame/">Andy</a></li>
-        <li><a href="https://selinemargo.github.io/js/myGame/">Gabriella</a></li>
-
-
-        <H4>Multi Rooms</h4>
-        <li><a href="https://evaarts.github.io/MA1/School_Map/">Nicole Liu Game ***</a></li>
-        <li><a href="https://dummy-human.github.io/MA1/NightmareHigh/">Dexter Game ***</a></li>
+        <h4>Multi Rooms</h4>
+        <div class="game-grid">
+          <a class="game-card" href="https://evaarts.github.io/MA1/School_Map/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/evaarts-School_Map.jpg" alt="Nicole Liu Game *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Nicole Liu Game ***</span></a>
+          <a class="game-card" href="https://dummy-human.github.io/MA1/NightmareHigh/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/dummy-human-NightmareHigh.jpg" alt="Dexter Game *** preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Dexter Game ***</span></a>
+        </div>
 
         <h4>Others Style</h4>
-        <li><a href="https://schahryar.github.io/js/quanta/">Syah</a></li>
-        <li><a href="https://huehuehuetler.github.io/js/beefcatcupid/">Marissa </a></li>
-        <li><a href="https://limjiayee.github.io/js/recycle/">Jia Yee Recycle </a></li>
-        <li><a href="https://22ndteam.github.io/js/Mexplorer/game/">Joel (Maze) </a></li>
-        <li><a href="https://sdral.github.io/js/MazeProblem/">Sandra (Maze)</a></li>
-        <li><a href="https://kiki0307.github.io/js/DrobinChallenge/">Kiki (Drop) </a></li>
-        <li><a href="https://thejazzcollosal.github.io/SteadyGame/Steady/">Thejas Steady (Platform)</a></li>
-        
+        <div class="game-grid">
+          <a class="game-card" href="https://schahryar.github.io/js/quanta/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/schahryar-quanta.jpg" alt="Syah preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Syah</span></a>
+          <a class="game-card" href="https://huehuehuetler.github.io/js/beefcatcupid/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/huehuehuetler-beefcatcupid.jpg" alt="Marissa preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Marissa</span></a>
+          <a class="game-card" href="https://limjiayee.github.io/js/recycle/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/limjiayee-recycle.jpg" alt="Jia Yee Recycle preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Jia Yee Recycle</span></a>
+          <a class="game-card" href="https://22ndteam.github.io/js/Mexplorer/game/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/22ndteam-game-2.jpg" alt="Joel (Maze) preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Joel (Maze)</span></a>
+          <a class="game-card" href="https://sdral.github.io/js/MazeProblem/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/sdral-MazeProblem.jpg" alt="Sandra (Maze) preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Sandra (Maze)</span></a>
+          <a class="game-card" href="https://kiki0307.github.io/js/DrobinChallenge/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/kiki0307-DrobinChallenge.jpg" alt="Kiki (Drop) preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Kiki (Drop)</span></a>
+          <a class="game-card" href="https://thejazzcollosal.github.io/SteadyGame/Steady/" target="_blank" rel="noopener"><span class="game-thumb"><img src="previews/thejazzcollosal-Steady.jpg" alt="Thejas Steady (Platform) preview" loading="lazy" onerror="this.classList.add('missing')"></span><span class="game-name">Thejas Steady (Platform)</span></a>
+        </div>
+        <!-- STUDENT-GAMES:END -->
 
         <H2>p5.js</H2>
         <P2>Visualizations</P2>
