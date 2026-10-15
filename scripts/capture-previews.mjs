@@ -44,15 +44,27 @@ console.log(`${games.length} games total, ${pending.length} to capture (concurre
 
 const browser = await chromium.launch({ headless: !args.includes('--headed') });
 
+// A CodePen pen URL opens the editor; cdpn.io/fullpage is the bare running result
+// (codepen.io/fullpage is blocked until the pen owner verifies their email).
+function shotUrl(url) {
+  const pen = url.match(/^https?:\/\/(www\.)?codepen\.io\/([^/]+)\/pen\/([^/?#]+)/i);
+  if (pen) return `https://cdpn.io/${pen[2]}/fullpage/${pen[3]}`;
+  return url;
+}
+
 async function capture(game) {
+  const target = shotUrl(game.url);
+  const isCdpn = /^https:\/\/cdpn\.io\//i.test(target);
   const context = await browser.newContext({
     viewport: { width: 900, height: 675 },
     ignoreHTTPSErrors: true,
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36',
+    // cdpn.io only drops its security banner when the request looks like it came from CodePen.
+    extraHTTPHeaders: isCdpn ? { Referer: 'https://codepen.io/' } : {},
   });
   const page = await context.newPage();
   try {
-    const resp = await page.goto(game.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    const resp = await page.goto(target, { waitUntil: 'domcontentloaded', timeout: 30000 });
     if (!resp || resp.status() >= 400) {
       throw new Error(`HTTP ${resp ? resp.status() : 'no response'}`);
     }
