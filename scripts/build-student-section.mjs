@@ -24,7 +24,7 @@ function grid(cat) {
   for (const g of cat.items) {
     parts.push(
       `          <a class="game-card" href="${esc(g.url)}" target="_blank" rel="noopener">` +
-        `<span class="game-thumb"><img src="previews/${esc(g.slug)}.jpg" alt="${esc(g.name)} preview" loading="lazy" onerror="this.classList.add('missing')"></span>` +
+        `<span class="game-thumb"><img data-src="previews/${esc(g.slug)}.jpg" alt="${esc(g.name)} preview" onerror="this.classList.add('missing')"></span>` +
         `<span class="game-name">${esc(g.name)}</span></a>`
     );
   }
